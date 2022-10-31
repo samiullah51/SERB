@@ -4,14 +4,54 @@
     align-items: center;
     justify-content: flex-start;
 }
+
+/* Left Navbar */
+
 .navbar .navbar__left{
     padding: 15px;
     width: 70%;
     background-color: var(--primary-color);
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-around;
     position: relative;
     border-bottom-right-radius: 100px;
     color: #fff;
+}
+/* Logo */
+.navbar__left h2{
+    margin-right: 10px;
+}
+/* Searching area */
+.navbar__left .main__searchbox{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+/* Searchbox */
+.searchbox{
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    margin: 0 5px;
+    padding: 5px 10px;
+    color: var(--primary-color);
+    border-radius: 5px;
+  
+}
+.searchbox input{
+   border: none;
+   outline: none;
+   background-color: transparent;
+ font-size: 16px;
+
+}
+/* Signin / Signup Links */
+.navbar__left .register__section{
+display: flex;
+align-items: center;
+}
+.register__section p{
+    margin: 0 5px;
+    font-size: 18px;
 }
