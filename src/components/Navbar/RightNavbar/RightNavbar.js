@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./RightNavbar.css";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 function RightNavbar() {
   const [dropdown, setDropdown] = useState(false);
   const [mode, setMode] = useState("SELLER");
@@ -8,7 +9,10 @@ function RightNavbar() {
     <div className="right__navbar">
       <p className="label">Switch to</p>
       <div className="switcher" onClick={() => setDropdown(!dropdown)}>
-        <p className="mode">{mode}</p>
+        <div className="mode">
+          <p>{mode}</p>
+          <KeyboardArrowDownIcon />
+        </div>
         {dropdown && (
           <div className="show">
             <p onClick={() => setMode("SELLER")}>

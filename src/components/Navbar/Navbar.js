@@ -6,6 +6,7 @@ import RightNavbar from "./RightNavbar/RightNavbar";
 function Navbar() {
   const [searchByPlace, setSearchByPlace] = useState("");
   const [searchProduct, setSearchProduct] = useState("");
+  let user = false;
   return (
     <div className="navbar">
       {/* Navbar Left */}
@@ -40,11 +41,18 @@ function Navbar() {
 
         {/* Register Section */}
 
-        <div className="register__section">
-          <p>Sign In</p>
-          <p>/</p>
-          <p>Sign Up</p>
-        </div>
+        {!user ? (
+          <div className="register__section">
+            <p>Sign In</p>
+            <p>/</p>
+            <p>Sign Up</p>
+          </div>
+        ) : (
+          <div className="register__section">
+            <p>Samiullah </p>
+            <img src="https://m.media-amazon.com/images/M/MV5BMjMwNTIxODg0OF5BMl5BanBnXkFtZTgwODg2NzM0OTE@._V1_.jpg" />
+          </div>
+        )}
       </div>
 
       {/* Navbar Right */}

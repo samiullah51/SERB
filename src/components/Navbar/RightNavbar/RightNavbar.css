@@ -13,7 +13,7 @@
 }
 .switcher{
     position: relative;
-    width: 110px;
+    width: 40%;
     text-align: center;
 }
 
@@ -28,7 +28,9 @@
     font-weight: bold;
     user-select: none;
     text-align: center;
-    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     
   
 }
