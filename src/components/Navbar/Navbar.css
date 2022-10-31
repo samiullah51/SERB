@@ -3,13 +3,14 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    user-select: none;
 }
 
 /* Left Navbar */
 
 .navbar .navbar__left{
     padding: 15px;
-    width: 70%;
+    flex-basis: 70%;
     background-color: var(--primary-color);
     display: flex;
     align-items: center;
@@ -54,4 +55,9 @@ align-items: center;
 .register__section p{
     margin: 0 5px;
     font-size: 18px;
+}
+
+/* Right Navbar */
+.navbar__right{
+    flex-basis: 30%;
 }

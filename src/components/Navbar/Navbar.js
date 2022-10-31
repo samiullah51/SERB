@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import RightNavbar from "./RightNavbar/RightNavbar";
 function Navbar() {
   const [searchByPlace, setSearchByPlace] = useState("");
   const [searchProduct, setSearchProduct] = useState("");
@@ -11,10 +12,12 @@ function Navbar() {
 
       <div className="navbar__left">
         <h2>SERB</h2>
-        {/* Place for search */}
 
         {/*  Search for porduct */}
+
         <div className="main__searchbox">
+          {/* Place for search */}
+
           <div className="searchbox">
             <PlaceOutlinedIcon />
             <input
@@ -34,7 +37,9 @@ function Navbar() {
             <SearchIcon />
           </div>
         </div>
+
         {/* Register Section */}
+
         <div className="register__section">
           <p>Sign In</p>
           <p>/</p>
@@ -45,7 +50,7 @@ function Navbar() {
       {/* Navbar Right */}
 
       <div className="navbar__right">
-        <p>Right</p>
+        <RightNavbar />
       </div>
     </div>
   );

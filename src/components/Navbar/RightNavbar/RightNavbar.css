@@ -1,0 +1,49 @@
+.right__navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+}
+.right__navbar .label{
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0 10px;
+}
+.switcher{
+    position: relative;
+    width: 110px;
+    text-align: center;
+}
+
+.mode{
+    width: 100%;
+    background-color:  var(--primary-color);
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+    text-align: center;
+    
+    
+  
+}
+.switcher .show{
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    border: 1px solid var(--primary-color);
+}
+.show p{
+    padding: 5px;
+    cursor: pointer;
+}
+.show p:hover{
+    background-color: var(--primary-color);
+    color: #fff;
+}
