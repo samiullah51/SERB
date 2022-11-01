@@ -1,0 +1,13 @@
+.recent__products{
+    width: 90%;
+    margin: auto;
+}
+.recent__products h1{
+    margin: 15px 0;
+    color: var(--primary-color);
+}
+.recent__products .products__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
