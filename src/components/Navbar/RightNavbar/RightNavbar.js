@@ -15,15 +15,24 @@ function RightNavbar() {
         </div>
         {dropdown && (
           <div className="show">
-            <p onClick={() => setMode("SELLER")}>
-              {mode === "SELLER" ? "ACTIVE" : "SELLER"}
-            </p>
-            <p onClick={() => setMode("BUYER")}>
-              {mode === "BUYER" ? "ACTIVE" : "BUYER"}
-            </p>
-            <p onClick={() => setMode("EXCHANGER")}>
-              {mode === "EXCHANGER" ? "ACTIVE" : "EXCHANGER"}
-            </p>
+            {mode === "SELLER" && (
+              <>
+                <p onClick={() => setMode("BUYER")}>BUYER</p>
+                <p onClick={() => setMode("EXCHANGER")}>EXCHANGER</p>
+              </>
+            )}
+            {mode === "BUYER" && (
+              <>
+                <p onClick={() => setMode("SELLER")}>SELLER</p>
+                <p onClick={() => setMode("EXCHANGER")}>EXCHANGER</p>
+              </>
+            )}
+            {mode === "EXCHANGER" && (
+              <>
+                <p onClick={() => setMode("BUYER")}>BUYER</p>
+                <p onClick={() => setMode("SELLER")}>SELLER</p>
+              </>
+            )}
           </div>
         )}
       </div>
