@@ -4,10 +4,19 @@ function RecentProduct({ product }) {
   return (
     <div className="recent__product">
       <img src={product.image} />
-      <p>{product.title}</p>
-      <p>{product.price}</p>
+      <div>
+        <p className="title">{product.title}</p>
+        <p className="price">
+          {product.price}
+          <span>(PKR)</span>
+        </p>
+      </div>
       <div className="product__from">
-        <p>{product.address}</p>
+        <p>
+          {product.address.length > 25
+            ? product.address.slice(0, 25) + "..."
+            : product.address}
+        </p>
         <p>{product.createdAt}</p>
       </div>
     </div>

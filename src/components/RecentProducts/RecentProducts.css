@@ -9,5 +9,6 @@
 .recent__products .products__container{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap;
 }

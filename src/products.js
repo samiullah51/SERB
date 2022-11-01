@@ -44,7 +44,7 @@ export const products = [
     image: "./images/p6.jpg",
     title: "Iphone 13 Pro-Max",
     price: 150000,
-    address: "Gul Haji Plaza, Peshawar",
+    address: "Gul Haji Plaza, Peshawar s vas asd as asdsd",
     createdAt: "5 Days ago",
   },
 ];

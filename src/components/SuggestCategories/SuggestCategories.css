@@ -1,6 +1,7 @@
 .suggest__categories{
     width: 90%;
     margin: auto;
+    margin-top: 80px;
 }
 .suggest__categories h1{
     margin: 15px 0;
