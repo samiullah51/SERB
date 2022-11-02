@@ -4,11 +4,18 @@
     margin: 10px;
     border-radius: 10px;
     height: 310px;
+    border: 1px solid transparent;
 }
+.recent__product:hover{
+    box-shadow: 0 1px 9px -1px rgba(43, 42, 42, 0.4);
+    cursor: pointer;
+}
+
 .recent__product img{
 width: 100%;
 border-radius: 10px 10px 0 0;
 height: 200px;
+object-fit: fill;
 }
 .recent__product div{
     padding: 5px;
