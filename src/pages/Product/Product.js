@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Gallary from "../../components/Gallary/Gallary";
 import "./Product.css";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
+import RecentProducts from "../../components/RecentProducts/RecentProducts";
 function Product() {
   return (
     <div className="product">
@@ -15,6 +16,7 @@ function Product() {
           <ProductDetails />
         </div>
       </div>
+      <RecentProducts title="Related Products" items={4} />
     </div>
   );
 }

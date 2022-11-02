@@ -9,7 +9,7 @@ function Home() {
     <>
       <Navbar />
       <SuggestCategories />
-      <RecentProducts />
+      <RecentProducts title="Recent Products" items={10} />
       <Footer />
     </>
   );

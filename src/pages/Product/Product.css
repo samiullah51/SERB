@@ -6,6 +6,7 @@
     justify-content: space-around;
     margin-top: 105px;
     user-select: none;
+    margin-bottom: 30px;
 }
 .container__left{
     flex-basis: 50%;

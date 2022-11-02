@@ -16,6 +16,7 @@ width: 100%;
 border-radius: 10px 10px 0 0;
 height: 200px;
 object-fit: fill;
+border-bottom: .2px solid #ccc;
 }
 .recent__product div{
     padding: 5px;
