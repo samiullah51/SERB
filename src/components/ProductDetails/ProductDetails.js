@@ -1,11 +1,11 @@
 import React from "react";
 import "./ProductDetails.css";
 import StarIcon from "@mui/icons-material/Star";
+import currencyFormatter from "currency-formatter";
 function ProductDetails() {
   return (
     <div className="product__details">
       {/* Header */}
-
       <div className="details__header">
         <div className="header_left">
           <p className="left__by">by - </p>
@@ -27,17 +27,29 @@ function ProductDetails() {
           <StarIcon />
         </div>
       </div>
-
       {/* Body */}
       <div className="details__body">
         <p className="product__title">Cannon-DSLR 12.3x</p>
         <p className="product__desc">
           Lorem ipsum is a placeholder text commonly used to demonstrate the
           visual form of a document or a typeface without relying on meaningful
+          visual form of a document or a typeface without relying on meaningful
           content.
         </p>
         <p className="product__price">Price</p>
-        <p className="price__value">12000</p>
+        <p className="price__value">
+          {currencyFormatter.format(1200, { code: "" })}
+          <span>(PKR)</span>
+        </p>
+        <div className="body__footer">
+          <p>2 days ago</p>
+          <p>Dara adam khel, kohat</p>
+        </div>
+      </div>
+      {/* Actions */}'
+      <div className="actions">
+        <button className="buy__btn">Buy Now</button>
+        <button className="favorite__btn">Add to favorite</button>
       </div>
     </div>
   );

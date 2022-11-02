@@ -1,5 +1,7 @@
 import React from "react";
 import "./RecentProduct.css";
+import currencyFormatter from "currency-formatter";
+
 function RecentProduct({ product }) {
   return (
     <div className="recent__product">
@@ -7,7 +9,7 @@ function RecentProduct({ product }) {
       <div>
         <p className="title">{product.title}</p>
         <p className="price">
-          {product.price}
+          {currencyFormatter.format(product.price, { code: "" })}
           <span>(PKR)</span>
         </p>
       </div>
