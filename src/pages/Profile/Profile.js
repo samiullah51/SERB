@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import Rating from "../../components/Rating/Rating";
+import Reviews from "../../components/Reviews/Reviews";
 import "./Profile.css";
 function Profile() {
   return (
@@ -22,8 +23,9 @@ function Profile() {
           </div>
           {/* Rating */}
           <p className="rating__title">Rating and reviews</p>
-
           <Rating />
+          {/* Reviews */}
+          <Reviews />
         </div>
         <div className="profile__right">right</div>
       </div>

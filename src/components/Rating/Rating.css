@@ -12,16 +12,16 @@
 .rating__left .rating__value{
     font-size: 60px;
     font-weight: 500;
-    color: #272727;
+    color: #4D4D4D;
 
 }
 .rating__left .rated__by{
-    color: #272727;
+    color: #4D4D4D;
     font-size: 22px;
     font-weight: 500;
 }
 .rating__left .MuiSvgIcon-root{
-    color: #272727;
+    color: #4D4D4D;
     
 }
 .rating__right{
@@ -53,7 +53,7 @@
 position: absolute;
 top: 0;
 left: 0;
-background-color: #272727;
+background-color: #4D4D4D;
 border-radius: 10px;
 height: 100%;
 }
