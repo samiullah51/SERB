@@ -6,6 +6,7 @@ export const products = [
     price: 999,
     address: "Dara Adam Khel, Kohat",
     createdAt: "2 days ago",
+    status: "available",
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const products = [
     price: 1200,
     address: "Khyali kor Suran, Mohmand Agency",
     createdAt: "today",
+    status: "sold",
   },
   {
     id: 3,
@@ -22,6 +24,7 @@ export const products = [
     price: 1500,
     address: "Pabbi Station, Nowshehra",
     createdAt: "3 days ago",
+    status: "sold",
   },
   {
     id: 4,
@@ -30,6 +33,7 @@ export const products = [
     price: 75000,
     address: "Taro Jaba, Peshawar",
     createdAt: "yesterday",
+    status: "available",
   },
   {
     id: 5,
@@ -38,6 +42,7 @@ export const products = [
     price: 999,
     address: "Dara Adam Khel, Kohat",
     createdAt: "2 Days ago",
+    status: "available",
   },
   {
     id: 6,
@@ -46,6 +51,7 @@ export const products = [
     price: 150000,
     address: "Gul Haji Plaza, Peshawar s vas asd as asdsd",
     createdAt: "5 Days ago",
+    status: "sold",
   },
   {
     id: 7,
@@ -54,6 +60,7 @@ export const products = [
     price: 1500,
     address: "Pabbi Station, Nowshehra",
     createdAt: "3 days ago",
+    status: "available",
   },
   {
     id: 8,
@@ -62,6 +69,7 @@ export const products = [
     price: 75000,
     address: "Taro Jaba, Peshawar",
     createdAt: "yesterday",
+    status: "available",
   },
   {
     id: 9,
@@ -70,6 +78,7 @@ export const products = [
     price: 999,
     address: "Dara Adam Khel, Kohat",
     createdAt: "2 Days ago",
+    status: "available",
   },
   {
     id: 10,
@@ -78,5 +87,6 @@ export const products = [
     price: 150000,
     address: "Gul Haji Plaza, Peshawar s vas asd as asdsd",
     createdAt: "5 Days ago",
+    status: "available",
   },
 ];

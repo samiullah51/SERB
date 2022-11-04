@@ -1,0 +1,78 @@
+.single__current__user__product{
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    border-radius: 5px;
+    position: relative;
+    
+}
+.single__current__user__product .MuiSvgIcon-root{
+    position: absolute;
+    top: 5px;
+    right: 0;
+    color: #4d4d4d;
+}
+.single__current__user__product:hover{
+    background-color: rgba(226, 226, 226, 0.507);
+    cursor: pointer;
+}
+.single__current__user__product p{
+    width: 200px;
+    text-align: center;
+}
+.single__current__user__product img{
+    width: 50px;
+    height:50px;
+}
+.single__current__user__product .title{
+    font-size: 14px;
+}
+.single__current__user__product .price{
+    font-weight: 500;
+}
+.single__current__user__product .status{
+    padding: 3px;
+    font-size: 13px;
+    border-radius: 10px;
+    color: #fff;
+}
+.single__current__user__product .createdAt{
+    color: #4d4d4d;
+}
+.single__current__user__product .modal p{
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    padding: 2px;
+    color: #fff;
+   
+}
+.single__current__user__product .modal p:hover{
+    color: rgb(211, 211, 211);
+
+}
+.single__current__user__product .modal{
+    user-select: none;
+    padding: 5px;
+    position: absolute;
+    top:0px;
+    right: 20px;
+    background-color: #4d4d4d;
+    box-shadow: 0 0 9px 1px rgba(0,0,0,0.2);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: 5px;
+}
+.single__current__user__product .modal .close{
+    position: absolute;
+    top: -10px;
+    left: 80%;
+    font-size: 20px;
+}
