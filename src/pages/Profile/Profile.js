@@ -5,6 +5,7 @@ import Rating from "../../components/Rating/Rating";
 import Reviews from "../../components/Reviews/Reviews";
 import SoldProducts from "../../components/SoldProducts/SoldProducts";
 import "./Profile.css";
+import Footer from "../../components/Footer/Footer";
 function Profile() {
   return (
     <>
@@ -31,7 +32,9 @@ function Profile() {
         <div className="profile__right">
           <SoldProducts />
         </div>
+        {/* Footer */}
       </div>
+      <Footer />
     </>
   );
 }
