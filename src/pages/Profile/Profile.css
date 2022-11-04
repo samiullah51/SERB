@@ -8,8 +8,9 @@
     padding: 20px;
 }
 .profile__right{
-    background-color: blue;
     flex-basis: 70%;
+    margin-top: 20px;
+
 }
 .left__about .about__about, .rating__title{
     font-size: 22px;

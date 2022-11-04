@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import Rating from "../../components/Rating/Rating";
 import Reviews from "../../components/Reviews/Reviews";
+import SoldProducts from "../../components/SoldProducts/SoldProducts";
 import "./Profile.css";
 function Profile() {
   return (
@@ -27,7 +28,9 @@ function Profile() {
           {/* Reviews */}
           <Reviews />
         </div>
-        <div className="profile__right">right</div>
+        <div className="profile__right">
+          <SoldProducts />
+        </div>
       </div>
     </>
   );
