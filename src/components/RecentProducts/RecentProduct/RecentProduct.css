@@ -39,6 +39,8 @@ border-bottom: .2px solid #ccc;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    bottom: 15px;
 }
 .product__from p{
 font-size: 12px;
