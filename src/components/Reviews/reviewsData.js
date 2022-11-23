@@ -2,9 +2,9 @@ export const reviewsData = [
   {
     id: 1,
     profileImg:
-      "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
+      "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png",
     fullName: "Sami Samiullah",
-    stars: 2.5,
+    stars: 5,
     createdAt: "03-Feb-2022",
     desc: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.",
   },
