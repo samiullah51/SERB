@@ -1,0 +1,23 @@
+.single__input{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
+    width: 100%;
+}
+.single__input .input__label{
+    margin: 5px 0;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+.single__input select{
+    padding: 5px;
+    min-width: 200px;
+}
+.single__input input{
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 80%;
+}
