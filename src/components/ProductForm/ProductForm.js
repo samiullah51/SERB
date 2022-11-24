@@ -34,6 +34,32 @@ function ProductForm() {
           <p>Location</p>
         </div>
       </div>
+      <div
+        className="single__input"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
+      >
+        <input type="text" style={{ flexBasis: "10%", marginRight: "25px" }} />
+        <input type="text" style={{ flexBasis: "68%" }} />
+      </div>
+
+      {/* Condition */}
+      <div className="single__input">
+        <p className="label">Condition</p>
+        <div className="input__conidtion">
+          <label for="new">
+            <input type="radio" id="new" name="conition" />
+            <p>New</p>
+          </label>
+          <label for="used">
+            <input type="radio" id="used" name="conition" />
+            <p>Used</p>
+          </label>
+        </div>
+      </div>
     </div>
   );
 }

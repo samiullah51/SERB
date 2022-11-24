@@ -7,7 +7,7 @@
     color:var(--primary-color);
     font-size: 16px;
 }
-.single__input input{
+.single__input input[type ='text' ]{
     width: 80%;
     border: 1px solid #ccc;
     padding: 7px;
@@ -32,10 +32,10 @@
     resize: none;
 }
 .modal__location{
-width: 30%;
+width: 25%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .modal__location .modal__location__box{
     display: flex;
@@ -47,10 +47,25 @@ width: 30%;
     font-size: 14px;
     width: 120px;
     justify-content: center;
+    margin-right: 30px;
    
    
 }
 .modal__location .MuiSvgIcon-root{
     font-size: 16px;
     margin-right: 5px;
+}
+.input__conidtion{
+    display: flex;
+    align-items: center;
+}
+.input__conidtion label{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 25px;
+    cursor: pointer;
+}
+.input__conidtion label p{
+    margin-left: 5px;
 }
