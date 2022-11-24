@@ -60,6 +60,12 @@ function ProductForm() {
           </label>
         </div>
       </div>
+      {/* Price Section */}
+      <div className="single__input price__input">
+        <p className="label">Price</p>
+        <input type="text" style={{ width: "125px" }} />
+        <p className="pkr">PKR</p>
+      </div>
     </div>
   );
 }
