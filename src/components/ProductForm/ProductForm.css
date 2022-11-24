@@ -82,3 +82,43 @@ font-weight: bold;
 color: var(--primary-color);
 user-select: none;
 }
+.input__photos .MuiSvgIcon-root{
+    font-size: 60px;
+   margin: 10px;
+    color: var(--primary-color);
+}
+.input__photos .MuiSvgIcon-root:hover{
+    color: rgb(107, 107, 107);
+    cursor: pointer;
+}
+.submit__section{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.submit__section button{
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100px;
+    margin: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+.submit__section .cancel__button{
+    background-color: transparent;
+    border-color: var(--primary-color);
+}
+.submit__section .post__button{
+    background-color: var(--primary-color);
+color: #fff;
+}
+.post__button:hover{
+    background-color: rgb(110, 110, 110);
+    
+}
+.cancel__button:hover{
+    background-color: rgba(207, 207, 207, 0.425);
+    
+}

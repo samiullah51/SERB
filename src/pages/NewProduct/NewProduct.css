@@ -1,5 +1,5 @@
 h1{
-    margin-top: 100px;
+    margin-top: 70px;
     text-align: center;
     font-weight: 400;
     color: var(--primary-color);
@@ -15,6 +15,7 @@ h1{
     border: 1px solid var(--primary-color);
     margin: 10px auto;
     padding: 20px;
+    position: relative;
 }
 .product__form{
     width: 100%;

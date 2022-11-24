@@ -2,6 +2,7 @@ import React from "react";
 import "./ProductForm.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AddIcon from "@mui/icons-material/Add";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 function ProductForm() {
   return (
     <div className="form">
@@ -65,6 +66,23 @@ function ProductForm() {
         <p className="label">Price</p>
         <input type="text" style={{ width: "125px" }} />
         <p className="pkr">PKR</p>
+      </div>
+      {/* Images Section */}
+      <div className="single__input">
+        <p className="label">Upload up to 5 photos</p>
+        <div className="input__photos">
+          <AddAPhotoIcon />
+          <AddAPhotoIcon />
+          <AddAPhotoIcon />
+          <AddAPhotoIcon />
+          <AddAPhotoIcon />
+        </div>
+      </div>
+
+      {/* Submit Section */}
+      <div className="submit__section">
+        <button className="cancel__button">Cancel</button>
+        <button className="post__button">Post</button>
       </div>
     </div>
   );
