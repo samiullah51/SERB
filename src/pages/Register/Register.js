@@ -35,7 +35,7 @@ function Register() {
           <div className="inputs">
             <div className="inputs__box">
               <p>Full Name</p>
-              <input type="text" placeholder="Samiullah" />
+              <input type="text" placeholder="Example" />
             </div>
             <div className="inputs__box">
               <p>Username</p>
@@ -81,6 +81,18 @@ function Register() {
                 <option>Female</option>
                 <option>Other</option>
               </select>
+            </div>
+            <p style={{ fontSize: "13px", color: "var(--primary-color)" }}>
+              By clicking Sign Up, you agree to our Terms, Privacy Policy and
+              Cookies Policy. You may receive SMS notifications from us and can
+              opt out at any time.
+            </p>
+            {/* Form Footer */}
+            <div className="form__footer">
+              <button>Register Now</button>
+              <p>
+                Already have an account? <span>Login</span> here.
+              </p>
             </div>
           </div>
         </div>

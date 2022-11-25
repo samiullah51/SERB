@@ -79,3 +79,32 @@ justify-content: center;
 .inputs__box select option{
     font-size: 14px;
 }
+.form__footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.form__footer button{
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding:  8px;
+    flex-basis: 40%;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+
+}
+.form__footer button:hover{
+    background-color: rgb(107, 107, 107);
+    cursor: pointer;
+}
+.form__footer p{
+    color: var(--primary-color);
+}
+.form__footer span{
+    color: dodgerblue;
+    cursor: pointer;
+}
