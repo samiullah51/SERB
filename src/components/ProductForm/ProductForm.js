@@ -7,7 +7,9 @@ function ProductForm() {
   return (
     <div className="form">
       <div className="single__input">
-        <p className="label">Category</p>
+        <p className="label" style={{ marginBottom: "10px" }}>
+          Category
+        </p>
         <select>
           <option disabled>--Select--</option>
           <option>Vehicles</option>

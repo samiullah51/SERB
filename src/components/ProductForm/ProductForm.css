@@ -15,11 +15,18 @@
     outline: none;
     font-size: 16px;
 }
+.single__input input[type ='text']:focus, .single__input textarea:focus
+{
+    border-color: var(--primary-color);
+}
 .single__input select{
     padding: 5px;
     outline: none;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+.single__input select option{
+    font-size: 18px;
 }
 .single__input .desc{
     min-height: 100px;

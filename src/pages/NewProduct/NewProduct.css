@@ -16,6 +16,7 @@ h1{
     margin: 10px auto;
     padding: 20px;
     position: relative;
+    user-select: none;
 }
 .product__form{
     width: 100%;
