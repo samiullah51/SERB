@@ -1,28 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import "./VerifyOtp.css";
 function VerifyOtp() {
-  const days = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
-  ];
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const years = [];
-  for (var i = 1990; i <= 2022; i++) {
-    years.push(i);
-  }
+  const numOfFields = 3;
+
+  const handleChange = (e) => {
+    const { maxLength, value, name } = e.target;
+    const [fieldName, fieldIndex] = name.split("-");
+
+    // Check if they hit the max character length
+    if (value.length >= maxLength) {
+      // Check if it's not the last input field
+      if (parseInt(fieldIndex, 10) < 4) {
+        // Get the next input field
+        const nextSibling = document.querySelector(
+          `input[name=ssn-${parseInt(fieldIndex, 10) + 1}]`
+        );
+
+        // If found, focus the next field
+        if (nextSibling !== null) {
+          nextSibling.focus();
+        }
+      }
+    }
+  };
   return (
     <div className="register">
       <div className="overlay">
@@ -37,15 +37,55 @@ function VerifyOtp() {
           {/* inputs */}
           <div className="inputs">
             <div className="inputs__box">
-              <input type="text" />
-              <input type="text" />
-              <input type="text" />
-              <input type="text" />
+              <input
+                type="text"
+                name="ssn-1"
+                maxLength={1}
+                onChange={handleChange}
+                autoFocus
+              />
+
+              <input
+                type="text"
+                name="ssn-2"
+                onChange={handleChange}
+                maxLength={1}
+              />
+              <input
+                type="text"
+                name="ssn-3"
+                onChange={handleChange}
+                maxLength={1}
+              />
+              <input
+                type="text"
+                maxLength={1}
+                name="ssn-4"
+                onChange={handleChange}
+              />
             </div>
+            {/* Didn't recieve */}
 
             {/* Form Footer */}
+            <div style={{ color: "var(--primary-color)", margin: "20px 0" }}>
+              <p style={{ color: "var(--primary-color)" }}>
+                Didn’t recieve an OTP?
+              </p>
+              <p
+                style={{
+                  color: "var(--primary-color)",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                  margin: "5px 0",
+                }}
+              >
+                Resend OTP
+              </p>
+            </div>
             <div className="form__footer">
-              <button>Register Now</button>
+              <button>Verify</button>
             </div>
           </div>
         </div>

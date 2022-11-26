@@ -42,19 +42,24 @@ justify-content: center;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: red;
 }
 .register__form .inputs .inputs__box{
     width: 100%;
     margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .inputs__box input{
-    width: 10%;
+    width: 8%;
     padding: 8px;
     border: 1px solid #ccc;
     outline: none;
-    font-size: 16px;
+    font-size: 20px;
     border-radius: 4px;
+    margin: 0 10px;
+    text-align: center;
 }
 .inputs__box input::placeholder{
     color: rgb(192, 192, 192);
@@ -75,6 +80,7 @@ justify-content: center;
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 10px 0;
 }
 .form__footer button{
