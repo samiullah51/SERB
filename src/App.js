@@ -14,10 +14,11 @@ function App() {
       {/* <Product /> */}
       {/* <Profile /> */}
       {/* <CurrentUserProfile /> */}
-      {/* <NewProduct /> */}
+      {/* <NewProduct mode="sell" /> */}
       {/* <Register /> */}
       {/* <VerifyOtp /> */}
-      <SignIn />
+      {/* <SignIn /> */}
+      <NewProduct mode="exchange" />
     </div>
   );
 }

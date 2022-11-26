@@ -3,7 +3,16 @@ import "./ProductForm.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AddIcon from "@mui/icons-material/Add";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-function ProductForm() {
+function ProductForm({ mode }) {
+  // handle Click
+  const handleClick = () => {
+    if (mode === "sell") {
+      console.log("sell functionality");
+    } else {
+      console.log("Exchange functionality");
+    }
+  };
+
   return (
     <div className="form">
       <div className="single__input">
@@ -11,7 +20,7 @@ function ProductForm() {
           Category
         </p>
         <select>
-          <option disabled>--Select--</option>
+          <option hidden>Category</option>
           <option>Vehicles</option>
           <option>Birds</option>
           <option>Furniture</option>
@@ -84,7 +93,9 @@ function ProductForm() {
       {/* Submit Section */}
       <div className="submit__section">
         <button className="cancel__button">Cancel</button>
-        <button className="post__button">Post</button>
+        <button className="post__button" onClick={handleClick}>
+          Post
+        </button>
       </div>
     </div>
   );
