@@ -1,5 +1,5 @@
 
-.register{
+.verify{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     user-select: none;
     background-image: url('../../../public/images/Capture.PNG');
 }
-.register .overlay{
+.verify .overlay{
     background-color: rgba(32, 32, 32, 0.705);
     width: 100%;
     height: 100%;
@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: center;
 }
-.register__form{
+.verify__form{
     background-color: #fff;
 color: #000;
 width: 550px;
@@ -26,16 +26,16 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 }
-.register__form h2{
+.verify__form h2{
     font-size: 50px;
     font-weight: 700;
     color: var(--primary-color);
     margin: 10px 0;
 }
-.register__form .desc{
+.verify__form .desc{
     font-size: 20px;
 }
-.register__form .inputs{
+.verify__form .inputs{
     padding: 20px;
     width: 100%;
     display: flex;
@@ -43,7 +43,7 @@ justify-content: center;
     justify-content: center;
     flex-wrap: wrap;
 }
-.register__form .inputs .inputs__box{
+.verify__form .inputs .inputs__box{
     width: 100%;
     margin: 5px;
     display: flex;
@@ -51,7 +51,7 @@ justify-content: center;
     justify-content: center;
 
 }
-.inputs__box input{
+.verify .inputs__box input{
     width: 8%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -67,7 +67,7 @@ justify-content: center;
 .inputs__box input:focus{
     border-color: var(--primary-color);
 }
-.register .inputs .inputs__box p{
+.verify .inputs .inputs__box p{
     font-weight: 500;
     color: var(--primary-color);
     margin-bottom: 5px;

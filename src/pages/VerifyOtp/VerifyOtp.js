@@ -24,9 +24,9 @@ function VerifyOtp() {
     }
   };
   return (
-    <div className="register">
+    <div className="verify">
       <div className="overlay">
-        <div className="register__form">
+        <div className="verify__form">
           <h2 className="logo">SERB</h2>
           <p className="desc">
             Please enter the 4 digits verification code sent to
