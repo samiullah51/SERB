@@ -10,7 +10,7 @@ function NewProduct({ mode }) {
 
       {/* New Product */}
       {mode === "sell" ? (
-        <h1>Add New Product</h1>
+        <h1>Add New Product To Sell</h1>
       ) : (
         <h1>Add Product To Exchange</h1>
       )}

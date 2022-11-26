@@ -39,6 +39,7 @@
     font-size: 13px;
     border-radius: 10px;
     color: #fff;
+    height: 25px;
 }
 .single__current__user__product .createdAt{
     color: #4d4d4d;
@@ -56,6 +57,7 @@
 
 }
 .single__current__user__product .modal{
+    width: 100px;
     user-select: none;
     padding: 5px;
     position: absolute;

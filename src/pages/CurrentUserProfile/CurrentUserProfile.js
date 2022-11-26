@@ -41,7 +41,7 @@ function CurrentUserProfile() {
             </div>
           </div>
           {/* All Products of Current User */}
-          <AllCurrentUserProducts />
+          <AllCurrentUserProducts mode="sell" />
         </div>
         {/* Footer */}
       </div>

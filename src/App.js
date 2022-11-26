@@ -7,6 +7,7 @@ import NewProduct from "./pages/NewProduct/NewProduct";
 import Register from "./pages/Register/Register";
 import VerifyOtp from "./pages/VerifyOtp/VerifyOtp";
 import SignIn from "./pages/SignIn/SignIn";
+import ExchangeProducts from "./pages/ExchangeProducts/ExchangeProducts";
 function App() {
   return (
     <div className="App">
@@ -18,7 +19,8 @@ function App() {
       {/* <Register /> */}
       {/* <VerifyOtp /> */}
       {/* <SignIn /> */}
-      <NewProduct mode="exchange" />
+      {/* <NewProduct mode="exchange" /> */}
+      <ExchangeProducts />
     </div>
   );
 }

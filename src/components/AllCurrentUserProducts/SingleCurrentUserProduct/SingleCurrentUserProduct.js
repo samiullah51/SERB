@@ -6,12 +6,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 function SingleCurrentUserProduct({ product }) {
   const [modal, setModal] = useState(false);
 
-  // handleProductStatus
-  const handleProductStatus = () => {
-    product.status = "sold";
-    setModal(false);
-  };
-
   return (
     <div className="single__current__user__product">
       <img src={product.image} />
@@ -23,7 +17,7 @@ function SingleCurrentUserProduct({ product }) {
       <p
         className="status"
         style={
-          product.status === "sold"
+          product.status === "sold" || product.status === "exchanged"
             ? { backgroundColor: "#4D4D4D" }
             : { backgroundColor: "#138D95" }
         }
@@ -37,7 +31,6 @@ function SingleCurrentUserProduct({ product }) {
         <div className="modal">
           <p>Remove</p>
           <p>Edit</p>
-          <p onClick={handleProductStatus}>Mark as sold</p>
           <p className="close" onClick={() => setModal(false)}>
             &times;
           </p>
