@@ -6,6 +6,7 @@ import Profile from "./pages/Profile/Profile";
 import NewProduct from "./pages/NewProduct/NewProduct";
 import Register from "./pages/Register/Register";
 import VerifyOtp from "./pages/VerifyOtp/VerifyOtp";
+import SignIn from "./pages/SignIn/SignIn";
 function App() {
   return (
     <div className="App">
@@ -15,7 +16,8 @@ function App() {
       {/* <CurrentUserProfile /> */}
       {/* <NewProduct /> */}
       {/* <Register /> */}
-      <VerifyOtp />
+      {/* <VerifyOtp /> */}
+      <SignIn />
     </div>
   );
 }

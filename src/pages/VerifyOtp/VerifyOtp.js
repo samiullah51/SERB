@@ -32,7 +32,7 @@ function VerifyOtp() {
             Please enter the 4 digits verification code sent to
           </p>
           <p style={{ fontWeight: "bold", color: "var(--primary-color)" }}>
-            034xxxxxxx7
+            03xxxxxxx17
           </p>
           {/* inputs */}
           <div className="inputs">
