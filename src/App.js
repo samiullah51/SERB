@@ -17,7 +17,7 @@ function App() {
       {/* <CurrentUserProfile /> */}
       {/* <NewProduct mode="sell" /> */}
       {/* <Register /> */}
-      {/* <VerifyOtp /> */}
+      <VerifyOtp />
       {/* <SignIn /> */}
       {/* <NewProduct mode="exchange" /> */}
       {/* <ExchangeProducts /> */}
