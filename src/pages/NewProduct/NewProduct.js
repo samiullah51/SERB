@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import ProductForm from "../../components/ProductForm/ProductForm";
 import "./NewProduct.css";
@@ -20,6 +21,7 @@ function NewProduct({ mode }) {
           <ProductForm mode={mode} />
         </div>
       </div>
+      <Footer />
     </>
   );
 }

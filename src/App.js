@@ -10,7 +10,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import ExchangeProducts from "./pages/ExchangeProducts/ExchangeProducts";
 function App() {
   return (
-    <div className="App">
+    <>
       {/* <Home /> */}
       {/* <Product /> */}
       {/* <Profile /> */}
@@ -20,8 +20,8 @@ function App() {
       {/* <VerifyOtp /> */}
       {/* <SignIn /> */}
       {/* <NewProduct mode="exchange" /> */}
-      <ExchangeProducts />
-    </div>
+      {/* <ExchangeProducts /> */}
+    </>
   );
 }
 

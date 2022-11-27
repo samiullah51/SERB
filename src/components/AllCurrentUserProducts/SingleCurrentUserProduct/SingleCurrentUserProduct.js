@@ -10,6 +10,7 @@ function SingleCurrentUserProduct({ product }) {
     <div className="single__current__user__product">
       <img src={product.image} />
       <p className="title">{product.title}</p>
+      {product.condition && <p className="title">{product.condition}</p>}
       <p className="price">
         {currencyFormatter.format(product.price, { code: "" })}
         <span>(PKR)</span>
@@ -22,7 +23,7 @@ function SingleCurrentUserProduct({ product }) {
             : { backgroundColor: "#138D95" }
         }
       >
-        {product.status}
+        {product.status.toUpperCase()}
       </p>
       <p className="createdAt">01-Jan-2022</p>
       {/* more icon */}

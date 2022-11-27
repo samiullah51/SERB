@@ -9,7 +9,7 @@ function ExchangeProducts() {
       <div className="exchange__product">
         <div className="exchange__header">
           <h1>All Products for Exchange</h1>
-          <button>Add New Product for Exchange</button>
+          <button>Add New Product</button>
         </div>
         <AllCurrentUserProducts mode="exchange" />
       </div>

@@ -7,6 +7,7 @@ export const exchangeProducts = [
     address: "Dara Adam Khel, Kohat",
     createdAt: "2 days ago",
     status: "exchange",
+    condition: "New",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const exchangeProducts = [
     address: "Khyali kor Suran, Mohmand Agency",
     createdAt: "today",
     status: "exchange",
+    condition: "Used",
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const exchangeProducts = [
     address: "Pabbi Station, Nowshehra",
     createdAt: "3 days ago",
     status: "exchanged",
+    condition: "Used",
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const exchangeProducts = [
     address: "Taro Jaba, Peshawar",
     createdAt: "yesterday",
     status: "exchanged",
+    condition: "Used",
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const exchangeProducts = [
     address: "Dara Adam Khel, Kohat",
     createdAt: "2 Days ago",
     status: "exchange",
+    condition: "New",
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ export const exchangeProducts = [
     address: "Gul Haji Plaza, Peshawar s vas asd as asdsd",
     createdAt: "5 Days ago",
     status: "exchanged",
+    condition: "New",
   },
   {
     id: 7,
@@ -61,5 +67,6 @@ export const exchangeProducts = [
     address: "Pabbi Station, Nowshehra",
     createdAt: "3 days ago",
     status: "exchange",
+    condition: "New",
   },
 ];
