@@ -1,0 +1,10 @@
+.exchange__product__detail{
+    margin-top: 100px;
+}
+.exchange__product__detail .left{
+    width: 50%;
+    margin-left: 50px;
+}
+.left .product__details{
+    width: 560px;
+}

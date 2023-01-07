@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import VerifyOtp from "./pages/VerifyOtp/VerifyOtp";
 import SignIn from "./pages/SignIn/SignIn";
 import ExchangeProducts from "./pages/ExchangeProducts/ExchangeProducts";
+import ExchangeProductDetail from "./pages/ExchangeProductDetail/ExchangeProductDetail";
 function App() {
   return (
     <>
@@ -20,7 +21,8 @@ function App() {
       {/* <VerifyOtp /> */}
       {/* <SignIn /> */}
       {/* <NewProduct mode="exchange" /> */}
-      <ExchangeProducts />
+      {/* <ExchangeProducts /> */}
+      <ExchangeProductDetail />
     </>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import "./ProductDetails.css";
 import StarIcon from "@mui/icons-material/Star";
 import currencyFormatter from "currency-formatter";
-function ProductDetails() {
+function ProductDetails({ mode }) {
   return (
     <div className="product__details">
       {/* Header */}
@@ -36,21 +36,34 @@ function ProductDetails() {
           visual form of a document or a typeface without relying on meaningful
           content.
         </p>
-        <p className="product__price">Price</p>
-        <p className="price__value">
-          {currencyFormatter.format(1200, { code: "" })}
-          <span>(PKR)</span>
-        </p>
+        {mode === "exchange" ? (
+          <p className="product__price">Condition</p>
+        ) : (
+          <p className="product__price">Price</p>
+        )}
+        {mode === "exchange" ? (
+          <p className="price__value">Used</p>
+        ) : (
+          <p className="price__value">
+            {currencyFormatter.format(1200, { code: "" })}
+            <span>(PKR)</span>
+          </p>
+        )}
+
         <div className="body__footer">
           <p>2 days ago</p>
           <p>Dara adam khel, kohat</p>
         </div>
       </div>
       {/* Actions */}'
-      <div className="actions">
-        <button className="buy__btn">Buy Now</button>
-        <button className="favorite__btn">Add to favorite</button>
-      </div>
+      {mode === "exchange" ? (
+        <></>
+      ) : (
+        <div className="actions">
+          <button className="buy__btn">Buy Now</button>
+          <button className="favorite__btn">Add to favorite</button>
+        </div>
+      )}
     </div>
   );
 }
