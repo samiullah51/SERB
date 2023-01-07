@@ -12,7 +12,7 @@ function SoldProducts() {
         ))}
       </div>
       <div className="product__available">
-        <p className="title">Sold Products (6)</p>
+        <p className="title">Available Products (6)</p>
         <div className="product__sold">
           {products.slice(2, 8).map((product) => (
             <Product product={product} />

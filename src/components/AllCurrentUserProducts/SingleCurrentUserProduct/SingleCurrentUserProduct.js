@@ -30,14 +30,24 @@ function SingleCurrentUserProduct({ product }) {
       <MoreVertIcon onClick={() => setModal(!modal)} />
       {modal && (
         <div className="modal">
-          <p>Remove</p>
-          <p>Edit</p>
+          {product.status == "exchange" ? (
+            <>
+              <p>Remove</p>
+              <p>Mark as Exchange</p>
+              <p>Edit</p>
+            </>
+          ) : (
+            <>
+              <p>Remove</p>
+            </>
+          )}
+
           <p className="close" onClick={() => setModal(false)}>
             &times;
           </p>
         </div>
       )}
-    </div>
+      </div>
   );
 }
 
