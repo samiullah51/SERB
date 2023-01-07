@@ -12,6 +12,9 @@ function ExchangeProductDetail() {
           <Gallary />
           <ProductDetails mode="exchange" />
         </div>
+        <div className="right">
+          <p>Single Exchange products</p>
+        </div>
       </div>
     </>
   );

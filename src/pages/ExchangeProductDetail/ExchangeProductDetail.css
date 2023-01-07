@@ -2,9 +2,13 @@
     margin-top: 100px;
 }
 .exchange__product__detail .left{
-    width: 50%;
     margin-left: 50px;
 }
-.left .product__details{
+.exchange__product__detail .left__galary {
     width: 560px;
+
+}
+.left .product__details{
+    width: 540px;
+    margin-top: 10px;
 }
