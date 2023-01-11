@@ -9,12 +9,9 @@ function ProductDetails({ mode }) {
       <div className="details__header">
         <div className="header_left">
           <p className="left__by">by - </p>
-          <img
-            className="profile__img"
-            src="https://m.media-amazon.com/images/M/MV5BMjMwNTIxODg0OF5BMl5BanBnXkFtZTgwODg2NzM0OTE@._V1_.jpg"
-          />
+          <img className="profile__img" src="./images/sami.jpg" />
           <div className="by__info">
-            <p className="info__name">Haroon Afridi</p>
+            <p className="info__name">Sami Samiullah</p>
             <p className="info__from">since jan-02-2022</p>
           </div>
           <img
