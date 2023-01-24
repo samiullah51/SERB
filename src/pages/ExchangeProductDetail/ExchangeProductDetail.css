@@ -45,7 +45,7 @@ width: 300px;
 .exchange__product__detail .exchange__products{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content:center;
     flex-wrap: wrap;
     margin-right: 10px;
 }

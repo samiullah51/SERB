@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./Gallary.css";
 function Gallary() {
   const images = [
-    "./images/p1.png",
-    "./images/p2.jpg",
-    "./images/p3.jpg",
     "./images/p4.jpg",
-    "./images/p5.jpg",
+    "./images/c1.jpg",
+    "./images/c2.jfif",
+    "./images/c3.jfif",
+    "./images/c4.jfif",
   ];
   const [active, setActive] = useState(images[0]);
   const [isActive, setIsActive] = useState(false);

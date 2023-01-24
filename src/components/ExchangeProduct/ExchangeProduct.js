@@ -3,7 +3,7 @@ import "./ExchangeProduct.css";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 function ExchangeProduct({ product }) {
   return (
-    <div className="exchange__product">
+    <div className="exchange__product__page">
       <img src={product.image} />
       <p className="product__title">{product.title}</p>
       <p className="product__condition">• {product.condition}</p>

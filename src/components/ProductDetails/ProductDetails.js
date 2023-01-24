@@ -2,7 +2,7 @@ import React from "react";
 import "./ProductDetails.css";
 import StarIcon from "@mui/icons-material/Star";
 import currencyFormatter from "currency-formatter";
-function ProductDetails({ mode }) {
+function ProductDetails({ mode, chatBtn }) {
   return (
     <div className="product__details">
       {/* Header */}
@@ -54,7 +54,7 @@ function ProductDetails({ mode }) {
       </div>
       {/* Actions */}'
       {mode === "exchange" ? (
-        <></>
+        chatBtn && <button className="chat__btn">Chat Now</button>
       ) : (
         <div className="actions">
           <button className="buy__btn">Buy Now</button>
