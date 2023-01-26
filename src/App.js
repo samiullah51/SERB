@@ -10,6 +10,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import ExchangeProducts from "./pages/ExchangeProducts/ExchangeProducts";
 import ExchangeProductDetail from "./pages/ExchangeProductDetail/ExchangeProductDetail";
 import ExchangeWithProduct from "./pages/ExchangeWithProduct/ExchangeWithProduct";
+import ChatBox from "./pages/ChatBox/ChatBox";
 function App() {
   return (
     <>
@@ -24,7 +25,8 @@ function App() {
       {/* <NewProduct mode="exchange" /> */}
       {/* <ExchangeProducts /> */}
       {/* <ExchangeProductDetail /> */}
-      <ExchangeWithProduct />
+      {/* <ExchangeWithProduct /> */}
+      <ChatBox />
     </>
   );
 }

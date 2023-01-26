@@ -1,25 +1,12 @@
 {
-  "name": "backend",
+  "name": "serb",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "crypto-js": "^4.1.1",
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.4.0",
-    "nodemon": "^2.0.16",
-    "stripe": "^9.10.0",
-    "twilio": "^3.80.0"
-  }
+  "license": "ISC"
 }
