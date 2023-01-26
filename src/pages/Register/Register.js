@@ -38,8 +38,8 @@ function Register() {
               <input type="text" placeholder="Example" />
             </div>
             <div className="inputs__box">
-              <p>Username</p>
-              <input type="text" placeholder="03xxxxxxxxx" />
+              <p>Email</p>
+              <input type="text" placeholder="someone@gmail.com" />
             </div>
             <div className="inputs__box">
               <p>Password</p>

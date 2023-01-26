@@ -5,8 +5,13 @@
 }
 .suggest__categories h1{
     margin: 15px 0;
+    font-weight: 500;
     color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    width: fit-content;
+    padding-bottom: 5px;
 }
+
 .suggest__categories .btns
 {
     width: 80%;

@@ -5,6 +5,7 @@ import "./Product.css";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
 import RecentProducts from "../../components/RecentProducts/RecentProducts";
 import Footer from "../../components/Footer/Footer";
+import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 function Product() {
   return (
     <div className="product">
@@ -17,7 +18,7 @@ function Product() {
           <ProductDetails />
         </div>
       </div>
-      <RecentProducts title="Related Products" items={4} />
+      <RelatedProducts title="Related Products" items={4} />
       <Footer />
     </div>
   );

@@ -11,22 +11,46 @@ import ExchangeProducts from "./pages/ExchangeProducts/ExchangeProducts";
 import ExchangeProductDetail from "./pages/ExchangeProductDetail/ExchangeProductDetail";
 import ExchangeWithProduct from "./pages/ExchangeWithProduct/ExchangeWithProduct";
 import ChatBox from "./pages/ChatBox/ChatBox";
+import { Routes, Route } from "react-router-dom";
+import RelatedProducts from "./components/RelatedProducts/RelatedProducts";
 function App() {
   return (
     <>
-      {/* <Home /> */}
-      {/* <Product /> */}
-      {/* <Profile /> */}
-      {/* <CurrentUserProfile /> */}
-      {/* <NewProduct mode="sell" /> */}
-      {/* <Register /> */}
-      {/* <VerifyOtp /> */}
-      {/* <SignIn /> */}
-      {/* <NewProduct mode="exchange" /> */}
-      {/* <ExchangeProducts /> */}
-      {/* <ExchangeProductDetail /> */}
-      {/* <ExchangeWithProduct /> */}
-      <ChatBox />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/relatedproduct" element={<RelatedProducts />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/currentuserprofile" element={<CurrentUserProfile />} />
+        <Route path="/addsellproduct" element={<NewProduct mode="sell" />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/verifyotp" element={<VerifyOtp />} />
+        <Route path="/login" element={<SignIn />} />
+        <Route
+          path="/addexchangeproduct"
+          element={<NewProduct mode="exchange" />}
+        />
+        <Route path="/exchangeproducts" element={<ExchangeProducts />} />
+        <Route
+          path="/exchangeproductdetails"
+          element={<ExchangeProductDetail />}
+        />
+        <Route path="/exchangewith" element={<ExchangeWithProduct />} />
+        <Route path="/chatbox" element={<ChatBox />} />
+
+        {/* <Product /> */}
+        {/* <Profile /> */}
+        {/* <CurrentUserProfile /> */}
+        {/* <NewProduct mode="sell" /> */}
+        {/* <Register /> */}
+        {/* <VerifyOtp /> */}
+        {/* <SignIn /> */}
+        {/* <NewProduct mode="exchange" /> */}
+        {/* <ExchangeProducts /> */}
+        {/* <ExchangeProductDetail /> */}
+        {/* <ExchangeWithProduct /> */}
+        {/* <ChatBox /> */}
+      </Routes>
     </>
   );
 }

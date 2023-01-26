@@ -3,7 +3,7 @@ const validator = require("validator");
 const { default: isEmail } = require("validator/lib/isemail");
 
 const UserSchema = new mongoose.Schema({
-  username: {
+  fullName: {
     type: String,
     required: true,
   },

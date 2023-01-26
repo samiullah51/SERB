@@ -1,11 +1,11 @@
 import React from "react";
-import "./RecentProduct.css";
+import "./RelatedProduct.css";
 import currencyFormatter from "currency-formatter";
 import { Link } from "react-router-dom";
 
 function RecentProduct({ product }) {
   return (
-    <Link to="product">
+    <Link to="/register">
       <div className="recent__product">
         <img src={product.image} />
         <div>

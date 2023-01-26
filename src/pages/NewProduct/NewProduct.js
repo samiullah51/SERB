@@ -11,9 +11,9 @@ function NewProduct({ mode }) {
 
       {/* New Product */}
       {mode === "sell" ? (
-        <h1>Add New Product To Sell</h1>
+        <h1 className="new__product__page__title">Add New Product To Sell</h1>
       ) : (
-        <h1>Add Product To Exchange</h1>
+        <h1 className="new__product__page__title">Add Product To Exchange</h1>
       )}
       <div className="new__product">
         {/* form */}
