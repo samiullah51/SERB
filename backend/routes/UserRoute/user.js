@@ -120,53 +120,69 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// // Forgotten password
-// router.post("/forgotpassword", async (req, res) => {
-//   const { email } = req.body;
+// Forgotten password
+router.post("/forgotpassword", async (req, res) => {
+  const { email } = req.body;
 
-//   try {
-//     const user = await User.findOne({ email: req.body.email });
+  try {
+    const user = await User.findOne({ email: req.body.email });
 
-//     // Check if the user exist with the same email or not
-//     if (user.email === email) {
-//       // Fresh OTP
-//       freshOtp = Math.floor(1000 + Math.floor(Math.random() * 9000));
-//       await User.updateOne({
-//         email,
-//         $set: {
-//           otpCode: freshOtp,
-//         },
-//       });
-//       // await sendEmail(checkUser.username, checkUser.email, 1234);
-//       res.status(200).json(freshOtp + " OTP Updated Successfully");
-//     } else {
-//       res.status(400).json({ message: "Email not exitst" });
-//     }
-//   } catch (err) {
-//     res.status(500).json({ message: "Email not exist" });
-//   }
-// });
+    // Check if the user exist with the same email or not
+    if (user.email === email) {
+      // Fresh OTP
+      freshOtp = Math.floor(1000 + Math.floor(Math.random() * 9000));
+      await User.updateOne({
+        email,
+        $set: {
+          otpCode: freshOtp,
+        },
+      });
+      res.status(200).json(freshOtp + " OTP Updated Successfully") &&
+        (await sendEmail(user.fullName, user.email, freshOtp));
+    } else {
+      res.status(400).json({ message: "Email does not exist" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: "Email not exist" });
+  }
+});
 
-// // New Password
-// router.post("/forgotpassword/newpassword", async (req, res) => {
-//   const { email, newpassword } = req.body;
+// Verify fresh OTP after forgotton password
+router.post("/forgotpassword/verification", async (req, res) => {
+  const { email, otpCode } = req.body;
 
-//   try {
-//     await User.updateOne({
-//       email,
-//       $set: {
-//         password: CryptoJS.AES.encrypt(
-//           newpassword,
-//           process.env.CRYPTO_SEC
-//         ).toString(),
-//       },
-//     });
+  try {
+    const checkUserWithOtp = await User.findOne({ email });
+    if (checkUserWithOtp.otpCode === otpCode) {
+      res.status(201).json({ message: "Updated OTP Verified Successfully" });
+    } else {
+      res.status(300).json({ message: "Invalid Updated OTP" });
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
 
-//     res.status(201).json({ message: "Passwored changed successfulyy" });
-//   } catch (err) {
-//     res.status(500).json(err.message);
-//   }
-// });
+// New Password
+router.post("/forgotpassword/newpassword", async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  try {
+    await User.updateOne({
+      email,
+      $set: {
+        password: CryptoJS.AES.encrypt(
+          newPassword,
+          process.env.CRYPTO_SEC
+        ).toString(),
+      },
+    });
+
+    res.status(201).json({ message: "Passwored changed successfulyy" });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
 
 // export router
 module.exports = router;
