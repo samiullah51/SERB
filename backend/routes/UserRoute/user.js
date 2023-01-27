@@ -17,8 +17,9 @@ const sendEmail = (receiverName, receiverEmail, recieverOtp) => {
   let mailOptions = {
     from: "mernstack51729@gmail.com", //  email sender
     to: receiverEmail, // email receiver
-    subject: "GoalTracker Confirmation",
-    html: `Dear ${receiverName}, your OTP is:  <h2>${recieverOtp}</h2>`,
+    subject: "SERB Confirmation",
+    html: `Dear ${receiverName}, your OTP for <b>SERB</b> Verification is:  <h1>${recieverOtp}</h1>
+    <br /> Please provide the same OTP you got here in the verification form to confirm that this account belongs to you. Thanks`,
   };
   //  Step 3
   transporter.sendMail(mailOptions, (err, data) => {
@@ -32,7 +33,7 @@ const sendEmail = (receiverName, receiverEmail, recieverOtp) => {
 // Register a new User
 
 router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { fullName, email, password } = req.body;
   // Check if user already exist
   const isUserExist = await User.findOne({ email });
   if (isUserExist) {
@@ -44,7 +45,7 @@ router.post("/register", async (req, res) => {
       CryptoJS.AES.encrypt(password, process.env.CRYPTO_SEC).toString();
     try {
       const newUser = new User({
-        username,
+        fullName,
         email,
         password: encryptPassword,
         otpCode: Math.floor(1000 + Math.floor(Math.random() * 9000)),
@@ -53,7 +54,7 @@ router.post("/register", async (req, res) => {
       // Send Verification Email
       res.status(200).json(savedUser);
       savedUser &&
-        sendEmail(savedUser.username, savedUser.email, savedUser.otpCode);
+        sendEmail(savedUser.fullName, savedUser.email, savedUser.otpCode);
     } catch (err) {
       res.status(500).json(err.message);
     }
@@ -62,20 +63,20 @@ router.post("/register", async (req, res) => {
 
 // Before login a registered user, make sure to verify the OTP sent to his Email
 
-router.post("/verify", async (req, res) => {
+router.post("/verification", async (req, res) => {
   const { email, otpCode } = req.body;
 
   try {
-    const checkUserWithOtp = await User.findOne({ email, otpCode });
+    const checkUserWithOtp = await User.findOne({ email });
     if (checkUserWithOtp.otpCode === otpCode) {
-      const verifiedUser = await checkUserWithOtp.update({
+      const verifiedUser = await checkUserWithOtp.updateOne({
         $set: {
           verified: true,
         },
       });
       res.status(201).json({ message: "Verified Successfully", verifiedUser });
     } else {
-      res.status(300).json({ message: "user is not verified" });
+      res.status(300).json({ message: "Invalid OTP" });
     }
   } catch (err) {
     res.status(500).json(err.message);
@@ -110,7 +111,7 @@ router.post("/login", async (req, res) => {
           process.env.JWT_SEC,
           { expiresIn: "3d" }
         );
-        const { password, otpCode, __v, ...others } = user._doc;
+        const { password, otpCode, ...others } = user._doc;
         res.header("auth-token", token).send({ ...others, token });
       }
     }
@@ -119,53 +120,53 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Forgotten password
-router.post("/forgotpassword", async (req, res) => {
-  const { email } = req.body;
+// // Forgotten password
+// router.post("/forgotpassword", async (req, res) => {
+//   const { email } = req.body;
 
-  try {
-    const user = await User.findOne({ email: req.body.email });
+//   try {
+//     const user = await User.findOne({ email: req.body.email });
 
-    // Check if the user exist with the same email or not
-    if (user.email === email) {
-      // Fresh OTP
-      freshOtp = Math.floor(1000 + Math.floor(Math.random() * 9000));
-      await User.updateOne({
-        email,
-        $set: {
-          otpCode: freshOtp,
-        },
-      });
-      // await sendEmail(checkUser.username, checkUser.email, 1234);
-      res.status(200).json(freshOtp + " OTP Updated Successfully");
-    } else {
-      res.status(400).json({ message: "Email not exitst" });
-    }
-  } catch (err) {
-    res.status(500).json({ message: "Email not exist" });
-  }
-});
+//     // Check if the user exist with the same email or not
+//     if (user.email === email) {
+//       // Fresh OTP
+//       freshOtp = Math.floor(1000 + Math.floor(Math.random() * 9000));
+//       await User.updateOne({
+//         email,
+//         $set: {
+//           otpCode: freshOtp,
+//         },
+//       });
+//       // await sendEmail(checkUser.username, checkUser.email, 1234);
+//       res.status(200).json(freshOtp + " OTP Updated Successfully");
+//     } else {
+//       res.status(400).json({ message: "Email not exitst" });
+//     }
+//   } catch (err) {
+//     res.status(500).json({ message: "Email not exist" });
+//   }
+// });
 
-// New Password
-router.post("/forgotpassword/newpassword", async (req, res) => {
-  const { email, newpassword } = req.body;
+// // New Password
+// router.post("/forgotpassword/newpassword", async (req, res) => {
+//   const { email, newpassword } = req.body;
 
-  try {
-    await User.updateOne({
-      email,
-      $set: {
-        password: CryptoJS.AES.encrypt(
-          newpassword,
-          process.env.CRYPTO_SEC
-        ).toString(),
-      },
-    });
+//   try {
+//     await User.updateOne({
+//       email,
+//       $set: {
+//         password: CryptoJS.AES.encrypt(
+//           newpassword,
+//           process.env.CRYPTO_SEC
+//         ).toString(),
+//       },
+//     });
 
-    res.status(201).json({ message: "Passwored changed successfulyy" });
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
-});
+//     res.status(201).json({ message: "Passwored changed successfulyy" });
+//   } catch (err) {
+//     res.status(500).json(err.message);
+//   }
+// });
 
 // export router
 module.exports = router;
