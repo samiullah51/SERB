@@ -3,6 +3,11 @@ const CryptoJS = require("crypto-js");
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
 const JWT = require("jsonwebtoken");
+const {
+  verifyTokenAndAdmin,
+  verifyToken,
+  verifyTokenAndAuthorization,
+} = require("./verifyToken");
 // Send Email
 const sendEmail = (receiverName, receiverEmail, recieverOtp) => {
   // Step 1
@@ -107,6 +112,7 @@ router.post("/login", async (req, res) => {
         const token = JWT.sign(
           {
             id: user._id,
+            isAdmin: user.isAdmin,
           },
           process.env.JWT_SEC,
           { expiresIn: "3d" }
@@ -179,6 +185,42 @@ router.post("/forgotpassword/newpassword", async (req, res) => {
     });
 
     res.status(201).json({ message: "Passwored changed successfulyy" });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// Get all Users
+router.get("/all", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const allUsers = await User.find();
+    res.status(200).json(allUsers);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// Delete a User
+router.delete("/delete/:userId", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.userId);
+    res.status(201).json("User Deleted Successfully!!!");
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// Update a User
+router.put("/edit/:userId", verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(201).json(updatedUser);
   } catch (err) {
     res.status(500).json(err.message);
   }
