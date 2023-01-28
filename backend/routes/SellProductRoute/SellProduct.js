@@ -18,7 +18,7 @@ router.post("/sell/add", verifyToken, async (req, res) => {
 
 // Get all products
 
-router.get("/all", async (req, res) => {
+router.get("/sell/all", async (req, res) => {
   try {
     const allProducts = await Product.find().sort({ createdAt: -1 });
     res.status(200).json(allProducts);
@@ -39,7 +39,7 @@ router.get("/recentproducts", async (req, res) => {
 });
 
 // Get all products of a specific user
-router.get("/all/:userId", async (req, res) => {
+router.get("/sell/all/:userId", async (req, res) => {
   try {
     const recentProducts = await Product.find({
       userId: req.params.userId,
@@ -51,7 +51,7 @@ router.get("/all/:userId", async (req, res) => {
 });
 
 // Related Products
-router.get("/relatedproducts", async (req, res) => {
+router.get("/sell/relatedproducts", async (req, res) => {
   const qCategory = req.query.category;
   try {
     const relatedProducts = await Product.find({
@@ -68,7 +68,7 @@ router.get("/relatedproducts", async (req, res) => {
 });
 
 // Update a product
-router.put("/edit/:productId", verifyToken, async (req, res) => {
+router.put("/sell/edit/:productId", verifyToken, async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.productId,
@@ -84,10 +84,36 @@ router.put("/edit/:productId", verifyToken, async (req, res) => {
 });
 
 // Delete a product
-router.delete("/delete/:productId", verifyToken, async (req, res) => {
+router.delete("/sell/delete/:productId", verifyToken, async (req, res) => {
   try {
     const deleteProduct = await Product.findByIdAndDelete(req.params.productId);
     res.status(201).json({ message: "Product deleted successfully" });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+// category: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
+// title: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
+// description: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
+// Searching products
+router.get("/sell/find", async (req, res) => {
+  try {
+    const searchProducts = await Product.find({
+      $or: [
+        {
+          category: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
+        },
+        {
+          title: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
+        },
+        {
+          description: {
+            $regex: new RegExp("^" + req.query.search + ".*", "i"),
+          },
+        },
+      ],
+    });
+    res.status(200).json(searchProducts);
   } catch (err) {
     res.status(500).json(err.message);
   }
