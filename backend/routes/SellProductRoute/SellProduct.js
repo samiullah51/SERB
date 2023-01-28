@@ -1,4 +1,5 @@
 const Product = require("../../models/SellProduct/Product");
+const User = require("../../models/User");
 const router = require("express").Router();
 const {
   verifyTokenAndAuthorization,
@@ -45,6 +46,20 @@ router.get("/sell/all/:userId", async (req, res) => {
       userId: req.params.userId,
     }).sort({ createdAt: -1 });
     res.status(200).json(recentProducts);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// Get single Product Details of specific user
+router.get("/sell/details/:productId", async (req, res) => {
+  try {
+    const details = await Product.findById({ _id: req.params.productId });
+
+    const by = await User.findById(details.userId);
+    const { otpCode, password, ...others } = by._doc;
+
+    res.status(200).json({ details: details, By: others });
   } catch (err) {
     res.status(500).json(err.message);
   }
