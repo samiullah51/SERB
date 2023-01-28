@@ -92,23 +92,39 @@ router.delete("/sell/delete/:productId", verifyToken, async (req, res) => {
     res.status(500).json(err.message);
   }
 });
-// category: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
-// title: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
-// description: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
+
 // Searching products
 router.get("/sell/find", async (req, res) => {
   try {
     const searchProducts = await Product.find({
       $or: [
         {
-          category: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
+          category: { $regex: new RegExp(".*" + req.query.search + ".*", "i") },
         },
         {
-          title: { $regex: new RegExp("^" + req.query.search + ".*", "i") },
+          title: { $regex: new RegExp(".*" + req.query.search + ".*", "i") },
         },
         {
           description: {
-            $regex: new RegExp("^" + req.query.search + ".*", "i"),
+            $regex: new RegExp(".*" + req.query.search + ".*", "i"),
+          },
+        },
+      ],
+    });
+    res.status(200).json(searchProducts);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// Searching products location Base
+router.get("/sell/findbylocation", async (req, res) => {
+  try {
+    const searchProducts = await Product.find({
+      $or: [
+        {
+          location: {
+            $regex: new RegExp(".*" + req.query.location + ".*", "i"),
           },
         },
       ],
