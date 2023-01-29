@@ -126,6 +126,7 @@ router.get("/sell/find", async (req, res) => {
         },
       ],
     });
+
     res.status(200).json(searchProducts);
   } catch (err) {
     res.status(500).json(err.message);

@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductDetails.css";
 import StarIcon from "@mui/icons-material/Star";
 import currencyFormatter from "currency-formatter";
-function ProductDetails({ mode, chatBtn }) {
+import { publicRequest } from "../../requestMethods";
+import * as timeago from "timeago.js";
+
+// Create formatter (English).
+function ProductDetails({ mode, chatBtn, id }) {
+  const [details, setDetails] = useState({});
+
+  // fetch product Details
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetched = await publicRequest.get(`/product/sell/details/` + id);
+      setDetails(fetched.data.details);
+    };
+    fetchData();
+  }, [id]);
+
   return (
     <div className="product__details">
       {/* Header */}
@@ -26,30 +41,25 @@ function ProductDetails({ mode, chatBtn }) {
       </div>
       {/* Body */}
       <div className="details__body">
-        <p className="product__title">Cannon-DSLR 12.3x</p>
-        <p className="product__desc">
-          Lorem ipsum is a placeholder text commonly used to demonstrate the
-          visual form of a document or a typeface without relying on meaningful
-          visual form of a document or a typeface without relying on meaningful
-          content.
-        </p>
+        <p className="product__title">{details.title}</p>
+        <p className="product__desc">{details.description}</p>
         {mode === "exchange" ? (
-          <p className="product__price">Condition</p>
+          <p className="product__price">{details.condition}</p>
         ) : (
           <p className="product__price">Price</p>
         )}
         {mode === "exchange" ? (
-          <p className="price__value">Used</p>
+          <p className="price__value">{details.condition}</p>
         ) : (
           <p className="price__value">
-            {currencyFormatter.format(1200, { code: "" })}
+            {currencyFormatter.format(details.price, { code: "" })}
             <span>(PKR)</span>
           </p>
         )}
 
         <div className="body__footer">
-          <p>2 days ago</p>
-          <p>Dara adam khel, kohat</p>
+          <p>{timeago.format(details.createdAt)}</p>
+          <p>{details.location}</p>
         </div>
       </div>
       {/* Actions */}'

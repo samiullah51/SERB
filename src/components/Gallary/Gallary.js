@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { publicRequest } from "../../requestMethods";
 import "./Gallary.css";
-function Gallary() {
-  const images = [
-    "./images/p4.jpg",
-    "./images/c1.jpg",
-    "./images/c2.jfif",
-    "./images/c3.jfif",
-    "./images/c4.jfif",
-  ];
+function Gallary({ id }) {
+  const [images, setImages] = useState([]);
   const [active, setActive] = useState(images[0]);
   const [isActive, setIsActive] = useState(false);
   const [target, setTarget] = useState(images[0]);
@@ -17,6 +12,17 @@ function Gallary() {
     setIsActive(true);
     setTarget(image);
   };
+
+  // fetch Single product
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetched = await publicRequest.get(`/product/sell/details/` + id);
+      setImages(fetched.data.details.photos);
+      setTarget(fetched.data.details.photos[0]);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="left__galary">
       <div className="galary__all">
@@ -29,7 +35,7 @@ function Gallary() {
         )}
       </div>
       <div className="galary__main">
-        <img src={active} />
+        <img src={target} />
       </div>
     </div>
   );
