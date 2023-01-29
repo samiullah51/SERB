@@ -21,7 +21,7 @@ function Product() {
           <ProductDetails id={productId} />
         </div>
       </div>
-      <RelatedProducts title="Related Products" items={4} />
+      <RelatedProducts title="Related Products" items={4} id={productId} />
       <Footer />
     </div>
   );

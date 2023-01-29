@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import * as timeago from "timeago.js";
 
 function RecentProduct({ product }) {
+  console.log(product.createdAt);
   return (
     <Link to={`product/${product._id}`}>
       <div className="recent__product">
@@ -18,8 +19,8 @@ function RecentProduct({ product }) {
         </div>
         <div className="product__from">
           <p>
-            {product.location.length > 25
-              ? product.location.slice(0, 25) + "..."
+            {product.location.length > 20
+              ? product.location.slice(0, 20) + "..."
               : product.location}
           </p>
           <p>{timeago.format(product.createdAt)}</p>

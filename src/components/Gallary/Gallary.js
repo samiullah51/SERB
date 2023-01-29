@@ -21,7 +21,7 @@ function Gallary({ id }) {
       setTarget(fetched.data.details.photos[0]);
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <div className="left__galary">
