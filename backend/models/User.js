@@ -4,6 +4,10 @@ const { default: isEmail } = require("validator/lib/isemail");
 
 const UserSchema = new mongoose.Schema(
   {
+    profileImage: {
+      type: String,
+      required: true,
+    },
     fullName: {
       type: String,
       required: true,
@@ -27,6 +31,10 @@ const UserSchema = new mongoose.Schema(
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    level: {
+      type: Number,
+      default: 1,
     },
   },
   { timestamps: true }

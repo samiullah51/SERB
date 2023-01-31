@@ -38,7 +38,7 @@ const sendEmail = (receiverName, receiverEmail, recieverOtp) => {
 // Register a new User
 
 router.post("/register", async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { profileImage, fullName, email, password } = req.body;
   // Check if user already exist
   const isUserExist = await User.findOne({ email });
   if (isUserExist) {
@@ -50,6 +50,7 @@ router.post("/register", async (req, res) => {
       CryptoJS.AES.encrypt(password, process.env.CRYPTO_SEC).toString();
     try {
       const newUser = new User({
+        profileImage,
         fullName,
         email,
         password: encryptPassword,
