@@ -103,7 +103,17 @@ justify-content: center;
 }
 /* error box */
 .error__box{
-    background-color: rgba(212, 18, 18, 0.774);
+    background-color: rgba(241, 24, 24, 0.863);
     width: 100%;
     padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+.verified__box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }

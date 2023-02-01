@@ -5,9 +5,10 @@ import "./SignIn.css";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // Error
+  // Errors
   const [error, setError] = useState("");
-  const [isVerified, setIsVerified] = useState(true);
+  const [isVerifiedError, setIsVerifiedError] = useState(false);
+
   // Navigate Hook
   const navigate = useNavigate();
 
@@ -26,8 +27,12 @@ function SignIn() {
         navigate("/");
       } catch (err) {
         if (err.response.data === "User is not verified") {
-          setIsVerified(false);
+          console.log(err.response.data);
+
+          setIsVerifiedError(true);
           setError("Sorry, you are not verified");
+        } else {
+          setError(err.response.data);
         }
       }
     }
@@ -37,39 +42,59 @@ function SignIn() {
       <div className="overlay">
         <div className="signin__form">
           <h2 className="logo">SERB</h2>
-          <div className="error__box">
-            <p>{error}</p>
-          </div>
-          <p className="desc">Log In To Your Account</p>
-          {/* inputs */}
-          <div className="inputs">
-            <div className="inputs__box">
-              <p>Email</p>
-              <input
-                type="text"
-                placeholder="someone@gmail.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="inputs__box">
-              <p>Password</p>
-              <input
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
 
-          {/* Form Footer */}
-          <div className="form__footer">
-            <button onClick={handleLogin}>Log in</button>
-            <p>
-              Already have an account? <span>Login</span> here.
-            </p>
-          </div>
+          {!isVerifiedError ? (
+            <>
+              {error && (
+                <div className="error__box">
+                  <p>{error}</p>
+                </div>
+              )}
+              <p className="desc">Log In To Your Account</p>
+              {/* inputs */}
+              <div className="inputs">
+                <div className="inputs__box">
+                  <p>Email</p>
+                  <input
+                    type="text"
+                    placeholder="someone@gmail.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="inputs__box">
+                  <p>Password</p>
+                  <input
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+              {/* Form Footer */}
+              <div className="form__footer">
+                <button onClick={handleLogin}>Log in</button>
+                <p>
+                  Already have an account? <span>Login</span> here.
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="verified__box">
+                <h3>Sorry, You are not verified</h3>
+                <p>
+                  Please click on the <b>Verify</b> button to get an OTP for
+                  verification.
+                </p>
+              </div>
+              {/* Form Footer */}
+              <div className="form__footer">
+                <button onClick={handleLogin}>Verify</button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

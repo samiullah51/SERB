@@ -100,11 +100,6 @@ router.post("/login", async (req, res) => {
     if (!user) {
       res.status(401).json("User not found");
       return false;
-    }
-    // Check User is verified or not
-    else if (!user.verified) {
-      res.status(401).json("User is not verified");
-      return false;
     } else {
       // Decrypt the password which is stored in Encryption form in database
       const hashedPassword = CryptoJS.AES.decrypt(
@@ -114,6 +109,9 @@ router.post("/login", async (req, res) => {
       const realPassword = await hashedPassword.toString(CryptoJS.enc.Utf8);
       if (realPassword !== req.body.password) {
         res.status(401).json("Invalid Credentials");
+        return false;
+      } else if (realPassword === req.body.password && !user.verified) {
+        res.status(401).json("User is not verified");
         return false;
       } else {
         // Create Token
