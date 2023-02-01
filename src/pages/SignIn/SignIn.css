@@ -101,3 +101,9 @@ justify-content: center;
     color: dodgerblue;
     cursor: pointer;
 }
+/* error box */
+.error__box{
+    background-color: rgba(212, 18, 18, 0.774);
+    width: 100%;
+    padding: 15px;
+}

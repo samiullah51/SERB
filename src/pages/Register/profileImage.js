@@ -1,4 +1,4 @@
-export const images = [
+export const profileImages = [
   "https://iconape.com/wp-content/png_logo_vector/avatar-4.png",
   "https://iconape.com/wp-content/png_logo_vector/avatar-8.png",
   "https://iconape.com/wp-content/png_logo_vector/avatar-9.png",

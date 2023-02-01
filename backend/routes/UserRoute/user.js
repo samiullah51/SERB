@@ -38,7 +38,7 @@ const sendEmail = (receiverName, receiverEmail, recieverOtp) => {
 // Register a new User
 
 router.post("/register", async (req, res) => {
-  const { profileImage, fullName, email, password } = req.body;
+  const { profileImage, fullName, email, password, dob, gender } = req.body;
   // Check if user already exist
   const isUserExist = await User.findOne({ email });
   if (isUserExist) {
@@ -54,6 +54,8 @@ router.post("/register", async (req, res) => {
         fullName,
         email,
         password: encryptPassword,
+        dob,
+        gender,
         otpCode: Math.floor(1000 + Math.floor(Math.random() * 9000)),
       });
       const savedUser = await newUser.save();
@@ -97,6 +99,11 @@ router.post("/login", async (req, res) => {
     // Check if user exist or not
     if (!user) {
       res.status(401).json("User not found");
+      return false;
+    }
+    // Check User is verified or not
+    else if (!user.verified) {
+      res.status(401).json("User is not verified");
       return false;
     } else {
       // Decrypt the password which is stored in Encryption form in database
