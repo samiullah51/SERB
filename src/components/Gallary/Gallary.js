@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { loader } from "../../loader";
 import { publicRequest } from "../../requestMethods";
 import "./Gallary.css";
 function Gallary({ id }) {
@@ -43,7 +44,9 @@ function Gallary({ id }) {
       </div>
     </div>
   ) : (
-    <h1>loading...</h1>
+    <div className="loader">
+      <img src={loader} />
+    </div>
   );
 }
 

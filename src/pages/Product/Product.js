@@ -22,7 +22,7 @@ function Product() {
         </div>
       </div>
       <RelatedProducts title="Related Products" items={4} id={productId} />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

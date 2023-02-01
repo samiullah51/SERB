@@ -7,11 +7,14 @@ import { publicRequest } from "../../requestMethods";
 function RecentProducts({ title, items, id }) {
   const [related, setRelated] = useState([]);
   const [product, setProduct] = useState("");
+  const [loading, setloading] = useState(false);
   // fetch Single product
   useEffect(() => {
+    setloading(true);
     const fetchData = async () => {
       const fetched = await publicRequest.get(`/product/sell/details/${id}`);
       setProduct(fetched.data.details.category);
+      setloading(false);
     };
     fetchData();
   }, []);
@@ -26,8 +29,7 @@ function RecentProducts({ title, items, id }) {
     };
     fetchData();
   }, [product]);
-  console.log(product, related);
-  return (
+  return !loading ? (
     <div className="recent__products">
       <h1>{title}</h1>
       <div className="products__container">
@@ -36,6 +38,8 @@ function RecentProducts({ title, items, id }) {
         ))}
       </div>
     </div>
+  ) : (
+    <></>
   );
 }
 

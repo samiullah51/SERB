@@ -50,7 +50,7 @@ function Navbar() {
         ) : (
           <div className="register__section">
             <p>Samiullah </p>
-            <img src="./images/sami.jpg" />
+            <img src="https://th.bing.com/th/id/R.f7d2014756bb5303a0df53c508b98ce7?rik=lziNgiLZKtAZGQ&pid=ImgRaw&r=0&sres=1&sresct=1" />
           </div>
         )}
       </div>
