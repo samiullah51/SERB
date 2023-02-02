@@ -4,6 +4,9 @@ import { profileImages } from "./profileImage";
 import "./Register.css";
 import { useLocation, useNavigate } from "react-router";
 import { loader } from "../../loader";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { LOG_IN } from "../../redux/User/userTypes";
 function Register() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,6 +18,7 @@ function Register() {
   const [gender, setGender] = useState("");
   // loading
   const [loading, setLoading] = useState(false);
+
   // Error
   const [error, setError] = useState("");
   // Navigate Hook
@@ -182,7 +186,11 @@ function Register() {
                 )}
               </button>
               <p>
-                Already have an account? <span>Login</span> here.
+                Already have an account?{" "}
+                <Link to="/login" style={{ color: "dodgerblue" }}>
+                  Login
+                </Link>{" "}
+                here.
               </p>
             </div>
           </div>

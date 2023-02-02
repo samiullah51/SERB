@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { loader } from "../../loader";
+import { LOG_IN } from "../../redux/User/userTypes";
 import { publicRequest } from "../../requestMethods";
 import "./SignIn.css";
 function SignIn() {
@@ -9,6 +12,10 @@ function SignIn() {
   // Errors
   const [error, setError] = useState("");
   const [isVerifiedError, setIsVerifiedError] = useState(false);
+  // const user from redux
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  console.log(user);
   // loading
   const [loading, setLoading] = useState(false);
   // Navigate Hook
@@ -26,7 +33,7 @@ function SignIn() {
           email,
           password,
         });
-        loginUser && console.log(loginUser);
+        loginUser && dispatch({ type: LOG_IN, user: loginUser.data });
         navigate("/");
         setLoading(false);
       } catch (err) {
@@ -99,7 +106,11 @@ function SignIn() {
                   )}
                 </button>
                 <p>
-                  Already have an account? <span>Login</span> here.
+                  Don't have an account?{" "}
+                  <Link to="/register" style={{ color: "dodgerblue" }}>
+                    Create
+                  </Link>{" "}
+                  account.
                 </p>
               </div>
             </>

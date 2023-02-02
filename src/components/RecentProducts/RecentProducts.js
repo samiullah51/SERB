@@ -29,7 +29,7 @@ function RecentProducts({ title, items }) {
     </div>
   ) : (
     <div className="loader">
-      <img src={loader} />
+      <img src={loader} style={{ margin: "50px 0" }} />
     </div>
   );
 }

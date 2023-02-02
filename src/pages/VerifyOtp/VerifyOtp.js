@@ -9,7 +9,7 @@ function VerifyOtp() {
   const numOfFields = 3;
   const [completeCode, setCompleteCode] = useState([]);
   const [error, setError] = useState("");
-
+  const [resend, setResend] = useState("");
   // Navigate
   const navigate = useNavigate();
   // loading
@@ -18,7 +18,7 @@ function VerifyOtp() {
   const handleChange = (e) => {
     const { maxLength, value, name } = e.target;
     const [fieldName, fieldIndex] = name.split("-");
-
+    console.log(value);
     setCompleteCode([...completeCode, value]);
 
     // Check if they hit the max character length
@@ -39,6 +39,20 @@ function VerifyOtp() {
   };
   // count stars
   const count = Email.length - 13;
+
+  // handle Resend
+  const handleResend = async () => {
+    try {
+      const resendOtp = await publicRequest.post("/user/resend/verification", {
+        email: Email,
+      });
+      setResend("Otp has been sent again");
+      navigate("/verifyotp", { state: { Email } });
+    } catch (err) {
+      console.log(err);
+      setError(err.response.data);
+    }
+  };
 
   // handleVerification
   const handleVerification = async () => {
@@ -122,9 +136,11 @@ function VerifyOtp() {
                   cursor: "pointer",
                   margin: "5px 0",
                 }}
+                onClick={handleResend}
               >
                 Resend OTP
               </p>
+              {resend && <p>{resend}</p>}
             </div>
             <div className="form__footer">
               <button onClick={handleVerification}>
