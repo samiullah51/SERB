@@ -1,14 +1,25 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import { loader } from "../../loader";
+import { publicRequest } from "../../requestMethods";
 import "./VerifyOtp.css";
 function VerifyOtp() {
   const { state } = useLocation();
   const { Email } = state;
   const numOfFields = 3;
+  const [completeCode, setCompleteCode] = useState([]);
+  const [error, setError] = useState("");
 
+  // Navigate
+  const navigate = useNavigate();
+  // loading
+  const [loading, setLoading] = useState(false);
+  // handleChange
   const handleChange = (e) => {
     const { maxLength, value, name } = e.target;
     const [fieldName, fieldIndex] = name.split("-");
+
+    setCompleteCode([...completeCode, value]);
 
     // Check if they hit the max character length
     if (value.length >= maxLength) {
@@ -29,10 +40,32 @@ function VerifyOtp() {
   // count stars
   const count = Email.length - 13;
 
+  // handleVerification
+  const handleVerification = async () => {
+    setLoading(true);
+    try {
+      const verifyOtp = await publicRequest.post("/user/verification", {
+        email: Email,
+        otpCode: parseInt(completeCode.join("")),
+      });
+      navigate("/login");
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setError(err.response.data);
+    }
+  };
+
   return (
     <div className="verify">
       <div className="overlay">
         <div className="verify__form">
+          {error && (
+            <div className="error__box">
+              <p>{error}</p>
+            </div>
+          )}
+
           <h2 className="logo">SERB</h2>
           <p className="desc">
             Please enter the 4 digits verification code sent to
@@ -94,7 +127,13 @@ function VerifyOtp() {
               </p>
             </div>
             <div className="form__footer">
-              <button>Verify</button>
+              <button onClick={handleVerification}>
+                {loading ? (
+                  <img src={loader} width={15} height={15} />
+                ) : (
+                  "Verify"
+                )}
+              </button>
             </div>
           </div>
         </div>

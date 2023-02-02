@@ -84,7 +84,7 @@ router.post("/verification", async (req, res) => {
       });
       res.status(201).json({ message: "Verified Successfully", verifiedUser });
     } else {
-      res.status(300).json({ message: "Invalid OTP" });
+      res.status(300).json("Invalid OTP");
     }
   } catch (err) {
     res.status(500).json(err.message);
@@ -98,7 +98,7 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     // Check if user exist or not
     if (!user) {
-      res.status(401).json("Email or Password is Incorrect");
+      res.status(401).json("user not found");
       return false;
     } else {
       // Decrypt the password which is stored in Encryption form in database
@@ -108,7 +108,7 @@ router.post("/login", async (req, res) => {
       );
       const realPassword = await hashedPassword.toString(CryptoJS.enc.Utf8);
       if (realPassword !== req.body.password) {
-        res.status(401).json("Email or Password is Incorrect");
+        res.status(401).json(" Password is Incorrect");
         return false;
       } else if (realPassword === req.body.password && !user.verified) {
         res.status(401).json("User is not verified");
@@ -170,6 +170,26 @@ router.post("/forgotpassword/verification", async (req, res) => {
     } else {
       res.status(300).json({ message: "Invalid Updated OTP" });
     }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// Resend fresh OTP after forgotton password
+router.post("/resend/verification", async (req, res) => {
+  const freshOtp = Math.floor(1000 + Math.floor(Math.random() * 9000));
+  try {
+    const find = await User.findOneAndUpdate(
+      { email: req.body.email },
+      {
+        $set: {
+          otpCode: freshOtp,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(find + " OTP Updated Successfully") &&
+      (await sendEmail(find.fullName, find.email, freshOtp));
   } catch (err) {
     res.status(500).json(err.message);
   }

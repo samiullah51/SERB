@@ -3,6 +3,7 @@ import { publicRequest } from "../../requestMethods";
 import { profileImages } from "./profileImage";
 import "./Register.css";
 import { useLocation, useNavigate } from "react-router";
+import { loader } from "../../loader";
 function Register() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ function Register() {
   const [birthMonth, setBirthMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
   const [gender, setGender] = useState("");
+  // loading
+  const [loading, setLoading] = useState(false);
   // Error
   const [error, setError] = useState("");
   // Navigate Hook
@@ -36,6 +39,7 @@ function Register() {
       return false;
     } else {
       try {
+        setLoading(true);
         const newUser = await publicRequest.post("/user/register", {
           profileImage: profileImages[Math.floor(Math.random(0, 19) * 19)],
           fullName,
@@ -45,7 +49,10 @@ function Register() {
           gender,
         });
         navigate("/verifyotp", { state: { Email: newUser.data.email } });
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
+        console.log(err.response.data);
         setError(err.response.data);
       }
     }
@@ -95,6 +102,7 @@ function Register() {
                 placeholder="Example"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
+                autoFocus
               />
             </div>
             <div className="inputs__box">
@@ -166,7 +174,13 @@ function Register() {
             </p>
             {/* Form Footer */}
             <div className="form__footer">
-              <button onClick={handleRegistration}>Register Now</button>
+              <button onClick={handleRegistration}>
+                {loading ? (
+                  <img src={loader} width={15} height={15} />
+                ) : (
+                  "Register Now"
+                )}
+              </button>
               <p>
                 Already have an account? <span>Login</span> here.
               </p>

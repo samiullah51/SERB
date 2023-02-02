@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { loader } from "../../loader";
 import { publicRequest } from "../../requestMethods";
 import "./SignIn.css";
 function SignIn() {
@@ -8,7 +9,8 @@ function SignIn() {
   // Errors
   const [error, setError] = useState("");
   const [isVerifiedError, setIsVerifiedError] = useState(false);
-
+  // loading
+  const [loading, setLoading] = useState(false);
   // Navigate Hook
   const navigate = useNavigate();
 
@@ -18,6 +20,7 @@ function SignIn() {
       setError("Please fill the required fields");
       return false;
     } else {
+      setLoading(true);
       try {
         const loginUser = await publicRequest.post("/user/login", {
           email,
@@ -25,10 +28,10 @@ function SignIn() {
         });
         loginUser && console.log(loginUser);
         navigate("/");
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         if (err.response.data === "User is not verified") {
-          console.log(err.response.data);
-
           setIsVerifiedError(true);
           setError("Sorry, you are not verified");
         } else {
@@ -40,7 +43,16 @@ function SignIn() {
 
   // handle verified
   const handleVerified = async () => {
-    navigate("/verifyotp");
+    try {
+      const resendOtp = await publicRequest.post("/user/resend/verification", {
+        email,
+      });
+      resendOtp && console.log(resendOtp);
+      navigate("/verifyotp", { state: { Email: email } });
+    } catch (err) {
+      console.log(err);
+      setError(err.response.data);
+    }
   };
 
   return (
@@ -79,7 +91,13 @@ function SignIn() {
               </div>
               {/* Form Footer */}
               <div className="form__footer">
-                <button onClick={handleLogin}>Log in</button>
+                <button onClick={handleLogin}>
+                  {loading ? (
+                    <img src={loader} width={15} height={15} />
+                  ) : (
+                    "Log In"
+                  )}
+                </button>
                 <p>
                   Already have an account? <span>Login</span> here.
                 </p>
@@ -87,6 +105,8 @@ function SignIn() {
             </>
           ) : (
             <>
+              <h2 className="logo">SERB</h2>
+
               <div className="verified__box">
                 <h3>Sorry, You Are Not Verified</h3>
                 <p>
