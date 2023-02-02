@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { publicRequest } from "../../requestMethods";
 import { profileImages } from "./profileImage";
 import "./Register.css";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 function Register() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ function Register() {
   const [error, setError] = useState("");
   // Navigate Hook
   const navigate = useNavigate();
-
+  const { state } = useLocation();
   // User Registration
   const handleRegistration = async () => {
     if (
@@ -29,7 +29,7 @@ function Register() {
       !birthYear ||
       !gender
     ) {
-      setError("Please fill the required fields");
+      setError("Please Fill The Required Fields");
       return false;
     } else if (password !== cpassword) {
       setError("Confirm password does not match");
@@ -44,9 +44,9 @@ function Register() {
           dob: birthDay + " " + birthMonth + ", " + birthYear,
           gender,
         });
-        navigate("/login");
+        navigate("/verifyotp", { state: { Email: newUser.data.email } });
       } catch (err) {
-        console.log(err.response.data);
+        setError(err.response.data);
       }
     }
   };
@@ -77,6 +77,11 @@ function Register() {
     <div className="register">
       <div className="overlay">
         <div className="register__form">
+          {error && (
+            <div className="error__box">
+              <p>{error}</p>
+            </div>
+          )}
           <h2 className="logo">SERB</h2>
           <p className="desc">
             Register Yourself to Sell, Exchange or Buy Products

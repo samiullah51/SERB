@@ -37,12 +37,16 @@ function SignIn() {
       }
     }
   };
+
+  // handle verified
+  const handleVerified = async () => {
+    navigate("/verifyotp");
+  };
+
   return (
     <div className="signin">
       <div className="overlay">
         <div className="signin__form">
-          <h2 className="logo">SERB</h2>
-
           {!isVerifiedError ? (
             <>
               {error && (
@@ -50,6 +54,7 @@ function SignIn() {
                   <p>{error}</p>
                 </div>
               )}
+              <h2 className="logo">SERB</h2>
               <p className="desc">Log In To Your Account</p>
               {/* inputs */}
               <div className="inputs">
@@ -83,7 +88,7 @@ function SignIn() {
           ) : (
             <>
               <div className="verified__box">
-                <h3>Sorry, You are not verified</h3>
+                <h3>Sorry, You Are Not Verified</h3>
                 <p>
                   Please click on the <b>Verify</b> button to get an OTP for
                   verification.
@@ -91,7 +96,7 @@ function SignIn() {
               </div>
               {/* Form Footer */}
               <div className="form__footer">
-                <button onClick={handleLogin}>Verify</button>
+                <button onClick={handleVerified}>Verify your account</button>
               </div>
             </>
           )}

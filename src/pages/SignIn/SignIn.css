@@ -111,9 +111,20 @@ justify-content: center;
     justify-content: center;
     color: #fff;
 }
+.error__box p{
+    font-size: 20px;
+}
 .verified__box{
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+}
+.verified__box h3{
+    color: rgba(241, 24, 24, 0.863);
+    margin: 10px 0;
+    font-size: 24px;
+}
+.verified__box p{
+    color: var(--primary-color);
 }

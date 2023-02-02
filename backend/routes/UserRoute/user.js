@@ -98,7 +98,7 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     // Check if user exist or not
     if (!user) {
-      res.status(401).json("User not found");
+      res.status(401).json("Email or Password is Incorrect");
       return false;
     } else {
       // Decrypt the password which is stored in Encryption form in database
@@ -108,7 +108,7 @@ router.post("/login", async (req, res) => {
       );
       const realPassword = await hashedPassword.toString(CryptoJS.enc.Utf8);
       if (realPassword !== req.body.password) {
-        res.status(401).json("Invalid Credentials");
+        res.status(401).json("Email or Password is Incorrect");
         return false;
       } else if (realPassword === req.body.password && !user.verified) {
         res.status(401).json("User is not verified");

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router";
 import "./VerifyOtp.css";
 function VerifyOtp() {
+  const { state } = useLocation();
+  const { Email } = state;
   const numOfFields = 3;
 
   const handleChange = (e) => {
@@ -23,6 +26,9 @@ function VerifyOtp() {
       }
     }
   };
+  // count stars
+  const count = Email.length - 13;
+
   return (
     <div className="verify">
       <div className="overlay">
@@ -32,8 +38,11 @@ function VerifyOtp() {
             Please enter the 4 digits verification code sent to
           </p>
           <p style={{ fontWeight: "bold", color: "var(--primary-color)" }}>
-            03xxxxxxx17
+            {Email.slice(0, 2) +
+              Array(count).fill("*").join("") +
+              Email.slice(Email.length - 11, Email.length)}
           </p>
+
           {/* inputs */}
           <div className="inputs">
             <div className="inputs__box">
