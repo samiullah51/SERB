@@ -34,6 +34,21 @@ function SingleCurrentUserProduct({ product }) {
     }
   };
 
+  // handle Status
+  const handleStatus = async (status) => {
+    try {
+      status === "avaiable"
+        ? (await userRequest.put(`/product/sell/edit/status/${product._id}`, {
+            status,
+          })) && setModal(false)
+        : (await userRequest.put(`/product/sell/edit/status/${product._id}`, {
+            status,
+          })) && setModal(false);
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  };
+
   return (
     <div className="single__current__user__product">
       <img src={product.photos[0]} />
@@ -69,9 +84,11 @@ function SingleCurrentUserProduct({ product }) {
               <p onClick={removeProduct}>Delete</p>
               <p>Edit</p>
               {product.status === "sold" ? (
-                <p>Mark as AVAILABLE</p>
+                <p onClick={() => handleStatus("available")}>
+                  Mark as AVAILABLE
+                </p>
               ) : (
-                <p>Mark as SOLD</p>
+                <p onClick={() => handleStatus("sold")}>Mark as SOLD</p>
               )}
             </>
           )}

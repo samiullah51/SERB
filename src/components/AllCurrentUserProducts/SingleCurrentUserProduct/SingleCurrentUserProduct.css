@@ -60,7 +60,7 @@
 }
 .single__current__user__product .modal{
     padding-top: 20px;
-    width: 100px;
+    min-width: 100px;
     user-select: none;
     position: absolute;
     top:0px;

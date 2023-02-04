@@ -98,6 +98,24 @@ router.put("/sell/edit/:productId", verifyToken, async (req, res) => {
   }
 });
 
+// Change  product Status
+router.put("/sell/edit/status/:productId", verifyToken, async (req, res) => {
+  try {
+    const updatedStatus = await Product.findByIdAndUpdate(
+      req.params.productId,
+      {
+        $set: {
+          status: req.body.status,
+        },
+      },
+      { new: true }
+    );
+    res.status(201).json(updatedStatus);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 // Delete a product
 router.delete("/sell/delete/:productId", verifyToken, async (req, res) => {
   try {
