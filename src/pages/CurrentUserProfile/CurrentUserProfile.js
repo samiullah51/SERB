@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import AllCurrentUserProducts from "../../components/AllCurrentUserProducts/AllCurrentUserProducts";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
@@ -8,6 +9,7 @@ import Reviews from "../../components/Reviews/Reviews";
 import SoldProducts from "../../components/SoldProducts/SoldProducts";
 import "./CurrentUserProfile.css";
 function CurrentUserProfile() {
+  const user = useSelector((state) => state.user);
   return (
     <>
       <Navbar />

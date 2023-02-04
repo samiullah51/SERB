@@ -28,11 +28,40 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 .profile__header .edit__container h1{
     z-index: 11;
     opacity: 1;
 }
+.edit__container .register__form{
+    position: relative;
+}
+.edit__container .register__form .register__form__close{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+ 
+}
+.edit__container .register__form .register__form__close:hover{
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.profile__header .edit__container .register__form img{
+width: 100px;
+height: 100px;
+border-radius: 50%;
+border: 2px solid var(--primary-color);
+padding: 2px;
+}
+.edit__container .register__form .inputs{
+    flex-direction: column;
+}
+.edit__container .inputs__box p{
+    margin-bottom: 5px;
+}
+
+
 .profile__header .edit__profile:hover{
     background-color: rgb(32, 32, 32);
     cursor: pointer;
