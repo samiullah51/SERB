@@ -46,7 +46,11 @@ function EditContainer({ setShow }) {
                   autoFocus
                 />
               </div>
-
+              {/* Description */}
+              <div className="inputs__box">
+                <p>Add Description</p>
+                <textarea placeholder="Add some description about yourself..."></textarea>
+              </div>
               <div className="inputs__box">
                 <p>Current Password</p>
                 <input
