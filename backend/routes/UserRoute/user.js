@@ -124,7 +124,7 @@ router.post("/login", async (req, res) => {
           { expiresIn: "3d" }
         );
         const { password, otpCode, ...others } = user._doc;
-        res.header("auth-token", token).send({ ...others, token });
+        res.header("token", token).send({ ...others, token });
       }
     }
   } catch (err) {

@@ -37,6 +37,10 @@ const ProductSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    status: {
+      type: String,
+      default: "available",
+    },
   },
   { timestamps: true }
 );

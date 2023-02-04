@@ -2,7 +2,7 @@ const JWT = require("jsonwebtoken");
 
 // Just simply verify the token, user has a token or not, valid or not valid
 const verifyToken = async (req, res, next) => {
-  const token = req.header("auth-token");
+  const token = req.header("token");
   if (!token) return res.status(401).send("Access Denied!");
   try {
     const verified = JWT.verify(token, process.env.JWT_SEC);

@@ -13,8 +13,8 @@
     right:  0;
     background-color: var(--primary-color);
     color: #fff;
-    padding: 5px;
-    border-radius: 4px;
+    padding: 7px 8px;
+    border-radius: 50%;
     box-shadow: 0 0 9px 1px rgba(0,0,0,0.3);
     transition: .3s;
 }

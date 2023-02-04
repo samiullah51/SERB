@@ -1,5 +1,6 @@
 .profile__right{
     padding: 20px;
+    width:  60%;
 }
 .right__header{
     display: flex;
