@@ -3,7 +3,7 @@ import "./ProductForm.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AddIcon from "@mui/icons-material/Add";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-function ProductForm({ mode }) {
+function ProductForm({ mode, behave, product }) {
   // handle Click
   const handleClick = () => {
     if (mode === "sell") {
@@ -12,8 +12,7 @@ function ProductForm({ mode }) {
       console.log("Exchange functionality");
     }
   };
-
-  return (
+  return behave !== "edit" ? (
     <div className="form">
       <div className="single__input">
         <p className="label" style={{ marginBottom: "10px" }}>
@@ -95,6 +94,116 @@ function ProductForm({ mode }) {
         <button className="cancel__button">Cancel</button>
         <button className="post__button" onClick={handleClick}>
           Post
+        </button>
+      </div>
+    </div>
+  ) : (
+    <div className="form">
+      <div className="single__input">
+        <p className="label" style={{ marginBottom: "10px" }}>
+          Categorys
+        </p>
+        <select>
+          <option selected>{product?.details?.category}</option>
+          <option>Vehicles</option>
+          <option>Birds</option>
+          <option>Furniture</option>
+          <option>Motercycles</option>
+        </select>
+      </div>
+      <div className="single__input">
+        <p className="label">Title</p>
+        <input type="text" value={product?.details?.title} />
+      </div>
+      <div className="single__input">
+        <p className="label">Description</p>
+        <textarea
+          className="desc"
+          value={product?.details?.description}
+        ></textarea>
+      </div>
+      {/* <Modal and Location */}
+      <div className="modal__location">
+        <div className="modal__location__box">
+          <AddIcon />
+          <p>Modal</p>
+        </div>
+        <div className="modal__location__box">
+          <LocationOnIcon />
+          <p>Location</p>
+        </div>
+      </div>
+      <div
+        className="single__input"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
+      >
+        <input
+          type="text"
+          value={product?.details?.modal}
+          style={{ flexBasis: "10%", marginRight: "25px" }}
+        />
+        <input
+          type="text"
+          value={product?.details?.location}
+          style={{ flexBasis: "68%" }}
+        />
+      </div>
+
+      {/* Condition */}
+      <div className="single__input">
+        <p className="label">Condition</p>
+        <div className="input__conidtion">
+          <label for="new">
+            <input
+              type="radio"
+              id="new"
+              name="conition"
+              checked={product?.details?.condition === "New" ? true : false}
+            />
+            <p>New</p>
+          </label>
+          <label for="used">
+            <input
+              type="radio"
+              id="used"
+              name="conition"
+              checked={product?.details?.condition === "Used" ? true : false}
+            />
+            <p>Used</p>
+          </label>
+        </div>
+      </div>
+      {/* Price Section */}
+      <div className="single__input price__input">
+        <p className="label">Price</p>
+        <input
+          type="text"
+          value={product?.details?.price}
+          style={{ width: "125px" }}
+        />
+        <p className="pkr">PKR</p>
+      </div>
+      {/* Images Section */}
+      <div className="single__input">
+        <p className="label">Update photos</p>
+        <div className="input__photos">
+          <img src={product?.details?.photos[0]} />
+          <img src={product?.details?.photos[1]} />
+          <img src={product?.details?.photos[2]} />
+          <img src={product?.details?.photos[3]} />
+          <img src={product?.details?.photos[4]} />
+        </div>
+      </div>
+
+      {/* Submit Section */}
+      <div className="submit__section">
+        <button className="cancel__button">Cancel</button>
+        <button className="post__button" onClick={handleClick}>
+          Update
         </button>
       </div>
     </div>

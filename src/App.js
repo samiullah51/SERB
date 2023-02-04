@@ -14,6 +14,7 @@ import ChatBox from "./pages/ChatBox/ChatBox";
 import { Routes, Route } from "react-router-dom";
 import RelatedProducts from "./components/RelatedProducts/RelatedProducts";
 import ProtectedRoutes from "./ProtectedRoutes";
+import EditProduct from "./pages/EditProduct/EditProduct";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/currentuserprofile" element={<CurrentUserProfile />} />
           <Route path="/addsellproduct" element={<NewProduct mode="sell" />} />
+          <Route path="/editproduct/:productId" element={<EditProduct />} />
           <Route
             path="/addexchangeproduct"
             element={<NewProduct mode="exchange" />}

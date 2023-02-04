@@ -4,6 +4,7 @@ import currencyFormatter from "currency-formatter";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { publicRequest, userRequest } from "../../../requestMethods";
 import CloseIcon from "@mui/icons-material/Close";
+import { Link } from "react-router-dom";
 
 function SingleCurrentUserProduct({ product }) {
   const [modal, setModal] = useState(false);
@@ -82,7 +83,9 @@ function SingleCurrentUserProduct({ product }) {
           ) : (
             <>
               <p onClick={removeProduct}>Delete</p>
-              <p>Edit</p>
+              <Link to={`/editproduct/${product._id}`}>
+                <p>Edit</p>
+              </Link>
               {product.status === "sold" ? (
                 <p onClick={() => handleStatus("available")}>
                   Mark as AVAILABLE

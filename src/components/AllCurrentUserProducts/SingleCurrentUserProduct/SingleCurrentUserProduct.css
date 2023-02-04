@@ -58,6 +58,11 @@
     color: #4d4d4d;
 
 }
+.single__current__user__product .modal a{
+    color: #fff;
+    display: block;
+    width: 100%;
+}
 .single__current__user__product .modal{
     padding-top: 20px;
     min-width: 100px;
