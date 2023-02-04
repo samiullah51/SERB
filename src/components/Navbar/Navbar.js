@@ -4,10 +4,11 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import RightNavbar from "./RightNavbar/RightNavbar";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 function Navbar() {
   const [searchByPlace, setSearchByPlace] = useState("");
   const [searchProduct, setSearchProduct] = useState("");
-  let user = true;
+  const user = useSelector((state) => state.user);
   return (
     <div className="navbar">
       {/* Navbar Left */}
@@ -51,9 +52,9 @@ function Navbar() {
             <p>Sign Up</p>
           </div>
         ) : (
-          <Link to="/profile" className="register__section">
-            <p style={{ color: "#fff" }}>Samiullah </p>
-            <img src="https://th.bing.com/th/id/R.f7d2014756bb5303a0df53c508b98ce7?rik=lziNgiLZKtAZGQ&pid=ImgRaw&r=0&sres=1&sresct=1" />
+          <Link to="/currentuserprofile" className="register__section">
+            <p style={{ color: "#fff" }}>{user.fullName}</p>
+            <img src={user.profileImage} />
           </Link>
         )}
       </div>
