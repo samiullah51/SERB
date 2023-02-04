@@ -34,6 +34,7 @@ function SignIn() {
           password,
         });
         loginUser && dispatch({ type: LOG_IN, user: loginUser.data });
+        localStorage.setItem("user", JSON.stringify(loginUser.data));
         navigate("/");
         setLoading(false);
       } catch (err) {

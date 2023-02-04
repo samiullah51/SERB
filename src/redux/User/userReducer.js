@@ -1,7 +1,7 @@
 import { LOG_IN, LOG_OUT } from "./userTypes";
 
 const initialState = {
-  user: null,
+  user: localStorage.getItem("user"),
 };
 
 export const userReducer = (state = initialState, action) => {

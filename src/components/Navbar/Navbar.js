@@ -13,7 +13,9 @@ function Navbar() {
       {/* Navbar Left */}
 
       <div className="navbar__left">
-        <h2>SERB</h2>
+        <Link to="/">
+          <h2 style={{ color: "#fff" }}>SERB</h2>
+        </Link>
 
         {/*  Search for porduct */}
 
