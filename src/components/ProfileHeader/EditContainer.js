@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { loader } from "../../loader";
 import CloseIcon from "@mui/icons-material/Close";
+import Details from "./Details";
+import Edit from "./Edit";
 function EditContainer({ setShow }) {
   const user = useSelector((state) => state.user);
 
   // user data
   const [fullName, setFullName] = useState(user.fullName);
   const [password, setPassword] = useState(user.password);
+  //   detail or edit
+  const [details, setDetails] = useState(true);
 
   // error
   const [error, setError] = useState("");
@@ -27,61 +31,35 @@ function EditContainer({ setShow }) {
               <CloseIcon />
             </div>
 
-            <h2 className="logo">Edit Profile</h2>
-            <img src={user.profileImage} />
+            <h2 className="logo">
+              {details ? "Your Details" : "Edit Profile"}
+            </h2>
             {error && (
               <div className="error__box">
                 <p>{error}</p>
               </div>
             )}
-            {/* inputs */}
-            <div className="inputs">
-              <div className="inputs__box">
-                <p>Full Name</p>
-                <input
-                  type="text"
-                  placeholder="Example"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  autoFocus
-                />
-              </div>
-              {/* Description */}
-              <div className="inputs__box">
-                <p>Add Description</p>
-                <textarea placeholder="Add some description about yourself..."></textarea>
-              </div>
-              <div className="inputs__box">
-                <p>Current Password</p>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
 
-              <div className="inputs__box">
-                <p>New Password</p>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-
-              {/* Form Footer */}
-              <div className="form__footer">
-                <button>
-                  {loading ? (
-                    <img src={loader} width={15} height={15} />
-                  ) : (
-                    "Update Now"
-                  )}
-                </button>
-              </div>
+            {/* Details or Edit */}
+            <div className="show__details">
+              <p
+                onClick={() => setDetails(true)}
+                className={details ? "active" : ""}
+              >
+                Details
+              </p>
+              <p
+                onClick={() => setDetails(false)}
+                className={!details ? "active" : ""}
+              >
+                Edit
+              </p>
             </div>
+
+            {
+              // Details or Edit
+              details ? <Details /> : <Edit />
+            }
           </div>
         </div>
       </div>

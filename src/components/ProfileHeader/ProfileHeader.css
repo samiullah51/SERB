@@ -4,10 +4,12 @@
     justify-content: flex-start;
     user-select: none;
     position: relative;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
 }
 .profile__header .edit__profile{
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     right:  0;
     background-color: var(--primary-color);
     color: #fff;
@@ -44,6 +46,11 @@
 }
 .edit__container .register__form{
     position: relative;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+   
 }
 .edit__container .register__form .register__form__close{
     position: absolute;
@@ -112,4 +119,46 @@ padding: 2px;
 }
 .profile__info .info__from{
     color: gray;
+}
+/* Details or edit */
+.show__details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.show__details p{
+    margin: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.show__details :not(.active):hover{
+    color: var(--primary-color);
+}
+.show__details .active{
+    color: dodgerblue;
+}
+.profile__details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 10px;
+}
+.profile__details .single__details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px 0;
+}
+.profile__details .single__details label{
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 18px;
+    margin-right: 10px;
+}
+.profile__details .single__details p{
+    /* font-weight: bold; */
+    color: var(--primary-color);
+    font-size: 18px;
 }
