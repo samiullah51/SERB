@@ -21,13 +21,37 @@ function ProductForm({ mode, behave, product }) {
     photo5: null,
   });
   // set image
-  const [image, setImage] = useState({ image1: null, image2: null });
-  const [showImg, setShowImg] = useState({ showImg1: null, showImg2: null });
+  const [image, setImage] = useState({
+    image1: null,
+    image2: null,
+    image3: null,
+    image4: null,
+    image5: null,
+  });
+  const [showImg, setShowImg] = useState({
+    showImg1: null,
+    showImg2: null,
+    showImg3: null,
+    showImg4: null,
+    showImg5: null,
+  });
   // handle image
-  const handleChange = (image) => {
-    if (image) {
+  const handleChange = (image, number) => {
+    if (image && number === "first") {
       setImage(image);
       setShowImg({ ...showImg, showImg1: URL.createObjectURL(image) });
+    } else if (image && number === "second") {
+      setImage(image);
+      setShowImg({ ...showImg, showImg2: URL.createObjectURL(image) });
+    } else if (image && number === "third") {
+      setImage(image);
+      setShowImg({ ...showImg, showImg3: URL.createObjectURL(image) });
+    } else if (image && number === "fourth") {
+      setImage(image);
+      setShowImg({ ...showImg, showImg4: URL.createObjectURL(image) });
+    } else {
+      setImage(image);
+      setShowImg({ ...showImg, showImg5: URL.createObjectURL(image) });
     }
   };
   // handle Click
@@ -159,37 +183,70 @@ function ProductForm({ mode, behave, product }) {
       </div>
       {/* Images Section */}
       <div className="single__input">
-        <p className="label">Upload up to 5 photos</p>
+        <p className="label" style={{ margin: "10px 0" }}>
+          Upload up to 5 photos
+        </p>
         <div className="input__photos">
           <label htmlFor="file1">
-            <AddAPhotoIcon />
+            {showImg.showImg1 !== null ? (
+              <img src={showImg.showImg1} />
+            ) : (
+              <AddAPhotoIcon />
+            )}
             <input
               type="file"
               id="file1"
-              onChange={(e) => handleChange(e.target.files[0])}
+              onChange={(e) => handleChange(e.target.files[0], "first")}
             />
           </label>
           <label htmlFor="file2">
-            <AddAPhotoIcon />
+            {showImg.showImg2 !== null ? (
+              <img src={showImg.showImg2} />
+            ) : (
+              <AddAPhotoIcon />
+            )}
             <input
               type="file"
               id="file2"
-              onChange={(e) => handleChange(e.target.files[0])}
+              onChange={(e) => handleChange(e.target.files[0], "second")}
             />
           </label>
           <label htmlFor="file3">
-            <AddAPhotoIcon />
-            <input type="file" id="file3" onChange={handleChange} />
+            {showImg.showImg3 !== null ? (
+              <img src={showImg.showImg3} />
+            ) : (
+              <AddAPhotoIcon />
+            )}
+            <input
+              type="file"
+              id="file3"
+              onChange={(e) => handleChange(e.target.files[0], "third")}
+            />
           </label>
           <label htmlFor="file4">
-            <AddAPhotoIcon />
-            <input type="file" id="file4" onChange={handleChange} />
+            {showImg.showImg4 !== null ? (
+              <img src={showImg.showImg4} />
+            ) : (
+              <AddAPhotoIcon />
+            )}
+            <input
+              type="file"
+              id="file4"
+              onChange={(e) => handleChange(e.target.files[0], "fourth")}
+            />
           </label>
           <label htmlFor="file5">
-            <AddAPhotoIcon />
-            <input type="file" id="file5" onChange={handleChange} />
+            {showImg.showImg5 !== null ? (
+              <img src={showImg.showImg5} />
+            ) : (
+              <AddAPhotoIcon />
+            )}
+            <input
+              type="file"
+              id="file5"
+              onChange={(e) => handleChange(e.target.files[0], "fifth")}
+            />
           </label>
-          <img src={showImg.showImg1} />
         </div>
       </div>
 
