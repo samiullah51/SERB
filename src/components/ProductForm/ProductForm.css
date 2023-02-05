@@ -7,7 +7,7 @@
     color:var(--primary-color);
     font-size: 16px;
 }
-.single__input input[type ='text' ]{
+.single__input input[type ='text' ], .single__input input[type = 'number']{
     width: 80%;
     border: 1px solid #ccc;
     padding: 7px;
@@ -139,4 +139,7 @@ color: #fff;
 .cancel__button:hover{
     background-color: rgba(207, 207, 207, 0.425);
     
+}
+.input__photos #file1, #file2, #file3, #file4,#file5{
+    display: none;
 }

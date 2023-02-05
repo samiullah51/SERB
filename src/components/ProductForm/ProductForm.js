@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProductForm.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AddIcon from "@mui/icons-material/Add";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 function ProductForm({ mode, behave, product }) {
+  const [newProduct, setNewProduct] = useState({
+    category: "",
+    title: "",
+    description: "",
+    modal: "",
+    location: "",
+    condition: "",
+    price: null,
+  });
+  const [photos, setPhotos] = useState({
+    photo1: null,
+    photo2: null,
+    photo3: null,
+    photo4: null,
+    photo5: null,
+  });
+  // set image
+  const [image, setImage] = useState({ image1: null, image2: null });
+  const [showImg, setShowImg] = useState({ showImg1: null, showImg2: null });
+  // handle image
+  const handleChange = (image) => {
+    if (image) {
+      setImage(image);
+      setShowImg({ ...showImg, showImg1: URL.createObjectURL(image) });
+    }
+  };
   // handle Click
   const handleClick = () => {
     if (mode === "sell") {
       console.log("sell functionality");
+      console.log(URL.createObjectURL(photos.photo1));
     } else {
       console.log("Exchange functionality");
     }
@@ -18,21 +45,37 @@ function ProductForm({ mode, behave, product }) {
         <p className="label" style={{ marginBottom: "10px" }}>
           Category
         </p>
-        <select>
+        <select
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, category: e.target.value })
+          }
+        >
           <option hidden>Category</option>
-          <option>Vehicles</option>
-          <option>Birds</option>
-          <option>Furniture</option>
-          <option>Motercycles</option>
+          <option value="Vehicles">Vehicles</option>
+          <option value="Birds">Birds</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Motercycles">Motercycles</option>
         </select>
       </div>
       <div className="single__input">
         <p className="label">Title</p>
-        <input type="text" />
+        <input
+          type="text"
+          value={newProduct.title}
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, title: e.target.value })
+          }
+        />
       </div>
       <div className="single__input">
         <p className="label">Description</p>
-        <textarea className="desc"></textarea>
+        <textarea
+          className="desc"
+          value={newProduct.description}
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, description: e.target.value })
+          }
+        ></textarea>
       </div>
       {/* <Modal and Location */}
       <div className="modal__location">
@@ -53,8 +96,22 @@ function ProductForm({ mode, behave, product }) {
           justifyContent: "flex-start",
         }}
       >
-        <input type="text" style={{ flexBasis: "10%", marginRight: "25px" }} />
-        <input type="text" style={{ flexBasis: "68%" }} />
+        <input
+          type="text"
+          value={newProduct.modal}
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, modal: e.target.value })
+          }
+          style={{ flexBasis: "10%", marginRight: "25px" }}
+        />
+        <input
+          type="text"
+          value={newProduct.location}
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, location: e.target.value })
+          }
+          style={{ flexBasis: "68%" }}
+        />
       </div>
 
       {/* Condition */}
@@ -62,11 +119,27 @@ function ProductForm({ mode, behave, product }) {
         <p className="label">Condition</p>
         <div className="input__conidtion">
           <label for="new">
-            <input type="radio" id="new" name="conition" />
+            <input
+              type="radio"
+              id="new"
+              name="conition"
+              value="New"
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, condition: e.target.value })
+              }
+            />
             <p>New</p>
           </label>
           <label for="used">
-            <input type="radio" id="used" name="conition" />
+            <input
+              type="radio"
+              id="used"
+              name="conition"
+              value="Used"
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, condition: e.target.value })
+              }
+            />
             <p>Used</p>
           </label>
         </div>
@@ -74,18 +147,49 @@ function ProductForm({ mode, behave, product }) {
       {/* Price Section */}
       <div className="single__input price__input">
         <p className="label">Price</p>
-        <input type="text" style={{ width: "125px" }} />
+        <input
+          type="number"
+          value={newProduct.price}
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, price: e.target.value })
+          }
+          style={{ width: "125px" }}
+        />
         <p className="pkr">PKR</p>
       </div>
       {/* Images Section */}
       <div className="single__input">
         <p className="label">Upload up to 5 photos</p>
         <div className="input__photos">
-          <AddAPhotoIcon />
-          <AddAPhotoIcon />
-          <AddAPhotoIcon />
-          <AddAPhotoIcon />
-          <AddAPhotoIcon />
+          <label htmlFor="file1">
+            <AddAPhotoIcon />
+            <input
+              type="file"
+              id="file1"
+              onChange={(e) => handleChange(e.target.files[0])}
+            />
+          </label>
+          <label htmlFor="file2">
+            <AddAPhotoIcon />
+            <input
+              type="file"
+              id="file2"
+              onChange={(e) => handleChange(e.target.files[0])}
+            />
+          </label>
+          <label htmlFor="file3">
+            <AddAPhotoIcon />
+            <input type="file" id="file3" onChange={handleChange} />
+          </label>
+          <label htmlFor="file4">
+            <AddAPhotoIcon />
+            <input type="file" id="file4" onChange={handleChange} />
+          </label>
+          <label htmlFor="file5">
+            <AddAPhotoIcon />
+            <input type="file" id="file5" onChange={handleChange} />
+          </label>
+          <img src={showImg.showImg1} />
         </div>
       </div>
 

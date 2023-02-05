@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import AllCurrentUserProducts from "../../components/AllCurrentUserProducts/AllCurrentUserProducts";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
@@ -39,7 +40,9 @@ function CurrentUserProfile() {
               <p>Favorite</p>
             </div>
             <div className="header__right">
-              <button>Add New</button>
+              <Link to="/addsellproduct" className="new__btn">
+                Add New
+              </Link>
             </div>
           </div>
           {/* All Products of Current User */}

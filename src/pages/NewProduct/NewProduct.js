@@ -21,7 +21,6 @@ function NewProduct({ mode }) {
           <ProductForm mode={mode} />
         </div>
       </div>
-      <Footer />
     </>
   );
 }
