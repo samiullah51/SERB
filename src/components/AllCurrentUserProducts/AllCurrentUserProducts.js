@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 function AllCurrentUserProducts({ mode }) {
   const user = useSelector((state) => state.user);
-
   const [products, setProducts] = useState([]);
 
   // fetch all product of current user
