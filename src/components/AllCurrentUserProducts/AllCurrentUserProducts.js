@@ -8,15 +8,18 @@ import { useSelector } from "react-redux";
 function AllCurrentUserProducts({ mode }) {
   const user = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
-
+  // loading
+  const [loading, setLoading] = useState(false);
   // fetch all product of current user
   useEffect(() => {
+    setLoading(true);
     const getProducts = async () => {
       try {
         const products = await publicRequest.get(
           `/product/sell/all/${user._id}`
         );
         setProducts(products.data);
+        setLoading(false);
       } catch (err) {
         console.log(err.response.data);
       }
