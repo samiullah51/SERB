@@ -12,3 +12,11 @@
     align-items: center;
     justify-content: center;
 }
+.searched__products.oops{
+    display: flex;
+    flex-direction: column;
+    
+}
+.searched__products.oops h2{
+    color: var(--primary-color);
+}

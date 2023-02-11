@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import SoldProduct from "../../components/SoldProducts/Product/Product";
-import { loader } from "../../loader";
+import { loader, oops } from "../../loader";
 import { publicRequest } from "../../requestMethods";
 import "./Search.css";
 function Search() {
@@ -36,11 +36,18 @@ function Search() {
       <div className="search">
         <h1>Search for "{product}"</h1>
         {!loading ? (
-          <div className="searched__products">
-            {searchProducts.map((product) => (
-              <SoldProduct key={product._id} product={product} />
-            ))}
-          </div>
+          searchProducts.length === 0 ? (
+            <div className="searched__products oops">
+              <img src={oops} />
+              <h2>Sorry, product is not found</h2>
+            </div>
+          ) : (
+            <div className="searched__products">
+              {searchProducts.map((product) => (
+                <SoldProduct key={product._id} product={product} />
+              ))}
+            </div>
+          )
         ) : (
           <div className="searched__products">
             <img src={loader} width={40} />
