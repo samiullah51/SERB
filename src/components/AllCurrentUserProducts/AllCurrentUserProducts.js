@@ -15,10 +15,10 @@ function AllCurrentUserProducts({ mode }) {
     setLoading(true);
     const getProducts = async () => {
       try {
-        const products = await publicRequest.get(
+        const fechedProducts = await publicRequest.get(
           `/product/sell/all/${user._id}`
         );
-        setProducts(products.data);
+        setProducts(fechedProducts.data);
         setLoading(false);
       } catch (err) {
         console.log(err.response.data);
