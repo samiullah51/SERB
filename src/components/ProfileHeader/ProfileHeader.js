@@ -5,9 +5,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import { loader } from "../../loader";
 import EditContainer from "./EditContainer";
-function ProfileHeader() {
+function ProfileHeader({ userDetails }) {
   const user = useSelector((state) => state.user);
-  let sinceJoin = new Date(user?.createdAt).toLocaleString("en-US", {
+  let sinceJoin = new Date(userDetails?.createdAt).toLocaleString("en-US", {
     day: "numeric",
     year: "numeric",
     month: "long",
@@ -34,9 +34,9 @@ function ProfileHeader() {
       {/* Edit Container */}
       {show && <EditContainer setShow={setShow} />}
 
-      <img className="profile__img" src={user.profileImage} />
+      <img className="profile__img" src={userDetails.profileImage} />
       <div className="profile__info">
-        <p className="info__name">{user.fullName}</p>
+        <p className="info__name">{userDetails.fullName}</p>
         <p className="info__from">{sinceJoin}</p>
       </div>
       <img

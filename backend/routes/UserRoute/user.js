@@ -226,6 +226,16 @@ router.get("/all", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+// Get all Users
+router.get("/profile/:userId", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 // Delete a User
 router.delete("/delete/:userId", verifyTokenAndAdmin, async (req, res) => {
   try {

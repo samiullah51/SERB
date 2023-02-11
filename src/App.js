@@ -24,7 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/relatedproduct" element={<RelatedProducts />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/currentuserprofile" element={<CurrentUserProfile />} />
           <Route path="/addsellproduct" element={<NewProduct mode="sell" />} />
           <Route path="/editproduct/:productId" element={<EditProduct />} />

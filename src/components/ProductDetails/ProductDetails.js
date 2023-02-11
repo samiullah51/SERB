@@ -6,10 +6,14 @@ import { publicRequest } from "../../requestMethods";
 import * as timeago from "timeago.js";
 import { SignalCellularAltSharp } from "@mui/icons-material";
 import { loader } from "../../loader";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 // Create formatter (English).
 function ProductDetails({ mode, chatBtn, id }) {
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.user);
+
   // fetch product Details
   useEffect(() => {
     setLoading(true);
@@ -25,12 +29,11 @@ function ProductDetails({ mode, chatBtn, id }) {
     year: "numeric",
     month: "long",
   });
-
   return !loading ? (
     <div className="product__details">
       {/* Header */}
       <div className="details__header">
-        <div className="header_left">
+        <Link to={`/profile/${details?.By._id}`} className="header_left">
           <p className="left__by">by - </p>
           <img className="profile__img" src={details?.By.profileImage} />
           <div className="by__info">
@@ -41,7 +44,7 @@ function ProductDetails({ mode, chatBtn, id }) {
             className="level__img"
             src="https://static.vecteezy.com/system/resources/previews/004/946/876/non_2x/winner-badge-concepts-vector.jpg"
           />
-        </div>
+        </Link>
         <div className="header__right">
           <p>3.5</p>
           <StarIcon />
@@ -71,12 +74,18 @@ function ProductDetails({ mode, chatBtn, id }) {
         </div>
       </div>
       {/* Actions */}'
-      {mode === "exchange" ? (
-        chatBtn && <button className="chat__btn">Chat Now</button>
+      {details?.By?._id !== user?._id ? (
+        mode === "exchange" ? (
+          chatBtn && <button className="chat__btn">Chat Now</button>
+        ) : (
+          <div className="actions">
+            <button className="buy__btn">Buy Now</button>
+            <button className="favorite__btn">Add to favorite</button>
+          </div>
+        )
       ) : (
-        <div className="actions">
-          <button className="buy__btn">Buy Now</button>
-          <button className="favorite__btn">Add to favorite</button>
+        <div style={{ color: "gray", textAlign: "center" }}>
+          This is your own product nad you cannot buy it.
         </div>
       )}
     </div>

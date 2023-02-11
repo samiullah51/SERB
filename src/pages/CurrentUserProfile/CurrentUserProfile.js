@@ -17,7 +17,7 @@ function CurrentUserProfile() {
       <div className="profile">
         <div className="profile__left">
           {/* Profile Header */}
-          <ProfileHeader />
+          <ProfileHeader userDetails={user} />
           {/* Description About Profile */}
           <div className="left__about">
             <p className="about__about">About</p>

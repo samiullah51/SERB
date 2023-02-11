@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import Rating from "../../components/Rating/Rating";
@@ -6,14 +6,32 @@ import Reviews from "../../components/Reviews/Reviews";
 import SoldProducts from "../../components/SoldProducts/SoldProducts";
 import "./Profile.css";
 import Footer from "../../components/Footer/Footer";
+import { userRequest } from "../../requestMethods";
+import { useParams } from "react-router";
 function Profile() {
+  const { userId } = useParams();
+
+  const [userDetails, setUserDetails] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const fetched = await userRequest.get(`/user/profile/${userId}`);
+        setUserDetails(fetched.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchUser();
+  }, [userId]);
+
   return (
     <>
       <Navbar />
       <div className="profile">
         <div className="profile__left">
           {/* Profile Header */}
-          <ProfileHeader />
+          <ProfileHeader userDetails={userDetails} />
           {/* Description About Profile */}
           <div className="left__about">
             <p className="about__about">About</p>
@@ -30,7 +48,7 @@ function Profile() {
           <Reviews />
         </div>
         <div className="profile__right">
-          <SoldProducts />
+          <SoldProducts userDetails={userDetails} />
         </div>
         {/* Footer */}
       </div>

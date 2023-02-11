@@ -5,7 +5,7 @@ import currencyFormatter from "currency-formatter";
 function SoldProduct({ product }) {
   return (
     <div className="sold__product">
-      <img src={product.image} />
+      <img src={product.photos[0]} />
       <div>
         <p className="product__title">{product.title}</p>
         <p className="product__price">

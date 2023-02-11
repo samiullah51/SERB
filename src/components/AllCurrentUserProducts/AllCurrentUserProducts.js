@@ -18,7 +18,7 @@ function AllCurrentUserProducts({ mode }) {
         const fechedProducts = await publicRequest.get(
           `/product/sell/all/${user._id}`
         );
-        setProducts(fechedProducts.data);
+        setProducts(fechedProducts.data.allProducts);
         setLoading(false);
       } catch (err) {
         console.log(err.response.data);
@@ -27,7 +27,9 @@ function AllCurrentUserProducts({ mode }) {
     getProducts();
   }, [products]);
 
-  return (
+  return products.length === 0 ? (
+    <h2 style={{ textAlign: "center", color: "#d4d4d4" }}>No Product Yet</h2>
+  ) : (
     <div className="all__current__user__products">
       {mode === "sell"
         ? products.map((product) => (

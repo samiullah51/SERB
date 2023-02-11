@@ -42,10 +42,25 @@ router.get("/recentproducts", async (req, res) => {
 // Get all products of a specific user
 router.get("/sell/all/:userId", async (req, res) => {
   try {
-    const recentProducts = await Product.find({
+    // allproducts
+    const allProducts = await Product.find({
       userId: req.params.userId,
     }).sort({ createdAt: -1 });
-    res.status(200).json(recentProducts);
+    // fetch sold products
+    const soldProducts = await Product.find({
+      userId: req.params.userId,
+      status: "sold",
+    }).sort({ createdAt: -1 });
+    // fetch available products
+    const availableProducts = await Product.find({
+      userId: req.params.userId,
+      status: "available",
+    }).sort({ createdAt: -1 });
+    res.status(200).json({
+      allProducts: allProducts,
+      soldProducts: soldProducts,
+      availableProducts: availableProducts,
+    });
   } catch (err) {
     res.status(500).json(err.message);
   }
