@@ -9,17 +9,25 @@
     display: flex;
   align-items: center;
 }
+
 .header_left .left__by{
     font-weight: 500;
     font-size: 22px;
 }
+
 .by__info .info__name{
     font-weight: 500;
     font-size: 18px;
+    transition: .3s;
+
 }
+
 .by__info .info__from{
     color: gray;
     font-size: 14px;
+}
+.header_left .info__name:hover{
+    font-weight: bold;
 }
 .header_left .profile__img{
     width: 50px;
@@ -28,6 +36,10 @@
     margin: 0 10px;
     padding: 2px;
     border: 2px solid var(--primary-color);
+    transition: .3s;
+}
+.header_left .profile__img:hover{
+    transform: scale(1.1);
 }
 .header_left .level__img{
     width: 60px;

@@ -34,7 +34,7 @@ function ProductDetails({ mode, chatBtn, id }) {
       {/* Header */}
       <div className="details__header">
         <Link to={`/profile/${details?.By._id}`} className="header_left">
-          <p className="left__by">by - </p>
+          <p className="left__by">By - </p>
           <img className="profile__img" src={details?.By.profileImage} />
           <div className="by__info">
             <p className="info__name">{details?.By.fullName}</p>

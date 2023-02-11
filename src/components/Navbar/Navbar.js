@@ -6,7 +6,6 @@ import RightNavbar from "./RightNavbar/RightNavbar";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 function Navbar() {
-  const [searchByPlace, setSearchByPlace] = useState("");
   const [searchProduct, setSearchProduct] = useState("");
   const user = useSelector((state) => state.user);
   return (
@@ -24,22 +23,15 @@ function Navbar() {
           {/* Place for search */}
 
           <div className="searchbox">
-            <PlaceOutlinedIcon />
-            <input
-              type="text"
-              value={searchByPlace}
-              onChange={(e) => setSearchByPlace(e.target.value)}
-              placeholder="Location"
-            />
-          </div>
-          <div className="searchbox">
             <input
               type="text"
               value={searchProduct}
               onChange={(e) => setSearchProduct(e.target.value)}
               placeholder="Search here..."
             />
-            <SearchIcon />
+            <Link to={`/search?product=${searchProduct}`}>
+              <SearchIcon />
+            </Link>
           </div>
         </div>
 

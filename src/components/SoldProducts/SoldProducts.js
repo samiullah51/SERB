@@ -23,7 +23,6 @@ function SoldProducts({ userDetails }) {
     };
     fetchData();
   }, [userDetails]);
-  console.log(soldProducts);
   return loading ? (
     <div className="loading">
       <img src={loader} />

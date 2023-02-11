@@ -20,20 +20,22 @@
     background-color: var(--primary-color);
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     position: relative;
     color: #fff;
 }
 /* Logo */
 .navbar__left h2{
-    margin-right: 10px;
+    margin-left: 20px;
 }
 /* Searching area */
 .navbar__left .main__searchbox{
     display: flex;
     align-items: center;
     justify-content: flex-start;
+flex-basis: 50%;
 }
+
 .navbar__left .register__section p{
 cursor: pointer;
 }
@@ -53,16 +55,21 @@ cursor: pointer;
     padding: 5px 10px;
     color: var(--primary-color);
     border-radius: 5px;
+    width: 100%;
   
 }
  .searchbox .MuiSvgIcon-root{
  cursor: pointer;
+}
+.searchbox .MuiSvgIcon-root:hover{
+    color: black;
 }
 .searchbox input{
    border: none;
    outline: none;
    background-color: transparent;
  font-size: 16px;
+ width: 100%;
 
 }
 /* Signin / Signup Links */

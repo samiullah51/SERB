@@ -15,6 +15,7 @@ import { Routes, Route } from "react-router-dom";
 import RelatedProducts from "./components/RelatedProducts/RelatedProducts";
 import ProtectedRoutes from "./ProtectedRoutes";
 import EditProduct from "./pages/EditProduct/EditProduct";
+import Search from "./pages/Search/Search";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/currentuserprofile" element={<CurrentUserProfile />} />
           <Route path="/addsellproduct" element={<NewProduct mode="sell" />} />
           <Route path="/editproduct/:productId" element={<EditProduct />} />
+          <Route path="/search" element={<Search />} />
           <Route
             path="/addexchangeproduct"
             element={<NewProduct mode="exchange" />}
