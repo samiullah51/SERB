@@ -28,9 +28,11 @@ function ProfileHeader({ userDetails }) {
   return (
     <div className="profile__header">
       {/* Edit button */}
-      <div className="edit__profile" onClick={() => setShow(true)}>
-        <EditIcon />
-      </div>
+      {userDetails._id === user._id && (
+        <div className="edit__profile" onClick={() => setShow(true)}>
+          <EditIcon />
+        </div>
+      )}
       {/* Edit Container */}
       {show && <EditContainer setShow={setShow} />}
 
