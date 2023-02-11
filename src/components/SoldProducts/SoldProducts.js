@@ -3,23 +3,32 @@ import "./SoldProducts.css";
 import { products } from "../../products";
 import Product from "./Product/Product";
 import { publicRequest } from "../../requestMethods";
+import { loader } from "../../loader";
 function SoldProducts({ userDetails }) {
   const [soldProducts, setSoldProducts] = useState([]);
   const [avaiableProducts, setAvaiableProducts] = useState([]);
-  console.log("from details", userDetails._id);
+
+  // loading
+  const [loading, setLoading] = useState(false);
   // fetch all the product of selected user
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const fetched = await publicRequest.get(
         `/product/sell/all/${userDetails._id}`
       );
       setSoldProducts(fetched.data.soldProducts);
-      setAvaiableProducts(fetched.data.avaiableProducts);
+      setAvaiableProducts(fetched.data.availableProducts);
+      setLoading(false);
     };
     fetchData();
   }, [userDetails]);
   console.log(soldProducts);
-  return (
+  return loading ? (
+    <div className="loading">
+      <img src={loader} />
+    </div>
+  ) : (
     <div className="sold__products">
       <p className="title">Sold Products ({soldProducts?.length})</p>
       <div className="product__sold">

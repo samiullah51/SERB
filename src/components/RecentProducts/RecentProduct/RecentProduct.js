@@ -7,7 +7,7 @@ import * as timeago from "timeago.js";
 function RecentProduct({ product }) {
   console.log(product.createdAt);
   return (
-    <Link to={`product/${product._id}`}>
+    <Link to={`/product/${product._id}`}>
       <div className="recent__product">
         <img src={product.photos[0]} />
         <div>
