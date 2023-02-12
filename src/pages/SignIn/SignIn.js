@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { loader } from "../../loader";
 import { LOG_IN } from "../../redux/User/userTypes";
 import { publicRequest } from "../../requestMethods";
+import { storage } from "firebase/storage";
+
 import "./SignIn.css";
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -33,8 +35,12 @@ function SignIn() {
           email,
           password,
         });
-        loginUser && dispatch({ type: LOG_IN, user: loginUser.data });
         localStorage.setItem("user", JSON.stringify(loginUser.data));
+        loginUser &&
+          dispatch({
+            type: LOG_IN,
+            user: JSON.parse(localStorage.getItem("user")),
+          });
         navigate("/");
         setLoading(false);
       } catch (err) {
