@@ -4,8 +4,17 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AddIcon from "@mui/icons-material/Add";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { storage } from "../../firebase";
+import { userRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { loader } from "../../loader";
 
 function ProductForm({ mode, behave, product }) {
+  const user = useSelector((state) => state.user);
+  // navigation
+  const navigate = useNavigate();
+  // loading
+  const [loading, setLoading] = useState(false);
   const [newProduct, setNewProduct] = useState({
     category: "",
     title: "",
@@ -16,6 +25,8 @@ function ProductForm({ mode, behave, product }) {
     price: null,
   });
   const [allPhotos, setAllPhotos] = useState([]);
+  // const [sendAllphotos, setSendAllPhotos] = useState([]);
+  let sendAllphotos = [];
   // set image
   const [image, setImage] = useState({
     image1: null,
@@ -58,6 +69,19 @@ function ProductForm({ mode, behave, product }) {
 
   // handle Click
   const handleClick = () => {
+    // check if all the required fields are fill
+    if (
+      !newProduct.category ||
+      !newProduct.title ||
+      !newProduct.description ||
+      !newProduct.location ||
+      !newProduct.condition ||
+      allPhotos.length < 5
+    ) {
+      alert("please fill the require fields");
+      return false;
+    }
+    setLoading(true);
     if (mode === "sell") {
       allPhotos.forEach((item) => {
         const uploadTask = storage.ref(`/items/${item.name}`).put(item);
@@ -66,19 +90,32 @@ function ProductForm({ mode, behave, product }) {
           (snapshot) => {
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log(progress);
           },
           (err) => {
             console.log(err);
           },
           () => {
             uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-              console.log(url);
+              sendAllphotos.push(url);
+              if (sendAllphotos.length === 5) {
+                userRequest.post(`/product/sell/add`, {
+                  userId: user._id,
+                  category: newProduct.category,
+                  title: newProduct.title,
+                  description: newProduct.description,
+                  modal: newProduct.modal,
+                  location: newProduct.location,
+                  condition: newProduct.condition,
+                  price: newProduct.price,
+                  photos: sendAllphotos,
+                });
+                navigate("/");
+                setLoading(false);
+              }
             });
           }
         );
       });
-      console.log("sell functionality");
     } else {
       console.log("Exchange functionality");
     }
@@ -274,7 +311,7 @@ function ProductForm({ mode, behave, product }) {
       <div className="submit__section">
         <button className="cancel__button">Cancel</button>
         <button className="post__button" onClick={handleClick}>
-          Post
+          {!loading ? "Post" : <img src={loader} width={10} />}
         </button>
       </div>
     </div>
