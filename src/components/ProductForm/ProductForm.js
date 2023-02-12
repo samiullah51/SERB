@@ -3,6 +3,8 @@ import "./ProductForm.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AddIcon from "@mui/icons-material/Add";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import { storage } from "../../firebase";
+
 function ProductForm({ mode, behave, product }) {
   const [newProduct, setNewProduct] = useState({
     category: "",
@@ -13,13 +15,7 @@ function ProductForm({ mode, behave, product }) {
     condition: "",
     price: null,
   });
-  const [photos, setPhotos] = useState({
-    photo1: null,
-    photo2: null,
-    photo3: null,
-    photo4: null,
-    photo5: null,
-  });
+  const [allPhotos, setAllPhotos] = useState([]);
   // set image
   const [image, setImage] = useState({
     image1: null,
@@ -40,25 +36,49 @@ function ProductForm({ mode, behave, product }) {
     if (image && number === "first") {
       setImage(image);
       setShowImg({ ...showImg, showImg1: URL.createObjectURL(image) });
+      setAllPhotos([...allPhotos, image]);
     } else if (image && number === "second") {
       setImage(image);
       setShowImg({ ...showImg, showImg2: URL.createObjectURL(image) });
+      setAllPhotos([...allPhotos, image]);
     } else if (image && number === "third") {
       setImage(image);
       setShowImg({ ...showImg, showImg3: URL.createObjectURL(image) });
+      setAllPhotos([...allPhotos, image]);
     } else if (image && number === "fourth") {
       setImage(image);
       setShowImg({ ...showImg, showImg4: URL.createObjectURL(image) });
-    } else {
+      setAllPhotos([...allPhotos, image]);
+    } else if (image && number === "fifth") {
       setImage(image);
       setShowImg({ ...showImg, showImg5: URL.createObjectURL(image) });
+      setAllPhotos([...allPhotos, image]);
     }
   };
+
   // handle Click
   const handleClick = () => {
     if (mode === "sell") {
+      allPhotos.forEach((item) => {
+        const uploadTask = storage.ref(`/items/${item.name}`).put(item);
+        uploadTask.on(
+          "state_changes",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log(progress);
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+              console.log(url);
+            });
+          }
+        );
+      });
       console.log("sell functionality");
-      console.log(URL.createObjectURL(photos.photo1));
     } else {
       console.log("Exchange functionality");
     }

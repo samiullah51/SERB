@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { loader } from "../../loader";
 import { LOG_IN } from "../../redux/User/userTypes";
 import { publicRequest } from "../../requestMethods";
-import { storage } from "firebase/storage";
-
 import "./SignIn.css";
 function SignIn() {
   const [email, setEmail] = useState("");
