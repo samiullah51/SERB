@@ -134,8 +134,7 @@ function ProductForm({ mode, behave, product }) {
   }, [product]);
   // handle update
   const handleUpdate = async () => {
-    console.log(editProduct);
-    // /sell/edit/:productId
+    setLoading(true);
     try {
       const edited = await userRequest.put(
         `/product/sell/edit/${product.details._id}`,
@@ -150,6 +149,7 @@ function ProductForm({ mode, behave, product }) {
         }
       );
       edited && navigate("/");
+      setLoading(false);
     } catch (err) {
       setError(err.message);
     }
@@ -497,7 +497,7 @@ function ProductForm({ mode, behave, product }) {
       <div className="submit__section">
         <button className="cancel__button">Cancel</button>
         <button className="post__button" onClick={handleUpdate}>
-          Update
+          {!loading ? "Update" : <img src={loader} width={10} />}
         </button>
       </div>
     </div>
