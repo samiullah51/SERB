@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductForm.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AddIcon from "@mui/icons-material/Add";
@@ -11,6 +11,7 @@ import { loader } from "../../loader";
 
 function ProductForm({ mode, behave, product }) {
   const user = useSelector((state) => state.user);
+  const [error, setError] = useState("");
   // navigation
   const navigate = useNavigate();
   // loading
@@ -25,7 +26,6 @@ function ProductForm({ mode, behave, product }) {
     price: null,
   });
   const [allPhotos, setAllPhotos] = useState([]);
-  // const [sendAllphotos, setSendAllPhotos] = useState([]);
   let sendAllphotos = [];
   // set image
   const [image, setImage] = useState({
@@ -68,7 +68,7 @@ function ProductForm({ mode, behave, product }) {
   };
 
   // handle Click
-  const handleClick = () => {
+  const handleClick = async () => {
     // check if all the required fields are fill
     if (
       !newProduct.category ||
@@ -78,7 +78,7 @@ function ProductForm({ mode, behave, product }) {
       !newProduct.condition ||
       allPhotos.length < 5
     ) {
-      alert("please fill the require fields");
+      setError("Please fill the required fields");
       return false;
     }
     setLoading(true);
@@ -117,15 +117,56 @@ function ProductForm({ mode, behave, product }) {
         );
       });
     } else {
-      console.log("Exchange functionality");
     }
   };
+
+  // Edit Options
+  const [editProduct, setEditProduct] = useState(null);
+  // fetch the current product
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const fetched = await userRequest.get(
+        `/product/sell/details/${product?.details._id}`
+      );
+      setEditProduct(fetched.data.details);
+    };
+    fetchProduct();
+  }, [product]);
+  // handle update
+  const handleUpdate = async () => {
+    console.log(editProduct);
+    // /sell/edit/:productId
+    try {
+      const edited = await userRequest.put(
+        `/product/sell/edit/${product.details._id}`,
+        {
+          category: editProduct.category,
+          title: editProduct.title,
+          description: editProduct.description,
+          modal: editProduct.modal,
+          location: editProduct.location,
+          condition: editProduct.condition,
+          price: editProduct.price,
+        }
+      );
+      edited && navigate("/");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return behave !== "edit" ? (
     <div className="form">
+      {error && (
+        <div className="error">
+          <p>{error}</p>
+        </div>
+      )}
       <div className="single__input">
         <p className="label" style={{ marginBottom: "10px" }}>
           Category
         </p>
+
         <select
           onChange={(e) =>
             setNewProduct({ ...newProduct, category: e.target.value })
@@ -208,6 +249,7 @@ function ProductForm({ mode, behave, product }) {
               onChange={(e) =>
                 setNewProduct({ ...newProduct, condition: e.target.value })
               }
+              checked
             />
             <p>New</p>
           </label>
@@ -316,28 +358,45 @@ function ProductForm({ mode, behave, product }) {
       </div>
     </div>
   ) : (
+    // Edited
+
     <div className="form">
       <div className="single__input">
         <p className="label" style={{ marginBottom: "10px" }}>
           Categorys
         </p>
-        <select>
-          <option selected>{product?.details?.category}</option>
-          <option>Vehicles</option>
-          <option>Birds</option>
-          <option>Furniture</option>
-          <option>Motercycles</option>
+        <select
+          onChange={(e) =>
+            setEditProduct({ ...editProduct, category: e.target.value })
+          }
+        >
+          <option selected value={editProduct?.category}>
+            {editProduct?.category}
+          </option>
+          <option value="Vehicles">Vehicles</option>
+          <option value="Birds">Birds</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Motercycles">Motercycles</option>
         </select>
       </div>
       <div className="single__input">
         <p className="label">Title</p>
-        <input type="text" value={product?.details?.title} />
+        <input
+          type="text"
+          value={editProduct?.title}
+          onChange={(e) =>
+            setEditProduct({ ...editProduct, title: e.target.value })
+          }
+        />
       </div>
       <div className="single__input">
         <p className="label">Description</p>
         <textarea
           className="desc"
-          value={product?.details?.description}
+          value={editProduct?.description}
+          onChange={(e) =>
+            setEditProduct({ ...editProduct, description: e.target.value })
+          }
         ></textarea>
       </div>
       {/* <Modal and Location */}
@@ -361,12 +420,18 @@ function ProductForm({ mode, behave, product }) {
       >
         <input
           type="text"
-          value={product?.details?.modal}
+          value={editProduct?.modal}
+          onChange={(e) =>
+            setEditProduct({ ...editProduct, modal: e.target.value })
+          }
           style={{ flexBasis: "10%", marginRight: "25px" }}
         />
         <input
           type="text"
-          value={product?.details?.location}
+          value={editProduct?.location}
+          onChange={(e) =>
+            setEditProduct({ ...editProduct, location: e.target.value })
+          }
           style={{ flexBasis: "68%" }}
         />
       </div>
@@ -380,7 +445,11 @@ function ProductForm({ mode, behave, product }) {
               type="radio"
               id="new"
               name="conition"
-              checked={product?.details?.condition === "New" ? true : false}
+              value="New"
+              onChange={(e) =>
+                setEditProduct({ ...editProduct, condition: e.target.value })
+              }
+              // checked={product?.details?.condition === "New" ? true : false}
             />
             <p>New</p>
           </label>
@@ -389,7 +458,11 @@ function ProductForm({ mode, behave, product }) {
               type="radio"
               id="used"
               name="conition"
-              checked={product?.details?.condition === "Used" ? true : false}
+              value="Used"
+              onChange={(e) =>
+                setEditProduct({ ...editProduct, condition: e.target.value })
+              }
+              // checked={product?.details?.condition === "Used" ? true : false}
             />
             <p>Used</p>
           </label>
@@ -400,7 +473,10 @@ function ProductForm({ mode, behave, product }) {
         <p className="label">Price</p>
         <input
           type="text"
-          value={product?.details?.price}
+          value={editProduct?.price}
+          onChange={(e) =>
+            setEditProduct({ ...editProduct, price: e.target.value })
+          }
           style={{ width: "125px" }}
         />
         <p className="pkr">PKR</p>
@@ -420,7 +496,7 @@ function ProductForm({ mode, behave, product }) {
       {/* Submit Section */}
       <div className="submit__section">
         <button className="cancel__button">Cancel</button>
-        <button className="post__button" onClick={handleClick}>
+        <button className="post__button" onClick={handleUpdate}>
           Update
         </button>
       </div>

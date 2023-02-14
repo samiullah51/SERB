@@ -143,3 +143,13 @@ color: #fff;
 .input__photos #file1, #file2, #file3, #file4,#file5{
     display: none;
 }
+/* error */
+.form .error{
+    background-color: rgba(241, 24, 24, 0.863);
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
