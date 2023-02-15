@@ -16,6 +16,9 @@ function Edit() {
   // loading
   const [loading, setLoading] = useState(false);
 
+  // Update User
+  const handleUpdate = async () => {};
+
   return (
     <>
       <img src={user.profileImage} />
@@ -58,7 +61,7 @@ function Edit() {
 
         {/* Form Footer */}
         <div className="form__footer">
-          <button>
+          <button onClick={handleUpdate}>
             {loading ? (
               <img src={loader} width={15} height={15} />
             ) : (
