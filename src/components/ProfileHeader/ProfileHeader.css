@@ -162,3 +162,19 @@ padding: 2px;
     color: var(--primary-color);
     font-size: 18px;
 }
+.profileImg{
+    position: relative;
+}
+.profileImg input{
+display: none;
+}
+.profileImg .MuiSvgIcon-root{
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 28px;
+}
