@@ -45,24 +45,6 @@
     color: #4d4d4d;
     font-size: 12px;
 }
-.single__current__user__product .modal p{
-    text-align: left;
-    width: 100%;
-    font-size: 14px;
-    padding: 2px;
-    color: #fff;
-   padding: 5px;
-}
-.single__current__user__product .modal p:hover{
-    background-color: #fff;
-    color: #4d4d4d;
-
-}
-.single__current__user__product .modal a{
-    color: #fff;
-    display: block;
-    width: 100%;
-}
 .single__current__user__product .modal{
     padding-top: 20px;
     min-width: 100px;
@@ -70,7 +52,7 @@
     position: absolute;
     top:0px;
     right: 20px;
-    background-color: #4d4d4d;
+    background-color: #fff;
     box-shadow: 0 0 9px 1px rgba(0,0,0,0.2);
     text-align: left;
     display: flex;
@@ -78,14 +60,32 @@
     align-items: flex-start;
     justify-content: flex-start;
     z-index: 11;
-    border: 1px solid #4d4d4d;
+    border: 1px solid #ccc;
+}
+.single__current__user__product .modal p{
+    text-align: left;
+    width: 100%;
+    font-size: 12px;
+    padding: 2px;
+    color: var(--primary-color);;
+   padding: 5px;
+}
+.single__current__user__product .modal p:hover{
+    background-color: var(--primary-color);
+    color: #fff;
+
+}
+.single__current__user__product .modal a{
+    color: #fff;
+    display: block;
+    width: 100%;
 }
 .single__current__user__product .modal .MuiSvgIcon-root{
     position: absolute;
     top: 0px;
     left: 80%;
     font-size: 20px;
-    color: #fff;
+    color: #4d4d4d;
 }
 .single__current__user__product .modal .MuiSvgIcon-root:hover{
     color: black;

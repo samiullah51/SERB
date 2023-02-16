@@ -2,51 +2,48 @@
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    color: var(--primary-color);
+
+}
+.right__navbar a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    font-weight: bold;
+}
+.right__navbar a p{
+    font-size: 12px;
+}
+.right__navbar a:not(.label):hover{
+color: black;
+cursor: pointer;
+}
+.right__navbar .navbar__notifications .MuiSvgIcon-root{
+    cursor: pointer;
+    color: var(--primary-color);
+    margin: 0 6px;
+}
+.right__navbar .navbar__notifications .MuiSvgIcon-root:hover{
+    color: rgb(34, 34, 34);
+
 }
 .right__navbar .label{
-    font-size: 18px;
+    color: rgb(214, 72, 72);
     font-weight: bold;
-    color: var(--primary-color);
-    margin: 0 10px;
-}
-.switcher{
-    position: relative;
-    width: 40%;
-    text-align: center;
-}
-
-.mode{
-    width: 100%;
-    background-color:  var(--primary-color);
-    color: #fff;
-    border-radius: 10px 10px 0 0;
-    padding: 10px 15px;
-    font-size: 15px;
-    cursor: pointer;
-    font-weight: bold;
-    user-select: none;
-    text-align: center;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    
-  
 }
-.switcher .show{
-    position: absolute;
-    top: 105%;
-    left: 0;
-    width: 100%;
-    box-shadow: 0 0 9px 1px rgba(0,0,0,0.2);
-
-    background-color: #fff;
+.right__navbar .label p{
+    font-size: 14px;
+    font-weight: 400;
 }
-.show p{
-    padding: 5px;
+.right__navbar .label .MuiSvgIcon-root{
+    font-size: 20px;
+    margin-left: 2px;
+}
+.right__navbar .label:hover{
+    color: rgb(92, 92, 92);
     cursor: pointer;
-}
-.show p:hover{
-    background-color: var(--primary-color);
-    color: #fff;
 }

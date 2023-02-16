@@ -16,7 +16,7 @@
 
 .navbar .navbar__left{
     padding: 15px;
-    flex-basis: 70%;
+    flex-basis: 60%;
     background-color: var(--primary-color);
     display: flex;
     align-items: center;
@@ -84,6 +84,6 @@ align-items: center;
 
 /* Right Navbar */
 .navbar__right{
-    flex-basis: 30%;
+    flex-basis: 40%;
    padding: 10px;
 }
