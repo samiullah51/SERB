@@ -3,15 +3,19 @@ import EditIcon from "@mui/icons-material/Edit";
 import { logDOM } from "@testing-library/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { loader } from "../../loader";
 import { LOG_IN } from "../../redux/User/userTypes";
-
+import { userRequest } from "../../../src/requestMethods";
+import { storage } from "../../firebase";
 function Edit() {
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
   console.log(user);
   // user data
   const [fullName, setFullName] = useState(user.fullName);
   const [password, setPassword] = useState(user.password);
+  const [description, setDescription] = useState(user?.description);
   //   detail or edit
   const [details, setDetails] = useState(true);
   const dispatch = useDispatch();
@@ -20,60 +24,60 @@ function Edit() {
   // loading
   const [loading, setLoading] = useState(false);
   //  Set image
+
   const [image, setImage] = useState(null);
-  const [updateImage, setUpdateImage] = useState(null);
+  const [updateImage, setUpdateImage] = useState(user?.profileImage);
   // handle Change
   const handleChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
-    setUpdateImage(e.target.files[0]);
+    const uploadTask = storage
+      .ref(`/profilePhotos/${e.target.files[0].name}`)
+      .put(e.target.files[0]);
+    uploadTask.on(
+      "state_changes",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (err) => {
+        console.log(err);
+      },
+      async () => {
+        const updatedUser = await uploadTask.snapshot.ref.getDownloadURL();
+        setUpdateImage(updatedUser);
+        // setLoading(false);
+      }
+    );
   };
+
   // Update User
   const handleUpdate = async () => {
-    console.log(updateImage);
-    // try {
-    //   const saveUser = await JSON.parse(localStorage.getItem("user"));
-    //   localStorage.setItem("user", JSON.stringify({ ...saveUser })) &&
-    //     dispatch({
-    //       type: LOG_IN,
-    //       user: JSON.parse(localStorage.getItem("user")),
-    //     });
-    //   // const saveBack = localStorage.setItem("user", JSON.stringify(saveUser));
-    //   console.log(saveUser);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const finalResult = await userRequest.put(`/user/edit/${user._id}`, {
+        fullName,
+        description,
+        profileImage: updateImage,
+      });
 
-    // const uploadTask = storage.ref(`/items/${item.name}`).put(item);
-    // uploadTask.on(
-    //   "state_changes",
-    //   (snapshot) => {
-    //     const progress =
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   },
-    //   () => {
-    //     uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-    //       sendAllphotos.push(url);
-    //       if (sendAllphotos.length === 5) {
-    //         userRequest.post(`/product/sell/add`, {
-    //           userId: user._id,
-    //           category: newProduct.category,
-    //           title: newProduct.title,
-    //           description: newProduct.description,
-    //           modal: newProduct.modal,
-    //           location: newProduct.location,
-    //           condition: newProduct.condition,
-    //           price: newProduct.price,
-    //           photos: sendAllphotos,
-    //         });
-    //         navigate("/");
-    //         setLoading(false);
-    //       }
-    //     });
-    //   }
-    // );
+      const saveUser = JSON.parse(localStorage.getItem("user"));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          ...saveUser,
+          fullName: finalResult.data.fullName,
+          description: finalResult.data.description,
+          profileImage: finalResult.data.profileImage,
+        })
+      ) &&
+        dispatch({
+          type: LOG_IN,
+          user: JSON.parse(localStorage.getItem("user")),
+        });
+      window.location.reload();
+      // setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -98,7 +102,11 @@ function Edit() {
         {/* Description */}
         <div className="inputs__box">
           <p>Add Description</p>
-          <textarea placeholder="Add some description about yourself..."></textarea>
+          <textarea
+            placeholder="Add some description about yourself..."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
         </div>
         <div className="inputs__box">
           <p>Current Password</p>

@@ -164,6 +164,7 @@ padding: 2px;
 }
 .profileImg{
     position: relative;
+    cursor: pointer;
 }
 .profileImg input{
 display: none;
@@ -177,4 +178,10 @@ display: none;
     padding: 5px;
     border-radius: 50%;
     font-size: 28px;
+    cursor: pointer;
+}
+.profileImg .MuiSvgIcon-root:hover{
+    background-color: #fff;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
 }
