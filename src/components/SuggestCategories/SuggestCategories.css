@@ -21,7 +21,7 @@
     flex-wrap: wrap;
     margin: auto;
 }
-.suggest__categories .btns button{
+.suggest__categories .btns a{
     border: none;
     outline: none;
     padding: 10px;
@@ -33,7 +33,7 @@
     color: gray;
     transition: .2s;
 }
-.suggest__categories button:hover{
+.suggest__categories a:hover{
     background-color: var(--primary-color);
     color: #fff;
     cursor: pointer;

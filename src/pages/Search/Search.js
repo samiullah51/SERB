@@ -38,7 +38,7 @@ function Search() {
         {!loading ? (
           searchProducts.length === 0 ? (
             <div className="searched__products oops">
-              <img src={oops} />
+              <img src={oops} className="oops__img" />
               <h2>Sorry, product is not found</h2>
             </div>
           ) : (

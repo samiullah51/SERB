@@ -12,8 +12,8 @@ function SoldProducts({ userDetails }) {
   const [loading, setLoading] = useState(false);
   // fetch all the product of selected user
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
-      setLoading(true);
       const fetched = await publicRequest.get(
         `/product/sell/all/${userDetails._id}`
       );

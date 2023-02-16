@@ -25,6 +25,7 @@ function Profile() {
     };
     fetchUser();
   }, [userId]);
+
   return (
     <>
       <Navbar />
@@ -35,7 +36,11 @@ function Profile() {
           {/* Description About Profile */}
           <div className="left__about">
             <p className="about__about">About</p>
-            <p className="about__desc">{user?.description}</p>
+            {userDetails?.description?.length > 1 ? (
+              <p className="about__desc">{userDetails?.description}</p>
+            ) : (
+              <p>No Description Yet</p>
+            )}
           </div>
           {/* Rating */}
           <p className="rating__title">Rating and reviews</p>

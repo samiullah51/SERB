@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./SuggestCategories.css";
 function SuggestCategories() {
   const categories = [
@@ -19,7 +20,9 @@ function SuggestCategories() {
       <h1>Categories</h1>
       <div className="btns">
         {categories.map((cat) => (
-          <button key={cat}>{cat}</button>
+          <Link to={`/search?product=${cat}`} key={cat}>
+            {cat}
+          </Link>
         ))}
       </div>
     </div>
