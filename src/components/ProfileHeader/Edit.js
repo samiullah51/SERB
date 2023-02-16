@@ -23,12 +23,14 @@ function Edit() {
   const [error, setError] = useState("");
   // loading
   const [loading, setLoading] = useState(false);
+  const [loadingProfile, setLoadingProfile] = useState(false);
   //  Set image
 
   const [image, setImage] = useState(null);
   const [updateImage, setUpdateImage] = useState(user?.profileImage);
   // handle Change
   const handleChange = (e) => {
+    setLoadingProfile(true);
     setImage(URL.createObjectURL(e.target.files[0]));
     const uploadTask = storage
       .ref(`/profilePhotos/${e.target.files[0].name}`)
@@ -45,6 +47,7 @@ function Edit() {
       async () => {
         const updatedUser = await uploadTask.snapshot.ref.getDownloadURL();
         setUpdateImage(updatedUser);
+        setLoadingProfile(false);
         // setLoading(false);
       }
     );
@@ -52,6 +55,7 @@ function Edit() {
 
   // Update User
   const handleUpdate = async () => {
+    setLoading(true);
     try {
       const finalResult = await userRequest.put(`/user/edit/${user._id}`, {
         fullName,
@@ -73,6 +77,7 @@ function Edit() {
           type: LOG_IN,
           user: JSON.parse(localStorage.getItem("user")),
         });
+      setLoading(false);
       window.location.reload();
       // setLoading(false);
     } catch (err) {
@@ -84,7 +89,12 @@ function Edit() {
     <>
       <label htmlFor="profileImg" className="profileImg">
         <input type="file" id="profileImg" onChange={handleChange} />
-        {!image ? <img src={user.profileImage} /> : <img src={image} />}
+
+        {!image ? (
+          <img src={user.profileImage} />
+        ) : (
+          <img src={!loadingProfile ? image : loader} />
+        )}
         <CameraAltOutlined />
       </label>
 
@@ -131,11 +141,7 @@ function Edit() {
         {/* Form Footer */}
         <div className="form__footer">
           <button onClick={handleUpdate}>
-            {loading ? (
-              <img src={loader} width={15} height={15} />
-            ) : (
-              "Update Now"
-            )}
+            {loading ? "Updating..." : "Update Now"}
           </button>
         </div>
       </div>

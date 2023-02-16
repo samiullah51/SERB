@@ -21,11 +21,7 @@ function CurrentUserProfile() {
           {/* Description About Profile */}
           <div className="left__about">
             <p className="about__about">About</p>
-            <p className="about__desc">
-              Lorem Ipsum has been the industry's standard dummy text ever since
-              the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type
-            </p>
+            <p className="about__desc">{user?.description}</p>
           </div>
           {/* Rating */}
           <p className="rating__title">Rating and reviews</p>
