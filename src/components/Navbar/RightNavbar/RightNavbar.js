@@ -11,9 +11,15 @@ import TurnSlightLeftIcon from "@mui/icons-material/TurnSlightLeft";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { LOG_OUT } from "../../../redux/User/userTypes";
 function RightNavbar() {
-  const [dropdown, setDropdown] = useState(false);
-  const [mode, setMode] = useState("BUY");
+  const dispatch = useDispatch();
+  // handle logout
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch({ type: LOG_OUT });
+  };
   return (
     <div className="right__navbar">
       <Link to="/currentuserprofile">
@@ -42,7 +48,7 @@ function RightNavbar() {
         <p>Chats</p>
       </Link>
 
-      <div className="label">
+      <div className="label" onClick={handleLogout}>
         <p>LogOut </p>
         <ExitToAppIcon />
       </div>

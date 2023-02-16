@@ -11,7 +11,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    color: #a8a8a8;
+    /* font-weight: bold; */
 }
 .right__navbar a p{
     font-size: 12px;
@@ -30,7 +31,7 @@ cursor: pointer;
 
 }
 .right__navbar .label{
-    color: rgb(214, 72, 72);
+    color: rgb(27, 27, 27);
     font-weight: bold;
     display: flex;
     align-items: center;
