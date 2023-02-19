@@ -10,7 +10,7 @@ import TurnSlightRightIcon from "@mui/icons-material/TurnSlightRight";
 import TurnSlightLeftIcon from "@mui/icons-material/TurnSlightLeft";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LOG_OUT } from "../../../redux/User/userTypes";
 function RightNavbar() {
@@ -22,31 +22,31 @@ function RightNavbar() {
   };
   return (
     <div className="right__navbar">
-      <Link to="/currentuserprofile">
-        <TurnSlightRightIcon />
-        <p>Sell</p>
-      </Link>
-      <Link to="/">
+      <NavLink to="/">
         <TurnSlightLeftIcon />
         <p>Buy</p>
-      </Link>
-      <Link to="/addexchangeproduct">
+      </NavLink>
+      <NavLink to="/currentuserprofile">
+        <TurnSlightRightIcon />
+        <p>Sell</p>
+      </NavLink>
+      <NavLink to="/addexchangeproduct">
         <SwapHorizIcon />
         <p>Exchange</p>
-      </Link>
-      <Link>
+      </NavLink>
+      <NavLink to="/exchangeproducts">
         <EqualizerIcon />
         <p>Analytics</p>
-      </Link>
-      <Link>
+      </NavLink>
+      <NavLink to="/exchangewith">
         <NotificationsNoneIcon />
         <p>Notifications</p>
-      </Link>
+      </NavLink>
 
-      <Link to="/chatbox">
+      <NavLink to="/chatbox">
         <ChatBubbleOutlineIcon />
         <p>Chats</p>
-      </Link>
+      </NavLink>
 
       <div className="label" onClick={handleLogout}>
         <p>LogOut </p>
