@@ -7,6 +7,7 @@ const connectToDatabase = require("./connection");
 // Import all routers
 const authRouter = require("./routes/UserRoute/user");
 const sellProductRouter = require("./routes/SellProductRoute/SellProduct");
+const exchangeProductRouter = require("./routes/ExchangeProductRoute/ExchangeProduct");
 
 // dotEnv Configuration
 dotenv.config();
@@ -23,6 +24,7 @@ connectToDatabase();
 // API's routes
 app.use("/serb/api/user", authRouter);
 app.use("/serb/api/product", sellProductRouter);
+app.use("/serb/api/exchangeproduct", exchangeProductRouter);
 // app.use("/api/goal", goalRouter);
 // app.use("/api/habit", habitRouter);
 // app.use("/api/health/medicinetrack", medicineTrackRouter);

@@ -30,7 +30,7 @@ function RightNavbar() {
         <TurnSlightRightIcon />
         <p>Sell</p>
       </NavLink>
-      <NavLink to="/addexchangeproduct">
+      <NavLink to="/exchangeproducts">
         <SwapHorizIcon />
         <p>Exchange</p>
       </NavLink>

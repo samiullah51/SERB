@@ -117,8 +117,42 @@ function ProductForm({ mode, behave, product }) {
           }
         );
       });
-    } else if (mode === "exchange") {
-      console.log("testing from exchangle");
+    }
+    // Add product for exchange
+    else if (mode === "exchange") {
+      allPhotos.forEach((item) => {
+        const uploadTask = storage.ref(`/ExchangeItems/${item.name}`).put(item);
+        uploadTask.on(
+          "state_changes",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+              sendAllphotos.push(url);
+              if (sendAllphotos.length === 5) {
+                userRequest.post(`/exchangeproduct/exchange/add`, {
+                  userId: user._id,
+                  category: newProduct.category,
+                  title: newProduct.title,
+                  description: newProduct.description,
+                  modal: newProduct.modal,
+                  location: newProduct.location,
+                  condition: newProduct.condition,
+                  price: newProduct.price,
+                  photos: sendAllphotos,
+                });
+                navigate("/exchangeproducts");
+                setLoading(false);
+              }
+            });
+          }
+        );
+      });
     }
   };
 

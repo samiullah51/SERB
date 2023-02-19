@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./AllCurrentUserProducts.css";
-import { exchangeProducts } from "../../exchangeProducts";
 import SingleCurrentUserProduct from "./SingleCurrentUserProduct/SingleCurrentUserProduct";
 import { publicRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
@@ -8,6 +7,7 @@ import { useSelector } from "react-redux";
 function AllCurrentUserProducts({ mode }) {
   const user = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
+  const [exchangeProducts, setExchangeProducts] = useState([]);
   // loading
   const [loading, setLoading] = useState(false);
   // fetch all product of current user
@@ -19,6 +19,23 @@ function AllCurrentUserProducts({ mode }) {
           `/product/sell/all/${user._id}`
         );
         setProducts(fechedProducts.data.allProducts);
+        setLoading(false);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    };
+    getProducts();
+  }, [products]);
+
+  // fetch all Exchange product of current user
+  useEffect(() => {
+    setLoading(true);
+    const getProducts = async () => {
+      try {
+        const fechedProducts = await publicRequest.get(
+          `/exchangeproduct/exchange/all/${user._id}`
+        );
+        setExchangeProducts(fechedProducts.data.allProducts);
         setLoading(false);
       } catch (err) {
         console.log(err.response.data);

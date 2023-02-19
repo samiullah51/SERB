@@ -2,6 +2,8 @@ import React from "react";
 import AllCurrentUserProducts from "../../components/AllCurrentUserProducts/AllCurrentUserProducts";
 import Navbar from "../../components/Navbar/Navbar";
 import "./ExchangeProducts.css";
+import { Link } from "react-router-dom";
+
 function ExchangeProducts() {
   return (
     <>
@@ -9,7 +11,7 @@ function ExchangeProducts() {
       <div className="exchange__product">
         <div className="exchange__header">
           <h1>All Products for Exchange</h1>
-          <button>Add New Product</button>
+          <Link to="/addexchangeproduct">Add New Product</Link>
         </div>
         <AllCurrentUserProducts mode="exchange" />
       </div>
