@@ -12,6 +12,7 @@ import { loader } from "../../loader";
 function ProductForm({ mode, behave, product }) {
   const user = useSelector((state) => state.user);
   const [error, setError] = useState("");
+
   // navigation
   const navigate = useNavigate();
   // loading
@@ -116,7 +117,8 @@ function ProductForm({ mode, behave, product }) {
           }
         );
       });
-    } else {
+    } else if (mode === "exchange") {
+      console.log("testing from exchangle");
     }
   };
 
