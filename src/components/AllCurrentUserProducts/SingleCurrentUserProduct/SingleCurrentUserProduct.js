@@ -98,7 +98,7 @@ function SingleCurrentUserProduct({ product, mode }) {
           <div className="modal">
             <>
               <p onClick={() => removeProduct("exchange")}>Delete</p>
-              <Link to={`/editproduct/${product._id}`}>
+              <Link to={`/editexchangeproduct/${product._id}`}>
                 <p>Edit</p>
               </Link>
               {product.status === "exchange" ? (

@@ -5,20 +5,20 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import ProductForm from "../../components/ProductForm/ProductForm";
 import { userRequest } from "../../requestMethods";
-function EditProduct() {
+function EditExchangeProduct() {
   const { productId } = useParams();
   const [product, setProduct] = useState();
-  console.log(product);
   // fecth product
   useEffect(() => {
     const fetchData = async () => {
       const fetched = await userRequest.get(
-        `/product/sell/details/${productId}`
+        `/exchangeproduct/exchange/details/${productId}`
       );
       setProduct(fetched.data);
     };
     fetchData();
   }, [productId]);
+  console.log(product);
   return (
     <>
       {/* Navbar */}
@@ -38,4 +38,4 @@ function EditProduct() {
   );
 }
 
-export default EditProduct;
+export default EditExchangeProduct;

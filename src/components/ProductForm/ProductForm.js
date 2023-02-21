@@ -161,9 +161,13 @@ function ProductForm({ mode, behave, product }) {
   // fetch the current product
   useEffect(() => {
     const fetchProduct = async () => {
-      const fetched = await userRequest.get(
-        `/product/sell/details/${product?.details._id}`
-      );
+      const fetched =
+        (await userRequest.get(
+          `/product/sell/details/${product?.details._id}`
+        )) ||
+        (await userRequest.get(
+          `/exchangeproduct/exchange/details/${product?.details._id}`
+        ));
       setEditProduct(fetched.data.details);
     };
     fetchProduct();
