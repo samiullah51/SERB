@@ -6,10 +6,10 @@ import { publicRequest, userRequest } from "../../../requestMethods";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 
-function SingleCurrentUserProduct({ product }) {
+function SingleCurrentUserProduct({ product, mode }) {
   const [modal, setModal] = useState(false);
 
-  // since join
+  // since added product
   let productDate = new Date(product?.createdAt).toLocaleString("en-US", {
     day: "numeric",
     year: "numeric",
@@ -17,11 +17,11 @@ function SingleCurrentUserProduct({ product }) {
   });
 
   // handleremove
-  const removeProduct = async () => {
+  const removeProduct = async (behave) => {
     const confirmation = window.confirm(
       "This product will be deleted parmanently."
     );
-    if (confirmation) {
+    if (confirmation && behave === "sell") {
       try {
         const products = await userRequest.delete(
           `/product/sell/delete/${product._id}`
@@ -31,20 +31,29 @@ function SingleCurrentUserProduct({ product }) {
         console.log(err.response.data);
       }
     } else {
+      const products = await userRequest.delete(
+        `/exchangeproduct/exchange/delete/${product._id}`
+      );
       setModal(false);
     }
   };
 
-  // handle Status
-  const handleStatus = async (status) => {
+  // handle Status for exchange product
+  const handleExchangeStatus = async (status) => {
     try {
-      status === "avaiable"
-        ? (await userRequest.put(`/product/sell/edit/status/${product._id}`, {
-            status,
-          })) && setModal(false)
-        : (await userRequest.put(`/product/sell/edit/status/${product._id}`, {
-            status,
-          })) && setModal(false);
+      status === "exchange"
+        ? (await userRequest.put(
+            `/exchangeproduct/exchange/edit/status/${product._id}`,
+            {
+              status,
+            }
+          )) && setModal(false)
+        : (await userRequest.put(
+            `/exchangeproduct/exchange/edit/status/${product._id}`,
+            {
+              status,
+            }
+          )) && setModal(false);
     } catch (err) {
       console.log(err.response.data);
     }
@@ -67,38 +76,44 @@ function SingleCurrentUserProduct({ product }) {
             : { backgroundColor: "#138D95" }
         }
       >
-        {product.status.toUpperCase()}
+        {product.status === "exchange"
+          ? "EXCHANGE NOW"
+          : product.status.toUpperCase()}
       </p>
       <p className="createdAt">{productDate}</p>
       {/* more icon */}
       <MoreVertIcon onClick={() => setModal(!modal)} />
-      {modal && (
-        <div className="modal">
-          {product.status == "exchange" ? (
+      {modal &&
+        (mode === "sell" ? (
+          <div className="modal">
             <>
-              <p>Remove</p>
-              <p>Mark as Exchange</p>
-              <p>Edit</p>
-            </>
-          ) : (
-            <>
-              <p onClick={removeProduct}>Delete</p>
+              <p onClick={() => removeProduct("sell")}>Delete</p>
               <Link to={`/editproduct/${product._id}`}>
                 <p>Edit</p>
               </Link>
-              {product.status === "sold" ? (
-                <p onClick={() => handleStatus("available")}>
-                  Mark as AVAILABLE
+            </>
+            <CloseIcon onClick={() => setModal(false)} />
+          </div>
+        ) : (
+          <div className="modal">
+            <>
+              <p onClick={() => removeProduct("exchange")}>Delete</p>
+              <Link to={`/editproduct/${product._id}`}>
+                <p>Edit</p>
+              </Link>
+              {product.status === "exchange" ? (
+                <p onClick={() => handleExchangeStatus("exchanged")}>
+                  Mark as Exchanged
                 </p>
               ) : (
-                <p onClick={() => handleStatus("sold")}>Mark as SOLD</p>
+                <p onClick={() => handleExchangeStatus("exchange")}>
+                  Mark as Exchange
+                </p>
               )}
             </>
-          )}
-
-          <CloseIcon onClick={() => setModal(false)} />
-        </div>
-      )}
+            <CloseIcon onClick={() => setModal(false)} />
+          </div>
+        ))}
     </div>
   );
 }

@@ -42,7 +42,7 @@ function AllCurrentUserProducts({ mode }) {
       }
     };
     getProducts();
-  }, [products]);
+  }, [exchangeProducts]);
 
   return products.length === 0 ? (
     <h2 style={{ textAlign: "center", color: "#d4d4d4" }}>No Product Yet</h2>
