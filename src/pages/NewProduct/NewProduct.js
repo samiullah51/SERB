@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import ExchangeProductForm from "../../components/ProductForm/ExchangeProductForm";
 import ProductForm from "../../components/ProductForm/ProductForm";
 import "./NewProduct.css";
 function NewProduct({ mode }) {
@@ -18,7 +19,7 @@ function NewProduct({ mode }) {
       <div className="new__product">
         {/* form */}
         <div className="product__form">
-          <ProductForm mode={mode} />
+          {mode === "sell" ? <ProductForm /> : <ExchangeProductForm />}
         </div>
       </div>
     </>

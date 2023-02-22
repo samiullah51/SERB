@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { loader } from "../../loader";
 
-function ProductForm({ behave, product }) {
+function ExchangeProductForm({ mode, behave, product }) {
   const user = useSelector((state) => state.user);
   const [error, setError] = useState("");
 
@@ -81,9 +81,9 @@ function ProductForm({ behave, product }) {
     ) {
       setError("Please fill the required fields");
       return false;
-    } else {
-      setLoading(true);
-
+    }
+    setLoading(true);
+    if (mode === "sell") {
       allPhotos.forEach((item) => {
         const uploadTask = storage.ref(`/items/${item.name}`).put(item);
         uploadTask.on(
@@ -118,6 +118,42 @@ function ProductForm({ behave, product }) {
         );
       });
     }
+    // Add product for exchange
+    else if (mode === "exchange") {
+      allPhotos.forEach((item) => {
+        const uploadTask = storage.ref(`/ExchangeItems/${item.name}`).put(item);
+        uploadTask.on(
+          "state_changes",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+              sendAllphotos.push(url);
+              if (sendAllphotos.length === 5) {
+                userRequest.post(`/exchangeproduct/exchange/add`, {
+                  userId: user._id,
+                  category: newProduct.category,
+                  title: newProduct.title,
+                  description: newProduct.description,
+                  modal: newProduct.modal,
+                  location: newProduct.location,
+                  condition: newProduct.condition,
+                  price: newProduct.price,
+                  photos: sendAllphotos,
+                });
+                navigate("/exchangeproducts");
+                setLoading(false);
+              }
+            });
+          }
+        );
+      });
+    }
   };
 
   // Edit Options
@@ -125,9 +161,13 @@ function ProductForm({ behave, product }) {
   // fetch the current product
   useEffect(() => {
     const fetchProduct = async () => {
-      const fetched = await userRequest.get(
-        `/product/sell/details/${product?.details._id}`
-      );
+      const fetched =
+        (await userRequest.get(
+          `/product/sell/details/${product?.details._id}`
+        )) ||
+        (await userRequest.get(
+          `/exchangeproduct/exchange/details/${product?.details._id}`
+        ));
       setEditProduct(fetched.data.details);
     };
     fetchProduct();
@@ -504,4 +544,4 @@ function ProductForm({ behave, product }) {
   );
 }
 
-export default ProductForm;
+export default ExchangeProductForm;
