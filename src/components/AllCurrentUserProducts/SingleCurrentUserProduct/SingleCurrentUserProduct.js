@@ -110,6 +110,9 @@ function SingleCurrentUserProduct({ product, mode }) {
                   Mark as Exchange
                 </p>
               )}
+              <Link to={`/exchangeproductdetails/${product._id}`}>
+                <p>Exchange NOW</p>
+              </Link>
             </>
             <CloseIcon onClick={() => setModal(false)} />
           </div>

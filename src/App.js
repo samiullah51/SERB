@@ -41,7 +41,7 @@ function App() {
           />
           <Route path="/exchangeproducts" element={<ExchangeProducts />} />
           <Route
-            path="/exchangeproductdetails"
+            path="/exchangeproductdetails/:productId"
             element={<ExchangeProductDetail />}
           />
           <Route path="/exchangewith" element={<ExchangeWithProduct />} />
