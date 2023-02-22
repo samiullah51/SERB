@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import ExchangeProductForm from "../../components/ProductForm/ExchangeProductForm";
 import ProductForm from "../../components/ProductForm/ProductForm";
 import { userRequest } from "../../requestMethods";
 function EditExchangeProduct() {
@@ -18,7 +19,6 @@ function EditExchangeProduct() {
     };
     fetchData();
   }, [productId]);
-  console.log(product);
   return (
     <>
       {/* Navbar */}
@@ -31,7 +31,7 @@ function EditExchangeProduct() {
       <div className="new__product">
         {/* form */}
         <div className="product__form">
-          <ProductForm behave="edit" product={product} />
+          <ExchangeProductForm behave="edit" product={product} />
         </div>
       </div>
     </>
