@@ -28,7 +28,7 @@ function ExchangeProductDetail({ id }) {
         {/* Left */}
         <div className="left">
           <ExchangeGallary id={productId} />
-          <ExchangeProductDetails mode="exchange" />
+          <ExchangeProductDetails id={productId} mode="exchange" />
         </div>
         {/* Right */}
         <div className="right">

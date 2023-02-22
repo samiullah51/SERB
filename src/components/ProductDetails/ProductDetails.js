@@ -85,7 +85,7 @@ function ProductDetails({ mode, chatBtn, id }) {
         )
       ) : (
         <div style={{ color: "gray", textAlign: "center" }}>
-          This is your own product nad you cannot buy it.
+          This is your own product and you cannot buy it.
         </div>
       )}
     </div>

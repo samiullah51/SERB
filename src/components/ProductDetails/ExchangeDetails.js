@@ -57,7 +57,7 @@ function ExchangeDetails({ mode, chatBtn, id }) {
         <p className="product__title">{details?.details.title}</p>
         <p className="product__desc">{details?.details.description}</p>
         {mode === "exchange" ? (
-          <p className="product__price">{details?.details.condition}</p>
+          <p className="product__price">Condition</p>
         ) : (
           <p className="product__price">Price</p>
         )}
@@ -87,7 +87,7 @@ function ExchangeDetails({ mode, chatBtn, id }) {
         )
       ) : (
         <div style={{ color: "gray", textAlign: "center" }}>
-          This is your own product nad you cannot buy it.
+          This is your own product and you cannot exchange it.
         </div>
       )}
     </div>

@@ -148,7 +148,7 @@ function ExchangeProductForm({ behave, product }) {
           price: editProduct.price,
         }
       );
-      edited && navigate("/");
+      edited && navigate("/exchangeproducts");
       setLoading(false);
     } catch (err) {
       setError(err.message);
