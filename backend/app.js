@@ -25,11 +25,6 @@ connectToDatabase();
 app.use("/serb/api/user", authRouter);
 app.use("/serb/api/product", sellProductRouter);
 app.use("/serb/api/exchangeproduct", exchangeProductRouter);
-// app.use("/api/goal", goalRouter);
-// app.use("/api/habit", habitRouter);
-// app.use("/api/health/medicinetrack", medicineTrackRouter);
-// app.use("/api/health/appointmenttrack", appointmentTrackRouter);
-// app.use("/api/health/diabetestrack", diabetesTrackRouter);
 
 // Listening to a server
 app.listen(process.env.PORT || 8000, () => {
