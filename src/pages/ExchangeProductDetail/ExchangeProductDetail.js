@@ -12,12 +12,29 @@ import { userRequest } from "../../requestMethods";
 function ExchangeProductDetail({ id }) {
   const { productId } = useParams();
   const [exchangeProducts, setExchangeProducts] = useState([]);
-  // fetch all exchange products
-
+  const [category, setCategory] = useState("");
+  // loading
+  const [loading, setLoading] = useState(false);
+  // get product category
   useEffect(() => {
+    const getCat = async () => {
+      const gotCat = await userRequest.get(
+        `/exchangeproduct/exchange/details/${productId}`
+      );
+      setCategory(gotCat.data.details.category);
+    };
+    getCat();
+  }, [productId]);
+
+  // fetch all exchange related products
+  useEffect(() => {
+    setLoading(true);
     const fetch = async () => {
-      const fetched = await userRequest.get(`/exchangeproduct/exchange/all`);
+      const fetched = await userRequest.get(
+        `/exchangeproduct/exchange/relatedproducts?category=${category}`
+      );
       setExchangeProducts(fetched.data);
+      setLoading(false);
     };
     fetch();
   }, []);
@@ -38,11 +55,15 @@ function ExchangeProductDetail({ id }) {
             <Search />
           </div>
           {/* Exchange Product */}
-          <div className="exchange__products">
-            {exchangeProducts.map((product) => (
-              <ExchangeProduct key={product._id} product={product} />
-            ))}
-          </div>
+          {!loading ? (
+            <div className="exchange__products">
+              {exchangeProducts.map((product) => (
+                <ExchangeProduct key={product._id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <h1>Loading....</h1>
+          )}
         </div>
       </div>
     </>
