@@ -133,7 +133,9 @@ transition: .3s;}
     align-items: center;
     justify-content: center;
 }
+
 .loader img{
     width: 60px;
     height: 60px;
+
 }

@@ -9,7 +9,7 @@ import { loader } from "../../loader";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // Create formatter (English).
-function ExchangeDetails({ mode, chatBtn, id }) {
+function ExchangeDetails({ mode, chatBtn, id, load }) {
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
@@ -76,25 +76,21 @@ function ExchangeDetails({ mode, chatBtn, id }) {
         </div>
       </div>
       {/* Actions */}'
-      {details?.By?._id !== user?._id ? (
-        mode === "exchange" ? (
-          chatBtn && <button className="chat__btn">Chat Now</button>
-        ) : (
-          <div className="actions">
-            <button className="buy__btn">Buy Now</button>
-            <button className="favorite__btn">Add to favorite</button>
-          </div>
-        )
+      {mode === "exchange" ? (
+        chatBtn && <button className="chat__btn">Chat Now</button>
       ) : (
-        <div style={{ color: "gray", textAlign: "center" }}>
-          This is your own product and you cannot exchange it.
+        <div className="actions">
+          <button className="buy__btn">Buy Now</button>
+          <button className="favorite__btn">Add to favorite</button>
         </div>
       )}
     </div>
   ) : (
-    <div className="loader">
-      <img src={loader} />
-    </div>
+    load && (
+      <div className="loader">
+        <p>Loading...</p>
+      </div>
+    )
   );
 }
 

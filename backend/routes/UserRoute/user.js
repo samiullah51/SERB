@@ -226,6 +226,16 @@ router.get("/all", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+// get single user Details
+router.get("/details/singleuser/:userId", async (req, res) => {
+  try {
+    const getUser = await User.findById(req.params.userId);
+    res.status(200).json(getUser);
+  } catch (err) {
+    res.status(400).json("User not found");
+  }
+});
+
 // Get all Users
 router.get("/profile/:userId", verifyToken, async (req, res) => {
   try {

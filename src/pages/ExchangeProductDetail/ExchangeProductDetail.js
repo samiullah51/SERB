@@ -38,7 +38,7 @@ function ExchangeProductDetail({ id }) {
       setExchangeProducts(fetched.data);
     };
     fetch();
-  }, [exchangeProducts]);
+  }, [category]);
   return (
     <>
       <Navbar />
@@ -46,28 +46,31 @@ function ExchangeProductDetail({ id }) {
         {/* Left */}
         <div className="left">
           <ExchangeGallary id={productId} />
-          <ExchangeProductDetails id={productId} mode="exchange" />
+          <ExchangeProductDetails id={productId} mode="exchange" load={false} />
         </div>
         {/* Right */}
-        <div className="right">
-          <p className="right__title">Exchange Your Product With</p>
-          <div className="right__input">
-            <input type="text" placeholder="Search here..." />
-            <Search />
-          </div>
-          {/* Exchange Product */}
-          {!loading ? (
+        {!loading ? (
+          <div className="right">
+            <p className="right__title">Exchange Your Product With</p>
+            <div className="right__input">
+              <input type="text" placeholder="Search here..." />
+              <Search />
+            </div>
+            {/* Exchange Product */}
+
             <div className="exchange__products">
-              {exchangeProducts.map((product) => (
-                <ExchangeProduct key={product._id} product={product} />
-              ))}
+              {exchangeProducts.length !== 0 ? (
+                exchangeProducts.map((product) => (
+                  <ExchangeProduct key={product._id} product={product} />
+                ))
+              ) : (
+                <p style={{ margin: "20px" }}>Loading...</p>
+              )}
             </div>
-          ) : (
-            <div className="loader">
-              <img src={loader} width={30} />
-            </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
