@@ -68,7 +68,11 @@ function SingleCurrentUserProduct({ product, mode }) {
         {currencyFormatter.format(product.price, { code: "" })}
         <span>(PKR)</span>
       </p>
-      <p
+      <Link
+        to={
+          product.status === "exchange" &&
+          `/exchangeproductdetails/${product._id}`
+        }
         className="status"
         style={
           product.status === "sold" || product.status === "exchanged"
@@ -79,7 +83,8 @@ function SingleCurrentUserProduct({ product, mode }) {
         {product.status === "exchange"
           ? "EXCHANGE NOW"
           : product.status.toUpperCase()}
-      </p>
+      </Link>
+
       <p className="createdAt">{productDate}</p>
       {/* more icon */}
       <MoreVertIcon onClick={() => setModal(!modal)} />
