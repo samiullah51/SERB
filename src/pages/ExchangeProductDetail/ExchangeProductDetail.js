@@ -9,6 +9,7 @@ import { useParams } from "react-router";
 import ExchangeProductDetails from "../../components/ProductDetails/ExchangeDetails";
 import ExchangeGallary from "../../components/Gallary/ExchangeGallary";
 import { userRequest } from "../../requestMethods";
+import { loader } from "../../loader";
 function ExchangeProductDetail({ id }) {
   const { productId } = useParams();
   const [exchangeProducts, setExchangeProducts] = useState([]);
@@ -18,26 +19,26 @@ function ExchangeProductDetail({ id }) {
   // get product category
   useEffect(() => {
     const getCat = async () => {
+      setLoading(true);
       const gotCat = await userRequest.get(
         `/exchangeproduct/exchange/details/${productId}`
       );
       setCategory(gotCat.data.details.category);
+      setLoading(false);
     };
     getCat();
   }, [productId]);
 
   // fetch all exchange related products
   useEffect(() => {
-    setLoading(true);
     const fetch = async () => {
       const fetched = await userRequest.get(
         `/exchangeproduct/exchange/relatedproducts?category=${category}`
       );
       setExchangeProducts(fetched.data);
-      setLoading(false);
     };
     fetch();
-  }, []);
+  }, [exchangeProducts]);
   return (
     <>
       <Navbar />
@@ -62,7 +63,9 @@ function ExchangeProductDetail({ id }) {
               ))}
             </div>
           ) : (
-            <h1>Loading....</h1>
+            <div className="loader">
+              <img src={loader} width={30} />
+            </div>
           )}
         </div>
       </div>
