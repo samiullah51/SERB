@@ -17,6 +17,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import EditProduct from "./pages/EditProduct/EditProduct";
 import Search from "./pages/Search/Search";
 import EditExchangeProduct from "./pages/EditProduct/EditExchangeProduct";
+import ExchangeWithProductDetails from "./pages/ExchangeWithProductDetails/ExchangeWithProductDetails";
 
 function App() {
   return (
@@ -44,7 +45,14 @@ function App() {
             path="/exchangeproductdetails/:productId"
             element={<ExchangeProductDetail />}
           />
-          <Route path="/exchangewith" element={<ExchangeWithProduct />} />
+          <Route
+            path="/exchangewith/:productId"
+            element={<ExchangeWithProduct />}
+          />
+          <Route
+            path="/exchangewithproductdetails/:productId"
+            element={<ExchangeWithProductDetails />}
+          />
           <Route path="/chatbox" element={<ChatBox />} />
         </Route>
         <Route path="/register" element={<Register />} />
