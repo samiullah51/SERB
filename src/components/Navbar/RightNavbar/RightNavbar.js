@@ -23,7 +23,7 @@ function RightNavbar() {
   return (
     <div className="right__navbar">
       <NavLink to="/">
-        <TurnSlightLeftIcon />
+        <TurnSlightLeftIcon className="buy" />
         <p>Buy</p>
       </NavLink>
       <NavLink to="/currentuserprofile">
@@ -34,7 +34,7 @@ function RightNavbar() {
         <SwapHorizIcon />
         <p>Exchange</p>
       </NavLink>
-      <NavLink to="/exchangeproducts">
+      <NavLink to="/analytics">
         <EqualizerIcon />
         <p>Analytics</p>
       </NavLink>

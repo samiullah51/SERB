@@ -30,10 +30,12 @@ function SingleCurrentUserProduct({ product, mode }) {
       } catch (err) {
         console.log(err.response.data);
       }
-    } else {
+    } else if (confirmation && behave === "exchange") {
       const products = await userRequest.delete(
         `/exchangeproduct/exchange/delete/${product._id}`
       );
+      setModal(false);
+    } else {
       setModal(false);
     }
   };

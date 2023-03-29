@@ -3,6 +3,7 @@ import "./ExchangeProduct.css";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { publicRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 function ExchangeProduct({ product }) {
   const user = useSelector((state) => state.user);
 
@@ -11,7 +12,7 @@ function ExchangeProduct({ product }) {
   useEffect(() => {
     const fetchUser = async () => {
       const fetched = await publicRequest.get(
-        `user/details/singleuser/${[product.userId]}`
+        `user/details/singleuser/${product.userId}`
       );
       setUserDetails(fetched.data);
     };
@@ -20,7 +21,10 @@ function ExchangeProduct({ product }) {
 
   return (
     user._id !== product.userId && (
-      <div className="exchange__product__page">
+      <Link
+        to={`/exchangewithproductdetails/${product._id}`}
+        className="exchange__product__page"
+      >
         <img src={product.photos[0]} />
         <p className="product__title">{product.title}</p>
         <p className="product__condition">• {product.condition}</p>
@@ -32,12 +36,8 @@ function ExchangeProduct({ product }) {
             <img src={userDetails.profileImage} />
             <p>{userDetails.fullName}</p>
           </div>
-          {/* Footer Right */}
-          <div className="footer__right">
-            <ChatBubbleIcon />
-          </div>
         </div>
-      </div>
+      </Link>
     )
   );
 }

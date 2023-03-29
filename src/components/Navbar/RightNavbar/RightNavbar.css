@@ -17,6 +17,9 @@
 .right__navbar a.active{
     color: #000;
 }
+.right__navbar .buy{
+    transform: rotate(-140deg);
+}
 .right__navbar a p{
     font-size: 12px;
 }
