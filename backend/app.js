@@ -8,6 +8,8 @@ const connectToDatabase = require("./connection");
 const authRouter = require("./routes/UserRoute/user");
 const sellProductRouter = require("./routes/SellProductRoute/SellProduct");
 const exchangeProductRouter = require("./routes/ExchangeProductRoute/ExchangeProduct");
+const conversationRouter = require("./routes/ChatRoute/Conversation");
+const messageRouter = require("./routes/ChatRoute/Message");
 
 // dotEnv Configuration
 dotenv.config();
@@ -25,6 +27,8 @@ connectToDatabase();
 app.use("/serb/api/user", authRouter);
 app.use("/serb/api/product", sellProductRouter);
 app.use("/serb/api/exchangeproduct", exchangeProductRouter);
+app.use("/serb/api/conversation", conversationRouter);
+app.use("/serb/api/message", messageRouter);
 
 // Listening to a server
 app.listen(process.env.PORT || 8000, () => {

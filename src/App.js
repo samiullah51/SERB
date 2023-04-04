@@ -55,6 +55,7 @@ function App() {
           />
           <Route path="/chatbox" element={<ChatBox />} />
         </Route>
+
         <Route path="/register" element={<Register />} />
         <Route path="/verifyotp" element={<VerifyOtp />} />
         <Route path="/login" element={<SignIn />} />

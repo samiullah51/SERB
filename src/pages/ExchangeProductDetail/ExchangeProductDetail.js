@@ -59,7 +59,7 @@ function ExchangeProductDetail({ id }) {
             {/* Exchange Product */}
 
             <div className="exchange__products">
-              {exchangeProducts.length !== 0 ? (
+              {exchangeProducts.length - 1 !== 0 ? (
                 exchangeProducts.map((product) => (
                   <ExchangeProduct key={product._id} product={product} />
                 ))
