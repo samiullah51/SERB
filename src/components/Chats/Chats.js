@@ -5,20 +5,22 @@ import SingleChat from "./SingleChat/SingleChat";
 import { useEffect } from "react";
 import { useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
 
 function Chats() {
-  const chats = useState([]);
+  const [chats, setChats] = useState([]);
+  const user = useSelector((state) => state.user);
   useEffect(() => {
     const getChats = async () => {
-      const gotChats = await userRequest.post("/conversation");
-      console.log(gotChats);
+      const gotChats = await userRequest.get(`/conversation/find/${user._id}`);
+      setChats(gotChats.data);
     };
     getChats();
   }, [chats]);
   return (
     <>
-      {dummyChat.map((chat) => (
-        <SingleChat key={chat.id} {...chat} />
+      {chats.map((chat) => (
+        <SingleChat key={chat.id} chat={chat} />
       ))}
     </>
   );
