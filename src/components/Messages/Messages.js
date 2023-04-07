@@ -20,25 +20,55 @@ function Messages() {
   console.log(messages);
   return (
     <div className="chat__messages">
-      <div className="message__sender">
-        <p>This is message</p>
-        <span>4:34 am</span>
-      </div>
-      <div className="message__reciever">
-        <p>This is message</p>
-        <span>4:34 am</span>
-      </div>
-      {messages.map((msg) =>
-        user._id === msg.sender ? (
-          <div className="message__sender">
-            <p>{msg.text}</p>
-            <span>4:34 am</span>
-          </div>
-        ) : (
-          <div className="message__reciever">
-            <p>{msg.text}</p>
-            <span>4:34 am</span>
-          </div>
+      {messages.length == 0 ? (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h2
+            style={{
+              fontWeight: "300",
+              color: "#fff",
+            }}
+          >
+            Leave a Message to Start Chating
+          </h2>
+          <h2
+            style={{
+              fontWeight: "300",
+              color: "#fff",
+            }}
+          >
+            with
+          </h2>
+          <h1
+            style={{
+              fontWeight: "300",
+              color: "#fff",
+            }}
+          >
+            {selected.fullName}
+          </h1>
+        </div>
+      ) : (
+        messages.map((msg) =>
+          user._id !== msg.sender ? (
+            <div className="message__sender">
+              <p>{msg.text}</p>
+              <span>4:34 am</span>
+            </div>
+          ) : (
+            <div className="message__reciever">
+              <p>{msg.text}</p>
+              <span>4:34 am</span>
+            </div>
+          )
         )
       )}
     </div>
