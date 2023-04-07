@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { userRequest } from "../../requestMethods";
 import Messages from "../../components/Messages/Messages";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import SendIcon from "@mui/icons-material/Send";
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 function ChatBox() {
   const selected = useSelector((state) => state.selected);
   const user = useSelector((state) => state.user);
@@ -66,7 +69,7 @@ function ChatBox() {
               </div>
               {/* Right header contact info */}
               <div className="header__contact">
-                <SearchIcon />
+                <MoreVertIcon />
               </div>
             </div>
 
@@ -75,9 +78,9 @@ function ChatBox() {
 
             {/* Write New Message */}
             <div className="new__message">
-              <SearchIcon />
+              <SentimentSatisfiedAltIcon />
               <input type="text" placeholder="Write here..." />
-              <SearchIcon />
+              <SendIcon />
             </div>
           </div>
         )}

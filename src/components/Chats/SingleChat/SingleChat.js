@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CURRENT_CHAT, SELECTED } from "../../../redux/User/userTypes";
 import { userRequest } from "../../../requestMethods";
 import "./SingleChat.css";
+
 function SingleChat({ chat }) {
   const user = useSelector((state) => state.user);
   const memberId = chat.members.filter((u) => u !== user._id);

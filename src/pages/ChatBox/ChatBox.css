@@ -156,6 +156,9 @@ overflow: hidden;
     color: #fff;
     cursor: pointer;
 }
+.new__message .MuiSvgIcon-root:hover{
+    color: rgb(158, 158, 158);
+}
 .chatbox__right .right__header{
     width: 100%;
     border-bottom: 1px solid #ccc;
