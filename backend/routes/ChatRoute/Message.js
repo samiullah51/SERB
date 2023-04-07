@@ -13,6 +13,16 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
+// get all conversations
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const messages = await Message.find();
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 // get a conversation
 router.get("/:conversationId", verifyToken, async (req, res) => {
   try {

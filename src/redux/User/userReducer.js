@@ -1,8 +1,9 @@
-import { LOG_IN, LOG_OUT, SELECTED } from "./userTypes";
+import { CURRENT_CHAT, LOG_IN, LOG_OUT, SELECTED } from "./userTypes";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")),
-  selected: "sami",
+  selected: "",
+  currentChat: "",
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -18,6 +19,11 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         selected: action.selected,
+      };
+    case CURRENT_CHAT:
+      return {
+        ...state,
+        currentChat: action.currentChat,
       };
     default:
       return state;
