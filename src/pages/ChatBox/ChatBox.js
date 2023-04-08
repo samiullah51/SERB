@@ -12,8 +12,23 @@ import SendIcon from "@mui/icons-material/Send";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 function ChatBox() {
   const selected = useSelector((state) => state.selected);
+  const currentChat = useSelector((state) => state.currentChat);
   const user = useSelector((state) => state.user);
 
+  const [msg, setMsg] = useState("");
+  // send message
+  const handleClick = async () => {
+    try {
+      const send = await userRequest.post(`/message`, {
+        conversationId: currentChat,
+        sender: user._id,
+        text: msg,
+      });
+      send && setMsg("");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -79,8 +94,14 @@ function ChatBox() {
             {/* Write New Message */}
             <div className="new__message">
               <SentimentSatisfiedAltIcon />
-              <input type="text" placeholder="Write here..." />
-              <SendIcon />
+              <input
+                type="text"
+                placeholder="Write here..."
+                value={msg}
+                onChange={(e) => setMsg(e.target.value)}
+                autoFocus
+              />
+              <SendIcon onClick={handleClick} />
             </div>
           </div>
         )}

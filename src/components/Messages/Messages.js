@@ -1,23 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { userRequest } from "../../requestMethods";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
-  const [conversations, setConversations] = useState([]);
+
   const currentChat = useSelector((state) => state.currentChat);
   const selected = useSelector((state) => state.selected);
 
   const user = useSelector((state) => state.user);
+  //   scroll
+  const scrollRef = useRef(null);
   // Get messages
+
   useEffect(() => {
     const msgs = async () => {
       const getMsgs = await userRequest.get(`/message/${currentChat}`);
       setMessages(getMsgs.data);
     };
+    console.log("chainging..");
     msgs();
-  }, [currentChat]);
-  console.log(messages);
+  }, [messages.length, currentChat]);
+
+  //   scrolling
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    console.log("chainging..");
+  }, [messages.length]);
   return (
     <div className="chat__messages">
       {messages.length == 0 ? (
@@ -59,12 +68,12 @@ function Messages() {
       ) : (
         messages.map((msg) =>
           user._id !== msg.sender ? (
-            <div className="message__sender">
+            <div className="message__sender" ref={scrollRef}>
               <p>{msg.text}</p>
               <span>4:34 am</span>
             </div>
           ) : (
-            <div className="message__reciever">
+            <div className="message__reciever" ref={scrollRef}>
               <p>{msg.text}</p>
               <span>4:34 am</span>
             </div>

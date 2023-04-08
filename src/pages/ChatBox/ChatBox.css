@@ -151,6 +151,11 @@ overflow: hidden;
     background-color: #fff;
     border-radius: 20px;
     font-size: 14px;
+    border: 2px solid transparent;
+
+}
+.new__message input:focus{
+    border: 2px solid rgb(70, 124, 117);
 }
 .new__message .MuiSvgIcon-root{
     color: #fff;
