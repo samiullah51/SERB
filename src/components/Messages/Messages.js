@@ -18,7 +18,7 @@ function Messages() {
       const getMsgs = await userRequest.get(`/message/${currentChat}`);
       setMessages(getMsgs.data);
     };
-    console.log("chainging..");
+    console.log("chainging..ffddf", messages.length);
     msgs();
   }, [messages.length, currentChat]);
 
@@ -26,7 +26,7 @@ function Messages() {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
     console.log("chainging..");
-  }, [messages.length]);
+  }, [currentChat]);
   return (
     <div className="chat__messages">
       {messages.length == 0 ? (

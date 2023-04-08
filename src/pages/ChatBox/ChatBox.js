@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./ChatBox.css";
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,7 +14,28 @@ function ChatBox() {
   const selected = useSelector((state) => state.selected);
   const currentChat = useSelector((state) => state.currentChat);
   const user = useSelector((state) => state.user);
+  //
+  const [messages, setMessages] = useState([]);
 
+  //   scroll
+  const scrollRef = useRef(null);
+  // Get messages
+
+  useEffect(() => {
+    const msgs = async () => {
+      const getMsgs = await userRequest.get(`/message/${currentChat}`);
+      setMessages(getMsgs.data);
+    };
+    console.log("chainging..ffddf", messages.length);
+    msgs();
+  }, [messages.length, currentChat]);
+
+  //   scrolling
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    console.log("chainging..");
+  }, [messages.length, currentChat]);
+  //
   const [msg, setMsg] = useState("");
   // send message
   const handleClick = async () => {
@@ -24,7 +45,8 @@ function ChatBox() {
         sender: user._id,
         text: msg,
       });
-      send && setMsg("");
+      send && setMessages([...messages, send.data]);
+      setMsg("");
     } catch (err) {
       console.log(err.message);
     }
@@ -89,7 +111,60 @@ function ChatBox() {
             </div>
 
             {/* Chat Messages */}
-            <Messages />
+            {/* <Messages /> */}
+            <div className="chat__messages">
+              {messages.length === 0 ? (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <h2
+                    style={{
+                      fontWeight: "300",
+                      color: "#fff",
+                    }}
+                  >
+                    Leave a Message to Start Chating
+                  </h2>
+                  <h2
+                    style={{
+                      fontWeight: "300",
+                      color: "#fff",
+                    }}
+                  >
+                    with
+                  </h2>
+                  <h1
+                    style={{
+                      fontWeight: "300",
+                      color: "#fff",
+                    }}
+                  >
+                    {selected.fullName}
+                  </h1>
+                </div>
+              ) : (
+                messages.map((msg) =>
+                  user._id !== msg.sender ? (
+                    <div className="message__sender" ref={scrollRef}>
+                      <p>{msg.text}</p>
+                      <span>4:34 am</span>
+                    </div>
+                  ) : (
+                    <div className="message__reciever" ref={scrollRef}>
+                      <p>{msg.text}</p>
+                      <span>4:34 am</span>
+                    </div>
+                  )
+                )
+              )}
+            </div>
 
             {/* Write New Message */}
             <div className="new__message">
