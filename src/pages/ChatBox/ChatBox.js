@@ -6,14 +6,18 @@ import Chats from "../../components/Chats/Chats";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { userRequest } from "../../requestMethods";
-import Messages from "../../components/Messages/Messages";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SendIcon from "@mui/icons-material/Send";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import { loader } from "../../loader";
+
+import * as timeago from "timeago.js";
+
 function ChatBox() {
   const selected = useSelector((state) => state.selected);
   const currentChat = useSelector((state) => state.currentChat);
   const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
   //
   const [messages, setMessages] = useState([]);
 
@@ -26,19 +30,18 @@ function ChatBox() {
       const getMsgs = await userRequest.get(`/message/${currentChat}`);
       setMessages(getMsgs.data);
     };
-    console.log("chainging..ffddf", messages.length);
     msgs();
   }, [messages.length, currentChat]);
 
   //   scrolling
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-    console.log("chainging..");
   }, [messages.length, currentChat]);
   //
   const [msg, setMsg] = useState("");
   // send message
   const handleClick = async () => {
+    setLoading(true);
     try {
       const send = await userRequest.post(`/message`, {
         conversationId: currentChat,
@@ -47,6 +50,7 @@ function ChatBox() {
       });
       send && setMessages([...messages, send.data]);
       setMsg("");
+      setLoading(false);
     } catch (err) {
       console.log(err.message);
     }
@@ -154,12 +158,12 @@ function ChatBox() {
                   user._id !== msg.sender ? (
                     <div className="message__sender" ref={scrollRef}>
                       <p>{msg.text}</p>
-                      <span>4:34 am</span>
+                      <span>{timeago.format(msg.createdAt)}</span>
                     </div>
                   ) : (
                     <div className="message__reciever" ref={scrollRef}>
                       <p>{msg.text}</p>
-                      <span>4:34 am</span>
+                      <span>{timeago.format(msg.createdAt)}</span>
                     </div>
                   )
                 )
@@ -176,7 +180,11 @@ function ChatBox() {
                 onChange={(e) => setMsg(e.target.value)}
                 autoFocus
               />
-              <SendIcon onClick={handleClick} />
+              {!loading ? (
+                <SendIcon onClick={handleClick} />
+              ) : (
+                <img src={loader} width={20} />
+              )}
             </div>
           </div>
         )}

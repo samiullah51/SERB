@@ -100,7 +100,7 @@ overflow: hidden;
 }
 .message__sender span{
     font-size: 12px;
-    color: rgb(235, 235, 235);
+    color: rgba(211, 211, 211, 0.678);
 
     position: absolute;
     top: 5px;
@@ -124,7 +124,7 @@ overflow: hidden;
 }
 .message__reciever span{
     font-size: 12px;
-    color: rgb(235, 235, 235);
+    color: rgba(211, 211, 211, 0.678);
     position: absolute;
     top: 5px;
     right: 6px;
