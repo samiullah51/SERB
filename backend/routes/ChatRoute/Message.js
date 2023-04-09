@@ -22,7 +22,23 @@ router.get("/", verifyToken, async (req, res) => {
     res.status(500).json(err.message);
   }
 });
-
+// get all conversations
+router.get("/details/:id", verifyToken, async (req, res) => {
+  try {
+    const msg = await Message.findById(req.params.id);
+    res.status(200).json(msg);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+router.delete("/delete/:id", verifyToken, async (req, res) => {
+  try {
+    const deltedMsg = await Message.findByIdAndDelete(req.params.id);
+    res.status(201).json("Message deleted successfully");
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
 // get a conversation
 router.get("/:conversationId", verifyToken, async (req, res) => {
   try {

@@ -9,7 +9,35 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    
+}
+.chatbox .chat__modal{
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background-color: rgba(0, 0, 0, 0.897);
+z-index: 22211;
+}
+.chat__modal .MuiSvgIcon-root{
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: .2s;
+}
+.chat__modal .MuiSvgIcon-root:hover{
+    color: rgb(233, 119, 119);
+    cursor: pointer;
+}
+.chat__modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chat__modal .showImg{
+    width: 50%;
+    height: 90%;
 }
 .chatbox .chatbox__left{
     flex-basis: 25%;
@@ -128,13 +156,11 @@ overflow: hidden;
     font-size: 18px;
     color: rgb(189, 189, 189)
 }
-.message__sender .MuiSvgIcon-root{
-    position: absolute;
-    top: -5px;
-    left:-5px;
-    font-size: 18px;
-    color: rgb(189, 189, 189)
+.message__reciever .MuiSvgIcon-root:hover{
+    color: rgb(223, 89, 89);
+    cursor: pointer;
 }
+
 .message__reciever p{
     margin-top: 10px;
 }
@@ -151,6 +177,11 @@ overflow: hidden;
    max-height: 250px;
    margin-top: 10px;
 }
+.message__reciever:hover, .message__sender:hover{
+cursor: pointer;
+opacity: .8;
+}
+
 /* New Message */
 .chatbox__right .new__message{
     width: 100%;
