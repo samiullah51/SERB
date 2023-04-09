@@ -89,7 +89,7 @@ overflow: hidden;
     background-color: rgba(161, 173, 173, 0.452);
     padding: 10px;
     max-width: 50%;
-    min-width: 30%;
+    min-width: 100px;
     color: #fff;
     border-radius: 0 20px 20px 20px;
     margin: 5px;
@@ -103,7 +103,7 @@ overflow: hidden;
     color: rgba(211, 211, 211, 0.678);
 
     position: absolute;
-    top: 5px;
+    top: 2px;
     right: 6px;
 }
 /* reciever */
@@ -113,11 +113,27 @@ overflow: hidden;
     margin-right: 10px;
     padding: 10px;
     max-width: 50%;
-    min-width: 30%;
+    /* min-width: 30%; */
+    min-width: 100px;
+
     color: #fff;
     border-radius: 20px 0px 20px 20px;
     align-self: flex-end;
     margin: 5px;
+}
+.message__reciever .MuiSvgIcon-root{
+    position: absolute;
+    top: -5px;
+    right:-5px;
+    font-size: 18px;
+    color: rgb(189, 189, 189)
+}
+.message__sender .MuiSvgIcon-root{
+    position: absolute;
+    top: -5px;
+    left:-5px;
+    font-size: 18px;
+    color: rgb(189, 189, 189)
 }
 .message__reciever p{
     margin-top: 10px;
@@ -126,8 +142,14 @@ overflow: hidden;
     font-size: 12px;
     color: rgba(211, 211, 211, 0.678);
     position: absolute;
-    top: 5px;
-    right: 6px;
+    top: 2px;
+    right: 15px;
+}
+.message__sender img, .message__reciever img{
+   border-radius: 10px;
+   width: 200px;
+   max-height: 250px;
+   margin-top: 10px;
 }
 /* New Message */
 .chatbox__right .new__message{
@@ -141,6 +163,12 @@ overflow: hidden;
     justify-content: space-between;
     padding: 5px 10px;
     border-top: 1px solid #fff;
+    position: relative;
+}
+.new__message .picker{
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
 }
 .new__message input{
     width: 100%;
@@ -157,10 +185,19 @@ overflow: hidden;
 .new__message input:focus{
     border: 2px solid rgb(70, 124, 117);
 }
+.new__message input[type="file"]{
+    display: none;
+}
+.new__message img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
 .new__message .MuiSvgIcon-root{
     color: #fff;
     cursor: pointer;
 }
+
 .new__message .MuiSvgIcon-root:hover{
     color: rgb(158, 158, 158);
 }

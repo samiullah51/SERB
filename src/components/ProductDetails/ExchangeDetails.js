@@ -6,14 +6,19 @@ import { publicRequest, userRequest } from "../../requestMethods";
 import * as timeago from "timeago.js";
 import { SignalCellularAltSharp } from "@mui/icons-material";
 import { loader } from "../../loader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { CURRENT_CHAT, SELECTED } from "../../redux/User/userTypes";
 // Create formatter (English).
 function ExchangeDetails({ mode, chatBtn, id, load }) {
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
+  // current conversations
+  const [currentConversations, setCurrentConversations] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // fetch product Details
   useEffect(() => {
     setLoading(true);
@@ -31,24 +36,69 @@ function ExchangeDetails({ mode, chatBtn, id, load }) {
     year: "numeric",
     month: "long",
   });
+
+  // fetch current conversations
+  useEffect(() => {
+    setLoading(true);
+    const fetchData = async () => {
+      const chats = await userRequest.get(`/conversation/find/${user._id}`);
+      setCurrentConversations(chats.data);
+    };
+    fetchData();
+  }, [id]);
+  // console.log(currentConversations);
   // handle chat
   const handleChat = async () => {
-    // console.log(user, details);
-    console.log(user._id, details.By._id);
+    // console.log(details.By._id);
+    // console.log(currentConversations);
+    const found = currentConversations?.map((m) =>
+      m.members.find((f) => {
+        return f === details.By._id;
+      })
+    );
+
     try {
-      // const newChat = await userRequest.post(`/conversation`, {
-      //   senderId: user._id,
-      //   recieverId: details.By._id,
-      // });
-      // newChat && navigate("/chatbox");
-      const chats = await userRequest.get(`/conversation/find/${user._id}`);
-      const check = chats.data.map((chat) => {
-        return chat.members.filter((f) => f === details.By._id);
-      });
-      console.log(check);
+      const final = found.filter((f) => f === details.By._id);
+      if (final.length > 0) {
+        dispatch({ type: SELECTED, selected: null }) &&
+          dispatch({ type: CURRENT_CHAT, currentChat: null });
+        navigate("/chatbox");
+      } else {
+        const newChat = await userRequest.post(`/conversation`, {
+          senderId: user._id,
+          recieverId: details.By._id,
+        });
+        newChat &&
+          dispatch({ type: SELECTED, selected: details.By }) &&
+          dispatch({ type: CURRENT_CHAT, currentChat: newChat._id }) &&
+          navigate("/chatbox");
+      }
     } catch (err) {
       console.log(err.message);
     }
+    // try {
+    //   // const check = chats.data.map((chat) => {
+    //     // const found = chat.members.filter((f) => f === details.By._id);
+    //     // // console.log(found, details.By._id);
+    //     // if (found[0] === details.By._id) {
+    //     //   // dispatch({ type: SELECTED, selected: found });
+    //     //   // navigate("/chatbox");
+    //     //   console.log("found");
+    //     // } else {
+    //     //   // const newChat = userRequest.post(`/conversation`, {
+    //     //   //   senderId: user._id,
+    //     //   //   recieverId: details.By._id,
+    //     //   // });
+    //     //   // newChat && navigate("/chatbox");
+    //     //   console.log("not found");
+    //     // }
+    //     return found;
+    //   });
+    //   const final = check.filter((f) => f !== details.By._id);
+    //   console.log(final);
+    // } catch (err) {
+    //   console.log(err.message);
+    // }
   };
 
   return !loading ? (

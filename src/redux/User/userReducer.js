@@ -3,7 +3,7 @@ import { CURRENT_CHAT, LOG_IN, LOG_OUT, SELECTED } from "./userTypes";
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")),
   selected: "",
-  currentChat: "",
+  currentChat: null,
 };
 
 export const userReducer = (state = initialState, action) => {

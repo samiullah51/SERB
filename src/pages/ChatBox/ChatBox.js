@@ -10,7 +10,10 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SendIcon from "@mui/icons-material/Send";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import { loader } from "../../loader";
-// import Picker from "emoji-picker-react";
+import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
+import { storage } from "../../firebase";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import Picker from "emoji-picker-react";
 
 import * as timeago from "timeago.js";
 
@@ -23,22 +26,28 @@ function ChatBox() {
 
   //
   const [messages, setMessages] = useState([]);
-  const [chosenEmoji, setChosenEmoji] = useState(null);
-
-  //   // Handle Emoji
-  //   const handleEmoji = () => {
-  //     setChosenEmoji(!chosenEmoji);
-  //   };
-  //  // Pick Emoji
-  //  const pickEmoji = (e, emoji) => {
-  //   let msg = message;
-  //   msg += emoji.emoji;
-  //   setMsg(msg);
-  // };
+  const [chosenEmoji, setChosenEmoji] = useState(false);
+  const [image, setImage] = useState(null);
+  const [showImg, setShowImg] = useState(null);
+  // Handle Emoji
+  const handleEmoji = () => {
+    setChosenEmoji(!chosenEmoji);
+  };
+  // Pick Emoji
+  const pickEmoji = (e, emoji) => {
+    let message = msg;
+    message += emoji.emoji;
+    setMsg(message);
+  };
   //   scroll
   const scrollRef = useRef(null);
   // Get messages
-
+  // handle change
+  const handleChange = (image) => {
+    setImage(image);
+    setShowImg(URL.createObjectURL(image));
+  };
+  //
   useEffect(() => {
     const msgs = async () => {
       const getMsgs = await userRequest.get(`/message/${currentChat}`);
@@ -55,18 +64,51 @@ function ChatBox() {
   // send message
   const handleClick = async () => {
     setLoading(true);
-    try {
-      const send = await userRequest.post(`/message`, {
-        conversationId: currentChat,
-        sender: user._id,
-        text: msg,
-      });
-      send && setMessages([...messages, send.data]);
-      setMsg("");
-      setLoading(false);
-    } catch (err) {
-      console.log(err.message);
+    //
+    if (image) {
+      const uploadTask = storage.ref(`/profilePhotos/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changes",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (err) => {
+          console.log(err);
+        },
+        async () => {
+          const imageUrl = await uploadTask.snapshot.ref.getDownloadURL();
+          const send = await userRequest.post(`/message`, {
+            conversationId: currentChat,
+            sender: user._id,
+            text: msg,
+            image: imageUrl,
+          });
+          send && setMessages([...messages, send.data]);
+          setMsg("");
+          setImage(null);
+          setShowImg(null);
+          setChosenEmoji(false);
+          setLoading(false);
+          // setLoading(false);
+        }
+      );
+    } else {
+      try {
+        const send = await userRequest.post(`/message`, {
+          conversationId: currentChat,
+          sender: user._id,
+          text: msg,
+        });
+        send && setMessages([...messages, send.data]);
+        setMsg("");
+        setChosenEmoji(false);
+        setLoading(false);
+      } catch (err) {
+        console.log(err.message);
+      }
     }
+    //
   };
   return (
     <>
@@ -170,11 +212,15 @@ function ChatBox() {
                 messages.map((msg) =>
                   user._id !== msg.sender ? (
                     <div className="message__sender" ref={scrollRef}>
+                      {msg.image && <img src={msg.image} />}
                       <p>{msg.text}</p>
                       <span>{timeago.format(msg.createdAt)}</span>
                     </div>
                   ) : (
                     <div className="message__reciever" ref={scrollRef}>
+                      <HighlightOffIcon />
+
+                      {msg.image && <img src={msg.image} />}
                       <p>{msg.text}</p>
                       <span>{timeago.format(msg.createdAt)}</span>
                     </div>
@@ -185,7 +231,22 @@ function ChatBox() {
 
             {/* Write New Message */}
             <div className="new__message">
-              {/* <SentimentSatisfiedAltIcon
+              <label htmlFor="file1">
+                {showImg !== null ? (
+                  <img src={showImg} />
+                ) : (
+                  <PhotoCameraOutlinedIcon
+                    style={{ marginRight: "10px", marginTop: "4px" }}
+                  />
+                )}
+                <input
+                  type="file"
+                  id="file1"
+                  onChange={(e) => handleChange(e.target.files[0])}
+                />
+              </label>
+
+              <SentimentSatisfiedAltIcon
                 onClick={handleEmoji}
                 className={!chosenEmoji ? "emojiBtn" : "emojiBtn active"}
               />
@@ -193,7 +254,7 @@ function ChatBox() {
                 <div className="picker">
                   <Picker onEmojiClick={pickEmoji} />
                 </div>
-              )} */}
+              )}
               <input
                 type="text"
                 placeholder="Write here..."
