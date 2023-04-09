@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CURRENT_CHAT, SELECTED } from "../../../redux/User/userTypes";
@@ -8,12 +8,10 @@ import "./SingleChat.css";
 function SingleChat({ chat }) {
   const user = useSelector((state) => state.user);
   const memberId = chat.members.filter((u) => u !== user._id);
-  console.log(memberId, user);
   const [member, setMember] = useState("");
   const selected = useSelector((state) => state.selected);
   const currentChat = useSelector((state) => state.currentChat);
   const dispatch = useDispatch();
-  const [active, setActive] = useState(false);
 
   // fetch the details chat member
   useEffect(() => {
@@ -28,8 +26,8 @@ function SingleChat({ chat }) {
   }, [chat]);
   // handle click
   const handleClick = async () => {
-    dispatch({ type: SELECTED, selected: member });
     dispatch({ type: CURRENT_CHAT, currentChat: chat._id });
+    dispatch({ type: SELECTED, selected: member });
   };
 
   return (

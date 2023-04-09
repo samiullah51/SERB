@@ -10,6 +10,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SendIcon from "@mui/icons-material/Send";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import { loader } from "../../loader";
+// import Picker from "emoji-picker-react";
 
 import * as timeago from "timeago.js";
 
@@ -18,9 +19,22 @@ function ChatBox() {
   const currentChat = useSelector((state) => state.currentChat);
   const user = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
+
   //
   const [messages, setMessages] = useState([]);
+  const [chosenEmoji, setChosenEmoji] = useState(null);
 
+  //   // Handle Emoji
+  //   const handleEmoji = () => {
+  //     setChosenEmoji(!chosenEmoji);
+  //   };
+  //  // Pick Emoji
+  //  const pickEmoji = (e, emoji) => {
+  //   let msg = message;
+  //   msg += emoji.emoji;
+  //   setMsg(msg);
+  // };
   //   scroll
   const scrollRef = useRef(null);
   // Get messages
@@ -38,7 +52,6 @@ function ChatBox() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages.length, currentChat]);
   //
-  const [msg, setMsg] = useState("");
   // send message
   const handleClick = async () => {
     setLoading(true);
@@ -172,7 +185,15 @@ function ChatBox() {
 
             {/* Write New Message */}
             <div className="new__message">
-              <SentimentSatisfiedAltIcon />
+              {/* <SentimentSatisfiedAltIcon
+                onClick={handleEmoji}
+                className={!chosenEmoji ? "emojiBtn" : "emojiBtn active"}
+              />
+              {chosenEmoji && (
+                <div className="picker">
+                  <Picker onEmojiClick={pickEmoji} />
+                </div>
+              )} */}
               <input
                 type="text"
                 placeholder="Write here..."

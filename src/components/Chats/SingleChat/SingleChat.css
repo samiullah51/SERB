@@ -9,7 +9,7 @@
     padding: 5px;
 }
 .single__chat.active{
-    background-color: gray;
+    background-color: red;
 }
 .single__chat img{
     width: 40px;

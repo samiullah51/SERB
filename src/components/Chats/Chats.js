@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 function Chats() {
   const [chats, setChats] = useState([]);
   const user = useSelector((state) => state.user);
+
   useEffect(() => {
     const getChats = async () => {
       const gotChats = await userRequest.get(`/conversation/find/${user._id}`);
@@ -17,10 +18,11 @@ function Chats() {
     };
     getChats();
   }, []);
+
   return (
     <>
       {chats.map((chat) => (
-        <SingleChat key={chat.id} chat={chat} />
+        <SingleChat key={chat._id} chat={chat} />
       ))}
     </>
   );

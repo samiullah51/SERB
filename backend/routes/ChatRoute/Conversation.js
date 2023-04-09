@@ -14,6 +14,7 @@ router.post("/", verifyToken, async (req, res) => {
     res.status(500).json(err.message);
   }
 });
+
 // Get all the conversations from the database
 router.get("/", verifyToken, async (req, res) => {
   try {

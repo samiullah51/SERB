@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./ProductDetails.css";
 import StarIcon from "@mui/icons-material/Star";
 import currencyFormatter from "currency-formatter";
-import { publicRequest } from "../../requestMethods";
+import { publicRequest, userRequest } from "../../requestMethods";
 import * as timeago from "timeago.js";
 import { SignalCellularAltSharp } from "@mui/icons-material";
 import { loader } from "../../loader";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Create formatter (English).
 function ExchangeDetails({ mode, chatBtn, id, load }) {
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
-
+  const navigate = useNavigate();
   // fetch product Details
   useEffect(() => {
     setLoading(true);
@@ -31,6 +31,26 @@ function ExchangeDetails({ mode, chatBtn, id, load }) {
     year: "numeric",
     month: "long",
   });
+  // handle chat
+  const handleChat = async () => {
+    // console.log(user, details);
+    console.log(user._id, details.By._id);
+    try {
+      // const newChat = await userRequest.post(`/conversation`, {
+      //   senderId: user._id,
+      //   recieverId: details.By._id,
+      // });
+      // newChat && navigate("/chatbox");
+      const chats = await userRequest.get(`/conversation/find/${user._id}`);
+      const check = chats.data.map((chat) => {
+        return chat.members.filter((f) => f === details.By._id);
+      });
+      console.log(check);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return !loading ? (
     <div className="product__details">
       {/* Header */}
@@ -77,7 +97,11 @@ function ExchangeDetails({ mode, chatBtn, id, load }) {
       </div>
       {/* Actions */}'
       {mode === "exchange" ? (
-        chatBtn && <button className="chat__btn">Chat Now</button>
+        chatBtn && (
+          <button className="chat__btn" onClick={handleChat}>
+            Chat Now
+          </button>
+        )
       ) : (
         <div className="actions">
           <button className="buy__btn">Buy Now</button>
