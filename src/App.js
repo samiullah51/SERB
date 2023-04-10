@@ -18,6 +18,7 @@ import EditProduct from "./pages/EditProduct/EditProduct";
 import Search from "./pages/Search/Search";
 import EditExchangeProduct from "./pages/EditProduct/EditExchangeProduct";
 import ExchangeWithProductDetails from "./pages/ExchangeWithProductDetails/ExchangeWithProductDetails";
+import Analytics from "./pages/Analytics/Analytics";
 
 function App() {
   return (
@@ -54,6 +55,8 @@ function App() {
             element={<ExchangeWithProductDetails />}
           />
           <Route path="/chatbox" element={<ChatBox />} />
+          {/* analytics for working product */}
+          <Route path="/analytics" element={<Analytics />} />
         </Route>
 
         <Route path="/register" element={<Register />} />
