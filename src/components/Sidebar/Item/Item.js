@@ -20,7 +20,7 @@ function Item() {
         <VisibilityOutlinedIcon />
         <p>Views</p>
       </NavLink>
-      <NavLink className="single__item" to="revenue">
+      <NavLink className="single__item" to="/revenue">
         <AttachMoneyOutlinedIcon />
         <p>Revenue</p>
       </NavLink>

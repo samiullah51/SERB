@@ -1,13 +1,13 @@
 import React from "react";
-import "./Views.css";
+import "./Revenue.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Sales from "../../components/Sales/Sales";
-function Views() {
+function Revenue() {
   return (
     <>
       <Navbar />
-      <div className="views">
+      <div className="revenue">
         {/* Sidebar */}
         <Sidebar />
         {/* Sales */}
@@ -17,4 +17,4 @@ function Views() {
   );
 }
 
-export default Views;
+export default Revenue;
