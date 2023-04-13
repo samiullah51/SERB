@@ -2,7 +2,7 @@ import React from "react";
 import "./Views.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import Sales from "../../components/Sales/Sales";
+import ProfileViews from "../../components/Views/ProfileViews";
 function Views() {
   return (
     <>
@@ -10,8 +10,7 @@ function Views() {
       <div className="views">
         {/* Sidebar */}
         <Sidebar />
-        {/* Sales */}
-        <Sales />
+        <ProfileViews />
       </div>
     </>
   );
