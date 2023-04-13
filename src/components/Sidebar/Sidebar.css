@@ -1,5 +1,4 @@
 .sidebar{
     flex-basis: 20%;
-    height: 93vh;
-    border-right: 1px solid #ccc;
+height: 100%;
 }
