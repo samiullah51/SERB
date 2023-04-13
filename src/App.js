@@ -19,6 +19,7 @@ import Search from "./pages/Search/Search";
 import EditExchangeProduct from "./pages/EditProduct/EditExchangeProduct";
 import ExchangeWithProductDetails from "./pages/ExchangeWithProductDetails/ExchangeWithProductDetails";
 import Analytics from "./pages/Analytics/Analytics";
+import Awards from "./pages/Awards/Awards";
 
 function App() {
   return (
@@ -57,6 +58,8 @@ function App() {
           <Route path="/chatbox" element={<ChatBox />} />
           {/* analytics for working product */}
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/awards" element={<Awards />} />
+          <Route path="/views" element={<Awards />} />
         </Route>
 
         <Route path="/register" element={<Register />} />

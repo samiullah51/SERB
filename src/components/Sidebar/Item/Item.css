@@ -23,10 +23,10 @@
     color: #fff;
     border-left: 4px solid rgb(14, 172, 119);
 }
-.single__item:not(:first-child):hover{
-    background-color: rgba(201, 198, 198, 0.527);;
-    color: #000;
-    border-left: 4px solid rgb(79, 202, 206);
+.single__item:hover{
+
+    border-left: 4px solid rgb(14, 172, 119);
+
     cursor: pointer;
 
 }

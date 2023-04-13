@@ -1,29 +1,29 @@
 import React from "react";
 import "./Item.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 function Item() {
   return (
     <div className="items">
-      <Link className="single__item active">
+      <NavLink className="single__item" to="/analytics">
         <ShoppingCartOutlinedIcon />
         <p>Sales</p>
-      </Link>
-      <Link className="single__item">
+      </NavLink>
+      <NavLink className="single__item" to="/awards">
         <EmojiEventsOutlinedIcon />
         <p>Awards</p>
-      </Link>
-      <Link className="single__item">
+      </NavLink>
+      <NavLink className="single__item" to="/views">
         <VisibilityOutlinedIcon />
         <p>Views</p>
-      </Link>
-      <Link className="single__item">
+      </NavLink>
+      <NavLink className="single__item" to="revenue">
         <AttachMoneyOutlinedIcon />
         <p>Revenue</p>
-      </Link>
+      </NavLink>
     </div>
   );
 }
