@@ -8,6 +8,9 @@ function SalesItems({ title }) {
       {/* single item */}
       <div className="items">
         <SingleItem />
+        <SingleItem />
+        <SingleItem />
+        <SingleItem />
       </div>
     </div>
   );

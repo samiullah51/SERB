@@ -5,6 +5,7 @@
 }
 .sales__items h1{
     font-weight: 500;
+    color: var(--primary-color);
 }
 .sales__items .single__item{
     width: 90%;
@@ -39,7 +40,7 @@
     position: absolute;
     top: -15px;
     right: 0;
-    display: flex;
+    display: none;
     align-items: center;
 }
 .single__item:hover  .actions{

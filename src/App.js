@@ -24,6 +24,8 @@ import Views from "./pages/Views/Views";
 import Revenue from "./pages/Revenue/Revenue";
 import AwardsPage from "./pages/Awards/Awards";
 import Total from "./pages/Analytics/Total/Total";
+import Available from "./pages/Analytics/Available/Available";
+import Sold from "./pages/Analytics/Sold/Sold";
 
 function App() {
   return (
@@ -63,6 +65,8 @@ function App() {
           {/* analytics for working product */}
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/analytics/totalproducts" element={<Total />} />
+          <Route path="/analytics/availableproducts" element={<Available />} />
+          <Route path="/analytics/soldproducts" element={<Sold />} />
           <Route path="/awards" element={<AwardsPage />} />
           <Route path="/views" element={<Views />} />
           <Route path="/revenue" element={<Revenue />} />

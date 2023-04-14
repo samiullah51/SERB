@@ -15,6 +15,7 @@ function SaleProducts() {
       <Link
         className="single__sale__product"
         style={{ backgroundColor: "#20365A" }}
+        to="/analytics/availableproducts"
       >
         <p>Available Products</p>
         <h1>11</h1>
@@ -22,6 +23,7 @@ function SaleProducts() {
       <Link
         className="single__sale__product"
         style={{ backgroundColor: "#7A39A2" }}
+        to="/analytics/soldproducts"
       >
         <p>Sold Products</p>
         <h1>07</h1>
