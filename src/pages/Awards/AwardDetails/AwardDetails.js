@@ -2,21 +2,9 @@ import React from "react";
 import "./AwardDetails.css";
 import Navbar from "../../../components/Navbar/Navbar";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
-ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ["Total", "Available", "Sold", "Pending"],
-  datasets: [
-    {
-      label: "Product",
-      data: [18, 11, 7, 3],
-      backgroundColor: ["#3A6562", "#20365A", "#7A39A2", "#C23FBE"],
-      borderWidth: 1,
-    },
-  ],
-};
+import Crieteria from "./Crieteria";
+
 function AwardDetails() {
   return (
     <>
@@ -25,17 +13,38 @@ function AwardDetails() {
         <Sidebar />
         <div className="award__contents">
           <div className="contents">
-            <h2>Level 1 Completed</h2>
+            <div className="level">
+              <img src="https://www.f6aoj.ao-journal.com/crbst_blue1stshad.gif" />
+              <h2>Level Is Successfully Completed</h2>
+            </div>
             <p>
-              Dear Sami, you have successfully sold 20 products. Your current
-              rating is 4.5, and your total selling amount is 200,000. It means
-              you deserve 3% amount of your total selling amount as award by
-              SERB.
+              Dear <span> Sami </span>, you have successfully sold{" "}
+              <span> 20 </span> products. Your current rating is{" "}
+              <span> 4.5 </span>, and your total selling amount is{" "}
+              <span> 20,000 </span> PKR. It means you deserve <span> 3% </span>{" "}
+              amount of your total selling amount as award by
+              <span> SERB </span>.
             </p>
           </div>
-          <div className="chart">
-            <Pie data={data} />
+          {/* award formual */}
+          <div className="award__formula">
+            <p className="awardP">Award = (20,000 / 100) * 3</p>
+            <p className="awardP">
+              Award = 600 <span>(PKR)</span>
+            </p>
           </div>
+          {/* criteria */}
+          <Crieteria />
+
+          {/* Award Icon */}
+          <img
+            src="https://cdn.dribbble.com/users/393953/screenshots/1498167/browserpreview_tmp-1.gif"
+            width={180}
+          />
+          <h2>
+            600 <span style={{ fontSize: "14px" }}>(PKR)</span>
+          </h2>
+          <button className="collect">Collect Now</button>
         </div>
       </div>
     </>
