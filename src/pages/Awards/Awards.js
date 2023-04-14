@@ -2,8 +2,8 @@ import React from "react";
 import "./Awards.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import Sales from "../../components/Sales/Sales";
-function Awards() {
+import Awards from "../../components/Awards/Awards";
+function AwardsPage() {
   return (
     <>
       <Navbar />
@@ -11,10 +11,10 @@ function Awards() {
         {/* Sidebar */}
         <Sidebar />
         {/* Sales */}
-        <Sales />
+        <Awards />
       </div>
     </>
   );
 }
 
-export default Awards;
+export default AwardsPage;
