@@ -23,6 +23,7 @@ import Awards from "./pages/Awards/Awards";
 import Views from "./pages/Views/Views";
 import Revenue from "./pages/Revenue/Revenue";
 import AwardsPage from "./pages/Awards/Awards";
+import Total from "./pages/Analytics/Total/Total";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           <Route path="/chatbox" element={<ChatBox />} />
           {/* analytics for working product */}
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/analytics/totalproducts" element={<Total />} />
           <Route path="/awards" element={<AwardsPage />} />
           <Route path="/views" element={<Views />} />
           <Route path="/revenue" element={<Revenue />} />
