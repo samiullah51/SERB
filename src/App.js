@@ -26,6 +26,8 @@ import AwardsPage from "./pages/Awards/Awards";
 import Total from "./pages/Analytics/Total/Total";
 import Available from "./pages/Analytics/Available/Available";
 import Sold from "./pages/Analytics/Sold/Sold";
+import Pending from "./pages/Analytics/Pending/Pending";
+import AwardDetails from "./pages/Awards/AwardDetails/AwardDetails";
 
 function App() {
   return (
@@ -67,7 +69,9 @@ function App() {
           <Route path="/analytics/totalproducts" element={<Total />} />
           <Route path="/analytics/availableproducts" element={<Available />} />
           <Route path="/analytics/soldproducts" element={<Sold />} />
+          <Route path="/analytics/pendingproducts" element={<Pending />} />
           <Route path="/awards" element={<AwardsPage />} />
+          <Route path="/awards/details" element={<AwardDetails />} />
           <Route path="/views" element={<Views />} />
           <Route path="/revenue" element={<Revenue />} />
         </Route>

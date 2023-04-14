@@ -31,6 +31,7 @@ function SaleProducts() {
       <Link
         className="single__sale__product"
         style={{ backgroundColor: "#C23FBE" }}
+        to="/analytics/pendingproducts"
       >
         <p>Pending Products</p>
         <h1>03</h1>

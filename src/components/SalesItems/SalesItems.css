@@ -46,6 +46,9 @@
 .single__item:hover  .actions{
     display: flex;
 }
+.sales__items .single__item:hover{
+    background-color: #cccccc9c;
+}
 .sales__items .actions .MuiSvgIcon-root{
     font-size: 28px;
     margin: 0 5px;

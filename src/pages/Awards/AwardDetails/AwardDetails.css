@@ -1,0 +1,17 @@
+.award__details{
+    margin-top: 70px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    min-height: 90vh;
+    width: 100%;
+}
+.award__contents{
+    width:80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.award__details .award__contents .chart{
+    width: 300px;
+}
