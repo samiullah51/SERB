@@ -35,7 +35,7 @@ function ProfitStats() {
           150,000<span style={{ fontSize: "20px" }}>(PKR)</span>
         </h1>
         {/* WidtDraw */}
-        <button>WidtDraw Now</button>
+        <button>WithDraw Now</button>
       </div>
     </div>
   );

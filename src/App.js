@@ -29,6 +29,8 @@ import Sold from "./pages/Analytics/Sold/Sold";
 import Pending from "./pages/Analytics/Pending/Pending";
 import AwardDetails from "./pages/Awards/AwardDetails/AwardDetails";
 import Eligibility from "./pages/Awards/AwardDetails/Eligibility";
+import ProfileView from "./pages/Views/ProfileView/ProfileView";
+import TotalProductView from "./pages/Views/TotalProductView/TotalProductView";
 
 function App() {
   return (
@@ -75,6 +77,11 @@ function App() {
           <Route path="/awards/details" element={<AwardDetails />} />
           <Route path="/awards/eligibility" element={<Eligibility />} />
           <Route path="/views" element={<Views />} />
+          <Route path="/views/profileviews" element={<ProfileView />} />
+          <Route
+            path="/views/totalproductviews"
+            element={<TotalProductView />}
+          />
           <Route path="/revenue" element={<Revenue />} />
         </Route>
 
