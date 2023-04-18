@@ -22,7 +22,7 @@ function ProfileView() {
             padding: "20px",
           }}
         >
-          <ProfileVieww />
+          <ProfileVieww /> 
           <ProfileStats />
         </div>
       </div>
