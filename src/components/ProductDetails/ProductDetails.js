@@ -24,16 +24,32 @@ function ProductDetails({ mode, chatBtn, id }) {
     };
     fetchData();
   }, [id]);
+  // time format
   let sinceJoin = new Date(details?.By.createdAt).toLocaleString("en-US", {
     day: "numeric",
     year: "numeric",
     month: "long",
   });
+  // handle click
+  const handleClick = async () => {
+    try {
+      const postView = await publicRequest.post(`/profileviews/add`, {
+        userId: details?.By._id,
+        viewer: user._id,
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   return !loading ? (
     <div className="product__details">
       {/* Header */}
       <div className="details__header">
-        <Link to={`/profile/${details?.By._id}`} className="header_left">
+        <Link
+          to={`/profile/${details?.By._id}`}
+          className="header_left"
+          onClick={handleClick}
+        >
           <p className="left__by">By - </p>
           <img className="profile__img" src={details?.By.profileImage} />
           <div className="by__info">

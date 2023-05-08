@@ -10,6 +10,7 @@ const sellProductRouter = require("./routes/SellProductRoute/SellProduct");
 const exchangeProductRouter = require("./routes/ExchangeProductRoute/ExchangeProduct");
 const conversationRouter = require("./routes/ChatRoute/Conversation");
 const messageRouter = require("./routes/ChatRoute/Message");
+const profileRouter = require("./routes/ProfileViewsRoute/ProfileViews");
 
 // dotEnv Configuration
 dotenv.config();
@@ -29,6 +30,7 @@ app.use("/serb/api/product", sellProductRouter);
 app.use("/serb/api/exchangeproduct", exchangeProductRouter);
 app.use("/serb/api/conversation", conversationRouter);
 app.use("/serb/api/message", messageRouter);
+app.use("/serb/api/profileviews", profileRouter);
 
 // Listening to a server
 app.listen(process.env.PORT || 8000, () => {

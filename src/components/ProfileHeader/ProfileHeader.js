@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./ProfileHeader.css";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import { loader } from "../../loader";
 import EditContainer from "./EditContainer";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { publicRequest } from "../../requestMethods";
 function ProfileHeader({ userDetails }) {
   const user = useSelector((state) => state.user);
   let sinceJoin = new Date(userDetails?.createdAt).toLocaleString("en-US", {
@@ -12,6 +14,18 @@ function ProfileHeader({ userDetails }) {
     year: "numeric",
     month: "long",
   });
+  const [views, setViews] = useState("");
+
+  // get views
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const fetched = await publicRequest.get(
+        `/profileviews/allviews/${userDetails._id}`
+      );
+      setViews(fetched.data);
+    };
+    fetchProducts();
+  }, [userDetails._id]);
 
   // user data
   const [fullName, setFullName] = useState(user.fullName);
@@ -40,6 +54,10 @@ function ProfileHeader({ userDetails }) {
       <div className="profile__info">
         <p className="info__name">{userDetails.fullName}</p>
         <p className="info__from">{sinceJoin}</p>
+        <div className="info__views">
+          <p>{views.length} </p>
+          <span> views</span>
+        </div>
       </div>
       <img
         className="level__img"
