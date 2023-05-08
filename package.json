@@ -14,7 +14,7 @@
     "axios": "^1.2.6",
     "chart.js": "^4.2.1",
     "currency-formatter": "^1.5.9",
-    "emoji-picker-react": "^4.4.8",
+    "emoji-picker-react": "^3.5.1",
     "firebase": "^9.11.0",
     "javascript-time-ago": "^2.5.9",
     "react": "^18.2.0",
