@@ -113,11 +113,15 @@
   font-weight: 500;
 }
 .profile__info .info__views {
-  color: rgb(104, 104, 104);
+  color: #fff;
   margin-top: 10px;
   font-weight: 500;
   display: flex;
   align-items: flex-end;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.726);
+  border-radius: 5px;
+  box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.3);
 }
 .info__views p {
   font-size: 20px;

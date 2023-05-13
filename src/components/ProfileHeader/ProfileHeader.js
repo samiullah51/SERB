@@ -56,7 +56,7 @@ function ProfileHeader({ userDetails }) {
         <p className="info__from">{sinceJoin}</p>
         <div className="info__views">
           <p>{views.length} </p>
-          <span> views</span>
+          <VisibilityOutlinedIcon />
         </div>
       </div>
       <img
