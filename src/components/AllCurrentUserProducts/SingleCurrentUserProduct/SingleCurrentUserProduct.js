@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SingleCurrentUserProduct.css";
 import currencyFormatter from "currency-formatter";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -8,7 +8,17 @@ import { Link } from "react-router-dom";
 
 function SingleCurrentUserProduct({ product, mode }) {
   const [modal, setModal] = useState(false);
-
+  const [productViews, setProductViews] = useState([]);
+  // fetch product views
+  useEffect(() => {
+    const fetchVeiws = async () => {
+      const fetched = await publicRequest.get(
+        `/productviews/allviews/${product._id}`
+      );
+      setProductViews(fetched.data);
+    };
+    fetchVeiws();
+  }, []);
   // since added product
   let productDate = new Date(product?.createdAt).toLocaleString("en-US", {
     day: "numeric",
@@ -65,7 +75,7 @@ function SingleCurrentUserProduct({ product, mode }) {
     <div className="single__current__user__product">
       <img src={product.photos[0]} />
       <p className="title">{product.title}</p>
-      <div className="titleviews">Views 120</div>
+      <div className="titleviews">Views {productViews.length}</div>
       {product.condition && <p className="title">{product.condition}</p>}
       <p className="price">
         {currencyFormatter.format(product.price, { code: "" })}

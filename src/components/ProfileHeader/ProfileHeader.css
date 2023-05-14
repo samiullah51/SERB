@@ -121,9 +121,10 @@
   background-color: rgba(0, 0, 0, 0.726);
   border-radius: 5px;
   box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.3);
+  padding: 5px;
 }
 .info__views p {
-  font-size: 20px;
+font-size: 16px;
   margin-left: 5px;
   margin-right: 2px;
 }

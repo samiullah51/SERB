@@ -18,12 +18,23 @@ function ExchangeProduct({ product }) {
     };
     fetchUser();
   }, [product]);
-
+  //   // handle click views
+  const handleViewsClick = async (id) => {
+    try {
+      const addView = await publicRequest.post(`/productviews/add`, {
+        productId: id,
+        viewer: user._id,
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   return (
     user._id !== product.userId && (
       <Link
         to={`/exchangewithproductdetails/${product._id}`}
         className="exchange__product__page"
+        onClick={() => handleViewsClick(product._id)}
       >
         <img src={product.photos[0]} />
         <p className="product__title">{product.title}</p>
