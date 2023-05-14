@@ -110,10 +110,16 @@ router.get("/sell/all/:userId", async (req, res) => {
       userId: req.params.userId,
       status: "available",
     }).sort({ createdAt: -1 });
+    // fetch available products
+    const pendingProducts = await Product.find({
+      userId: req.params.userId,
+      status: "pending",
+    }).sort({ createdAt: -1 });
     res.status(200).json({
       allProducts: allProducts,
       soldProducts: soldProducts,
       availableProducts: availableProducts,
+      pendingProducts: pendingProducts,
     });
   } catch (err) {
     res.status(500).json(err.message);

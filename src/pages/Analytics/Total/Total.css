@@ -6,3 +6,10 @@
     width: 100%;
     min-height: 90vh;
 }
+.total .loader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 80%;
+}

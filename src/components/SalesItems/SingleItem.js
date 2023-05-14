@@ -1,24 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SalesItems.css";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
-function SingleItem() {
+import { publicRequest, userRequest } from "../../requestMethods";
+import { Link } from "react-router-dom";
+function SingleItem({ product }) {
+  // views
+  const [views, setViews] = useState("");
+
+  // fetch views
+  useEffect(() => {
+    const fetchViews = async () => {
+      const fetchedVeiws = await publicRequest.get(
+        `/productviews/allviews/${product._id}`
+      );
+      setViews(fetchedVeiws.data);
+    };
+    fetchViews();
+  }, []);
+
+  // since added product
+  let productDate = new Date(product?.createdAt).toLocaleString("en-US", {
+    day: "numeric",
+    year: "numeric",
+    month: "long",
+  });
+  // handle delete
+  const handleDelete = async (id) => {
+    const confirmation = window.confirm(
+      "This product will be deleted parmanently."
+    );
+    if (confirmation) {
+      try {
+        const products = await userRequest.delete(`/product/sell/delete/${id}`);
+        alert("Product Deleted Successfully!!!");
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    }
+  };
   return (
     <div className="single__item">
-      <img src="https://th.bing.com/th/id/OIP.8wc5wALWBwLSvLkUos-hAQHaJ4?pid=ImgDet&rs=1" />
-      <p className="title">Best Glass</p>
+      <img src={product.photos[0]} />
+      <p className="title">{product.title}</p>
       <div className="seen">
         <RemoveRedEyeOutlinedIcon />
-        <p>120</p>
+        <p>{views.length}</p>
       </div>
-      <p className="price">12000</p>
-      <p className="condition">Used</p>
-      <p className="status">Available</p>
-      <p className="createdAt">09-Oct-2022</p>
+      <p className="price">{product.price}</p>
+      <p className="condition">{product.condition}</p>
+
+      <p className="status">{product.status}</p>
+      <p className="createdAt" style={{ fontSize: "13px" }}>
+        {productDate}
+      </p>
       <div className="actions">
-        <DeleteOutlineIcon />
-        <EditIcon />
+        <DeleteOutlineIcon onClick={() => handleDelete(product._id)} />
+        <Link to={`/editproduct/${product._id}`}>
+          <EditIcon />
+        </Link>
       </div>
     </div>
   );
