@@ -13,6 +13,7 @@ function ProductDetails({ mode, chatBtn, id }) {
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
+  const [productViews, setProductViews] = useState([]);
 
   // fetch product Details
   useEffect(() => {
@@ -24,6 +25,17 @@ function ProductDetails({ mode, chatBtn, id }) {
     };
     fetchData();
   }, [id]);
+
+  // fetch product views in details page
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetched = await publicRequest.get(`/productviews/allviews/${id}`);
+      setProductViews(fetched.data);
+    };
+    fetchData();
+  }, [id]);
+
   // time format
   let sinceJoin = new Date(details?.By.createdAt).toLocaleString("en-US", {
     day: "numeric",
@@ -68,7 +80,10 @@ function ProductDetails({ mode, chatBtn, id }) {
       </div>
       {/* Body */}
       <div className="details__body">
-        <p className="product__title">{details?.details.title}</p>
+        <div className="product__title">
+          <p>{details?.details.title}</p>
+          <div className="titleviews">Views {productViews.length}</div>
+        </div>
         <p className="product__desc">{details?.details.description}</p>
         {mode === "exchange" ? (
           <p className="product__price">{details?.details.condition}</p>

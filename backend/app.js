@@ -32,7 +32,7 @@ app.use("/serb/api/exchangeproduct", exchangeProductRouter);
 app.use("/serb/api/conversation", conversationRouter);
 app.use("/serb/api/message", messageRouter);
 app.use("/serb/api/profileviews", profileRouter);
-app.use("/serb/api/productviews", profileRouter);
+app.use("/serb/api/productviews", productViewsRouter);
 
 // Listening to a server
 app.listen(process.env.PORT || 8000, () => {

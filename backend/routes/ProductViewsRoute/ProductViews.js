@@ -13,8 +13,8 @@ router.post("/add", async (req, res) => {
   const newViewer = new ProductViews(req.body);
   //   check exist
   try {
-    const check = await ProfileViews.findOne({
-      productId: req.body.userId,
+    const check = await ProductViews.findOne({
+      productId: req.body.productId,
       viewer: req.body.viewer,
     });
     if (check) {
@@ -28,10 +28,20 @@ router.post("/add", async (req, res) => {
   }
 });
 
+// Get all the viewers of all products
+router.get("/allviews/", async (req, res) => {
+  try {
+    const allViews = await ProductViews.find();
+    allViews && res.status(200).json(allViews);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 // Get all the viewers of the specific user
 router.get("/allviews/:productId", async (req, res) => {
   try {
-    const allViews = await ProfileViews.find({
+    const allViews = await ProductViews.find({
       productId: req.params.productId,
     });
     allViews && res.status(200).json(allViews);
