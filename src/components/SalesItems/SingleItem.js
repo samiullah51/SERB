@@ -13,7 +13,7 @@ function SingleItem({ product }) {
   useEffect(() => {
     const fetchViews = async () => {
       const fetchedVeiws = await publicRequest.get(
-        `/productviews/allviews/${product._id}`
+        `/productviews/allviews/find/${product._id}`
       );
       setViews(fetchedVeiws.data);
     };

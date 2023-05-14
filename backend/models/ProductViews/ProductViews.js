@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const ProductViews = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+    },
     productId: {
       type: String,
     },

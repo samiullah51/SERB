@@ -12,16 +12,17 @@ function RecentProduct({ product }) {
   useEffect(() => {
     const fetchVeiws = async () => {
       const fetched = await publicRequest.get(
-        `/productviews/allviews/${product._id}`
+        `/productviews/allviews/find/${product._id}`
       );
       setProductViews(fetched.data);
     };
     fetchVeiws();
   }, []);
   // handle click views
-  const handleViewsClick = async (id) => {
+  const handleViewsClick = async (id, userid) => {
     try {
       const addView = await publicRequest.post(`/productviews/add`, {
+        userId: userid,
         productId: id,
         viewer: user._id,
       });
@@ -32,7 +33,7 @@ function RecentProduct({ product }) {
   return (
     <Link
       to={`/product/${product._id}`}
-      onClick={() => handleViewsClick(product._id)}
+      onClick={() => handleViewsClick(product._id, product.userId)}
     >
       <div className="recent__product">
         <img src={product.photos[0]} />

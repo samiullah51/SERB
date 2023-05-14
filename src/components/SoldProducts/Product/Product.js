@@ -8,9 +8,10 @@ import { publicRequest } from "../../../requestMethods";
 function SoldProduct({ product }) {
   const user = useSelector((state) => state.user);
   //   // handle click views
-  const handleViewsClick = async (id) => {
+  const handleViewsClick = async (id, userid) => {
     try {
       const addView = await publicRequest.post(`/productviews/add`, {
+        userId: userid,
         productId: id,
         viewer: user._id,
       });
@@ -23,7 +24,7 @@ function SoldProduct({ product }) {
     <Link
       to={`/product/${product._id}`}
       className="sold__product"
-      onClick={() => handleViewsClick(product._id)}
+      onClick={() => handleViewsClick(product._id, product.userId)}
     >
       <img src={product.photos[0]} />
       <div>

@@ -14,6 +14,7 @@ router.post("/add", async (req, res) => {
   //   check exist
   try {
     const check = await ProductViews.findOne({
+      userId: req.body.userId,
       productId: req.body.productId,
       viewer: req.body.viewer,
     });
@@ -28,10 +29,10 @@ router.post("/add", async (req, res) => {
   }
 });
 
-// Get all the viewers of all products
-router.get("/allviews/", async (req, res) => {
+// // Get all the viewers of all products
+router.get("/allviews/:userId", async (req, res) => {
   try {
-    const allViews = await ProductViews.find();
+    const allViews = await ProductViews.find({ userId: req.params.userId });
     allViews && res.status(200).json(allViews);
   } catch (err) {
     res.status(500).json(err.message);
@@ -39,7 +40,7 @@ router.get("/allviews/", async (req, res) => {
 });
 
 // Get all the viewers of the specific user
-router.get("/allviews/:productId", async (req, res) => {
+router.get("/allviews/find/:productId", async (req, res) => {
   try {
     const allViews = await ProductViews.find({
       productId: req.params.productId,
