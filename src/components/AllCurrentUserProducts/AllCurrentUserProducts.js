@@ -44,7 +44,7 @@ function AllCurrentUserProducts({ mode }) {
     getProducts();
   }, [exchangeProducts]);
 
-  return products.length === 0 ? (
+  return products?.length === 0 ? (
     <h2 style={{ textAlign: "center", color: "#d4d4d4" }}>No Product Yet</h2>
   ) : (
     <div className="all__current__user__products">

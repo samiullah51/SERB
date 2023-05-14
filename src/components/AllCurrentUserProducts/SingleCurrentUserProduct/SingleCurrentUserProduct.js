@@ -75,7 +75,7 @@ function SingleCurrentUserProduct({ product, mode }) {
     <div className="single__current__user__product">
       <img src={product.photos[0]} />
       <p className="title">{product.title}</p>
-      <div className="titleviews">Views {productViews.length}</div>
+      <div className="titleviews">Views {productViews?.length}</div>
       {product.condition && <p className="title">{product.condition}</p>}
       <p className="price">
         {currencyFormatter.format(product.price, { code: "" })}

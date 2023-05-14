@@ -27,6 +27,60 @@ router.get("/sell/all", async (req, res) => {
     res.status(500).json(err.message);
   }
 });
+
+// Get all products of specific user
+
+// router.get("/sell/all/:userId", async (req, res) => {
+//   try {
+//     const allProducts = await Product.find({ userId: req.params.userId }).sort({
+//       createdAt: -1,
+//     });
+//     res.status(200).json(allProducts);
+//   } catch (err) {
+//     res.status(500).json(err.message);
+//   }
+// });
+// Get all Avaialable products
+
+router.get("/sell/available/:userId", async (req, res) => {
+  try {
+    const allProducts = await Product.find({
+      userId: req.params.userId,
+      status: "available",
+    }).sort({ createdAt: -1 });
+    res.status(200).json(allProducts);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// Get all sold products
+
+router.get("/sell/sold/:userId", async (req, res) => {
+  try {
+    const allProducts = await Product.find({
+      userId: req.params.userId,
+      status: "sold",
+    }).sort({ createdAt: -1 });
+    res.status(200).json(allProducts);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// Get all pending products
+
+router.get("/sell/pending/:userId", async (req, res) => {
+  try {
+    const allProducts = await Product.find({
+      userId: req.params.userId,
+      status: "pending",
+    }).sort({ createdAt: -1 });
+    res.status(200).json(allProducts);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
 // Get Recent Products
 router.get("/recentproducts", async (req, res) => {
   try {
