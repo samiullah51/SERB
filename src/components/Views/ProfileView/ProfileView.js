@@ -44,7 +44,7 @@ function ProfileView() {
         style={{ backgroundColor: "#20365A" }}
         to="/views/totalproductviews"
       >
-        <p>Total Product Views</p>
+        <p>Total Products Views</p>
         <h1>{productsViews.length}</h1>
       </Link>
     </div>

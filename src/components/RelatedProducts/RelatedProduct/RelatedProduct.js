@@ -13,7 +13,7 @@ function RecentProduct({ product }) {
   useEffect(() => {
     const fetchVeiws = async () => {
       const fetched = await publicRequest.get(
-        `/productviews/allviews/${product._id}`
+        `/productviews/allviews/find/${product._id}`
       );
       setProductViews(fetched.data);
     };

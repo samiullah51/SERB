@@ -30,7 +30,9 @@ function ProductDetails({ mode, chatBtn, id }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetched = await publicRequest.get(`/productviews/allviews/${id}`);
+      const fetched = await publicRequest.get(
+        `/productviews/allviews/find/${id}`
+      );
       setProductViews(fetched.data);
     };
     fetchData();

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./../Views.css";
 import Navbar from "../../../components/Navbar/Navbar";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import ProfileStats from "./ProfileStats";
-import ProfileViews from "../../../components/Views/ProfileViews";
 import ProfileVieww from "../../../components/Views/ProfileView/ProfileView";
+import ProfileStats from "../../../components/Views/ProfileStats";
+
 function ProfileView() {
   return (
     <>
@@ -22,7 +22,7 @@ function ProfileView() {
             padding: "20px",
           }}
         >
-          <ProfileVieww /> 
+          <ProfileVieww />
           <ProfileStats />
         </div>
       </div>
