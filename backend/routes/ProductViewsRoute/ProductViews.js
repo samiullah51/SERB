@@ -50,5 +50,30 @@ router.get("/allviews/find/:productId", async (req, res) => {
     res.status(500).json(err.message);
   }
 });
+// Get profile Stats
+router.get("/stats/:userId", async (req, res) => {
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0); // Set time to the start of the day
 
+  try {
+    const data = await ProductViews.aggregate([
+      {
+        $match: {
+          userId: req.params.userId, // Convert the user ID string to ObjectId
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
+          count: { $sum: 1 },
+        },
+      },
+    ]).sort({ createdAt: -1 });
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
 module.exports = router;

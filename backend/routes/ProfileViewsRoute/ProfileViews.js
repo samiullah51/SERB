@@ -37,38 +37,7 @@ router.get("/allviews/:userId", async (req, res) => {
   }
 });
 
-// // Get User Stats
-// router.get("/stats", async (req, res) => {
-//   const date = new Date();
-//   const lastYear = new Date(date.setDate(date.getDay() - 1));
-
-//   try {
-//     const startOfDay = new Date();
-//     startOfDay.setHours(0, 0, 0, 0); // Set time to the start of the day
-
-//     const pipeline = [
-//       {
-//         $match: {
-//           createdAt: { $gte: startOfDay },
-//         },
-//       },
-//       {
-//         $group: {
-//           _id: {
-//             $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
-//           },
-//           count: { $sum: 1 },
-//         },
-//       },
-//     ];
-//     const result = await ProfileViews.collection.aggregate(pipeline).toArray();
-//     res.status(200).json(result);
-//   } catch (err) {
-//     res.status(500).json(err.message);
-//   }
-// });
-
-// Get User Stats
+// Get profile Stats
 router.get("/stats/:userId", async (req, res) => {
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0); // Set time to the start of the day
@@ -88,7 +57,7 @@ router.get("/stats/:userId", async (req, res) => {
           count: { $sum: 1 },
         },
       },
-    ]);
+    ]).sort({ createdAt: -1 });
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json(err.message);
