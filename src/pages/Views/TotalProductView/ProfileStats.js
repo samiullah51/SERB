@@ -42,7 +42,7 @@ function ProfileStats() {
   }, []);
   return (
     <div style={{ width: "80%", height: 400 }} className="saleStats">
-      <h1>Total Product Views {productViews.length}</h1>
+      <h1>Total Products Views {productViews.length}</h1>
       <ResponsiveContainer>
         <AreaChart
           data={statsData}
