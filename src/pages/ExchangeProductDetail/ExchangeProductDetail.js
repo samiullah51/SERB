@@ -5,15 +5,21 @@ import Gallary from "../../components/Gallary/Gallary";
 import Navbar from "../../components/Navbar/Navbar";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
 import "./ExchangeProductDetail.css";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import ExchangeProductDetails from "../../components/ProductDetails/ExchangeDetails";
 import ExchangeGallary from "../../components/Gallary/ExchangeGallary";
-import { userRequest } from "../../requestMethods";
+import { publicRequest, userRequest } from "../../requestMethods";
 import { loader } from "../../loader";
+import { Link } from "react-router-dom";
 function ExchangeProductDetail({ id }) {
   const { productId } = useParams();
   const [exchangeProducts, setExchangeProducts] = useState([]);
   const [category, setCategory] = useState("");
+  const [searchProduct, setSearchProduct] = useState("");
+
+  const search = useLocation().search;
+  const product = new URLSearchParams(search).get("product");
+  const [searchProducts, setSearchProducts] = useState([]);
   // loading
   const [loading, setLoading] = useState(false);
   // get product category
@@ -39,6 +45,26 @@ function ExchangeProductDetail({ id }) {
     };
     fetch();
   }, [category]);
+
+  //   loading
+  // fetch the search product
+  useEffect(() => {
+    const searchProducts = async () => {
+      setLoading(true);
+      try {
+        const searched = await publicRequest.get(
+          `/product/exchange/find?search=${product}`
+        );
+        setSearchProducts(searched.data);
+        setLoading(false);
+        console.log(searched.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    searchProducts();
+  }, [product]);
+
   return (
     <>
       <Navbar />
@@ -53,8 +79,15 @@ function ExchangeProductDetail({ id }) {
           <div className="right">
             <p className="right__title">Exchange Your Product With</p>
             <div className="right__input">
-              <input type="text" placeholder="Search here..." />
-              <Search />
+              <input
+                type="text"
+                value={searchProduct}
+                onChange={(e) => setSearchProduct(e.target.value)}
+                placeholder="Search here..."
+              />
+              <Link to={`/exchangeproductdetails?product=${searchProduct}`}>
+                <Search />
+              </Link>
             </div>
             {/* Exchange Product */}
 

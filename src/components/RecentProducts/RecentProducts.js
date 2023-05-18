@@ -14,8 +14,8 @@ function RecentProducts({ title, items }) {
       const fetched = await publicRequest.get("/product/recentproducts");
       setProducts(fetched.data);
     };
-    fetchProducts();
     setLoading(false);
+    fetchProducts();
   }, [products]);
 
   return !loading ? (

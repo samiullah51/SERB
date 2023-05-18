@@ -30,11 +30,13 @@ function RecentProduct({ product }) {
       console.log(err.message);
     }
   };
+  
   return (
     <Link
       to={`/product/${product._id}`}
       onClick={() => handleViewsClick(product._id, product.userId)}
     >
+  
       <div className="recent__product">
         <img src={product.photos[0]} />
 
