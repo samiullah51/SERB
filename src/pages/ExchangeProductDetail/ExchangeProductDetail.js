@@ -5,21 +5,17 @@ import Gallary from "../../components/Gallary/Gallary";
 import Navbar from "../../components/Navbar/Navbar";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
 import "./ExchangeProductDetail.css";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import ExchangeProductDetails from "../../components/ProductDetails/ExchangeDetails";
 import ExchangeGallary from "../../components/Gallary/ExchangeGallary";
-import { publicRequest, userRequest } from "../../requestMethods";
+import { userRequest } from "../../requestMethods";
 import { loader } from "../../loader";
-import { Link } from "react-router-dom";
 function ExchangeProductDetail({ id }) {
   const { productId } = useParams();
   const [exchangeProducts, setExchangeProducts] = useState([]);
-  const [category, setCategory] = useState("");
-  const [searchProduct, setSearchProduct] = useState("");
-
-  const search = useLocation().search;
-  const product = new URLSearchParams(search).get("product");
   const [searchProducts, setSearchProducts] = useState([]);
+  const [category, setCategory] = useState("");
+  const [search, setSearch] = useState("");
   // loading
   const [loading, setLoading] = useState(false);
   // get product category
@@ -46,24 +42,13 @@ function ExchangeProductDetail({ id }) {
     fetch();
   }, [category]);
 
-  //   loading
-  // fetch the search product
-  useEffect(() => {
-    const searchProducts = async () => {
-      setLoading(true);
-      try {
-        const searched = await publicRequest.get(
-          `/product/exchange/find?search=${product}`
-        );
-        setSearchProducts(searched.data);
-        setLoading(false);
-        console.log(searched.data);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    searchProducts();
-  }, [product]);
+  const handleFilter = (text) => {
+    setSearch(text);
+    const searched = exchangeProducts.filter((item) =>
+      item.title.includes(text)
+    );
+    setSearchProducts(searched);
+  };
 
   return (
     <>
@@ -81,24 +66,22 @@ function ExchangeProductDetail({ id }) {
             <div className="right__input">
               <input
                 type="text"
-                value={searchProduct}
-                onChange={(e) => setSearchProduct(e.target.value)}
                 placeholder="Search here..."
+                value={search}
+                onChange={(e) => handleFilter(e.target.value)}
               />
-              <Link to={`/exchangeproductdetails?product=${searchProduct}`}>
-                <Search />
-              </Link>
+              <Search />
             </div>
             {/* Exchange Product */}
 
             <div className="exchange__products">
-              {exchangeProducts.length - 1 !== 0 ? (
-                exchangeProducts.map((product) => (
-                  <ExchangeProduct key={product._id} product={product} />
-                ))
-              ) : (
-                <p style={{ margin: "20px" }}>Loading...</p>
-              )}
+              {searchProducts.length < 1
+                ? exchangeProducts.map((product) => (
+                    <ExchangeProduct key={product._id} product={product} />
+                  ))
+                : searchProducts.map((product) => (
+                    <ExchangeProduct key={product._id} product={product} />
+                  ))}
             </div>
           </div>
         ) : (

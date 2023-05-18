@@ -149,7 +149,7 @@ router.delete("/exchange/delete/:productId", verifyToken, async (req, res) => {
 });
 
 // Searching products
-router.get("/exchange/find", async (req, res) => {
+router.get("/exchange/:productId/find", async (req, res) => {
   try {
     const searchProducts = await ExchangeProduct.find({
       $or: [
