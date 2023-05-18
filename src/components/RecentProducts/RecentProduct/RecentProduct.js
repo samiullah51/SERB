@@ -8,6 +8,11 @@ import { useSelector } from "react-redux";
 function RecentProduct({ product }) {
   const [productViews, setProductViews] = useState([]);
   const user = useSelector((state) => state.user);
+
+  const check = () => {
+    console.log("checking");
+  };
+
   // fetch product views
   useEffect(() => {
     const fetchVeiws = async () => {
@@ -30,13 +35,14 @@ function RecentProduct({ product }) {
       console.log(err.message);
     }
   };
-  
+  useEffect(() => {
+    check();
+  }, []);
   return (
     <Link
       to={`/product/${product._id}`}
       onClick={() => handleViewsClick(product._id, product.userId)}
     >
-  
       <div className="recent__product">
         <img src={product.photos[0]} />
 

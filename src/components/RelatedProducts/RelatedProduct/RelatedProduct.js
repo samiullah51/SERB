@@ -19,7 +19,6 @@ function RecentProduct({ product }) {
     };
     fetchVeiws();
   }, []);
-  console.log(product);
   // handle click views
   const handleViewsClick = async (id, userid) => {
     try {

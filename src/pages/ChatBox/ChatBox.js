@@ -162,10 +162,11 @@ function ChatBox() {
             <h3>Inbox</h3>
           </div>
           {/* Searchbox */}
-          <div className="search__chat">
+          {/* <div className="search__chat">
             <input type="text" placeholder="Search here..." />
             <SearchIcon />
-          </div>
+          </div> */}
+          <h2>All Chats</h2>
 
           {/* Chats*/}
 

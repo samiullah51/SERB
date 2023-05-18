@@ -6,15 +6,18 @@ import { publicRequest } from "../../requestMethods";
 import * as timeago from "timeago.js";
 import { SignalCellularAltSharp } from "@mui/icons-material";
 import { loader } from "../../loader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ADD_TO_FAV, REMOVE_FROM_FAV } from "../../redux/User/userTypes";
 // Create formatter (English).
 function ProductDetails({ mode, chatBtn, id }) {
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
   const [productViews, setProductViews] = useState([]);
-
+  const dispatch = useDispatch();
+  const [isFav, setIsFav] = useState(false);
+  const fav = useSelector((state) => state.fav);
   // fetch product Details
   useEffect(() => {
     setLoading(true);
@@ -55,6 +58,29 @@ function ProductDetails({ mode, chatBtn, id }) {
       console.log(err.message);
     }
   };
+  // handle favortie
+  const handleFav = () => {
+    const check = fav.find((item) => item.details._id === details.details._id);
+
+    // check if already exist in favortie
+
+    if (!check) {
+      dispatch({
+        type: ADD_TO_FAV,
+        payload: { details: details.details, productViews },
+      });
+      setIsFav(true);
+    } else {
+      console.log(details.details._id);
+      dispatch({
+        type: REMOVE_FROM_FAV,
+        _id: details.details._id,
+      });
+      setIsFav(false);
+    }
+  };
+
+  const removeFav = () => {};
   return !loading ? (
     <div className="product__details">
       {/* Header */}
@@ -113,7 +139,10 @@ function ProductDetails({ mode, chatBtn, id }) {
         ) : (
           <div className="actions">
             <button className="buy__btn">Buy Now</button>
-            <button className="favorite__btn">Add to favorite</button>
+
+            <button className="favorite__btn" onClick={handleFav}>
+              {!isFav ? "Add To Favorite" : "Remove From Favorite"}
+            </button>
           </div>
         )
       ) : (

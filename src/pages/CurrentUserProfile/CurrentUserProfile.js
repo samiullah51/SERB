@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AllCurrentUserProducts from "../../components/AllCurrentUserProducts/AllCurrentUserProducts";
@@ -9,8 +9,12 @@ import Rating from "../../components/Rating/Rating";
 import Reviews from "../../components/Reviews/Reviews";
 import SoldProducts from "../../components/SoldProducts/SoldProducts";
 import "./CurrentUserProfile.css";
+import Favorite from "../../components/Favorite/Favorite";
 function CurrentUserProfile() {
   const user = useSelector((state) => state.user);
+  const [active, setActive] = useState(true);
+  // hanlde active
+
   return (
     <>
       <Navbar />
@@ -36,8 +40,12 @@ function CurrentUserProfile() {
         <div className="profile__right">
           <div className="right__header">
             <div className="header__left">
-              <p className="all">All</p>
-              <p>Favorite</p>
+              <p className={active && "all"} onClick={() => setActive(true)}>
+                All
+              </p>
+              <p className={!active && "all"} onClick={() => setActive(false)}>
+                Favorite
+              </p>
             </div>
             <div className="header__right">
               <Link to="/addsellproduct" className="new__btn">
@@ -46,7 +54,7 @@ function CurrentUserProfile() {
             </div>
           </div>
           {/* All Products of Current User */}
-          <AllCurrentUserProducts mode="sell" />
+          {active ? <AllCurrentUserProducts mode="sell" /> : <Favorite />}
         </div>
         {/* Footer */}
       </div>

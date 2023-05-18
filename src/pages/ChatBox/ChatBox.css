@@ -264,3 +264,8 @@ border-radius: 50%;
     cursor: pointer;
     color: #ccc;
 }
+.chatbox__left h2{
+    color: var(--primary-color);
+    font-weight: 400;
+    margin: 10px;
+}
