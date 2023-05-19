@@ -18,6 +18,7 @@ function ProductDetails({ mode, chatBtn, id }) {
   const dispatch = useDispatch();
   const [isFav, setIsFav] = useState(false);
   const fav = useSelector((state) => state.fav);
+  const [btnMsg, setBtnMsg] = useState("Add To Favorite");
   // fetch product Details
   useEffect(() => {
     setLoading(true);
@@ -58,6 +59,9 @@ function ProductDetails({ mode, chatBtn, id }) {
       console.log(err.message);
     }
   };
+  useEffect(() => {
+    setBtnMsg("Add To Favorite");
+  }, [id]);
   // handle favortie
   const handleFav = () => {
     const check = fav.find((item) => item.details._id === details.details._id);
@@ -69,18 +73,12 @@ function ProductDetails({ mode, chatBtn, id }) {
         type: ADD_TO_FAV,
         payload: { details: details.details, productViews },
       });
-      setIsFav(true);
+      setBtnMsg("Added To Your Favorite");
     } else {
-      console.log(details.details._id);
-      dispatch({
-        type: REMOVE_FROM_FAV,
-        _id: details.details._id,
-      });
-      setIsFav(false);
+      setBtnMsg("Already Exists in Favorite");
     }
   };
 
-  const removeFav = () => {};
   return !loading ? (
     <div className="product__details">
       {/* Header */}
@@ -141,7 +139,7 @@ function ProductDetails({ mode, chatBtn, id }) {
             <button className="buy__btn">Buy Now</button>
 
             <button className="favorite__btn" onClick={handleFav}>
-              {!isFav ? "Add To Favorite" : "Remove From Favorite"}
+              {btnMsg}
             </button>
           </div>
         )
