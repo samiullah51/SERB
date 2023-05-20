@@ -9,6 +9,7 @@ import { loader } from "../../loader";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ADD_TO_FAV, REMOVE_FROM_FAV } from "../../redux/User/userTypes";
+import PaymentCard from "../../components/PaymentCard/PaymentCard";
 // Create formatter (English).
 function ProductDetails({ mode, chatBtn, id }) {
   const [details, setDetails] = useState();
@@ -81,6 +82,9 @@ function ProductDetails({ mode, chatBtn, id }) {
 
   return !loading ? (
     <div className="product__details">
+      <div className="payment__wrapper">
+        <PaymentCard />
+      </div>
       {/* Header */}
       <div className="details__header">
         <Link

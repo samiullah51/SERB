@@ -1,20 +1,32 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import currencyFormatter from "currency-formatter";
 import { Link } from "react-router-dom";
 import * as timeago from "timeago.js";
 import "./Favorite.css";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { REMOVE_FROM_FAV } from "../../redux/User/userTypes";
 function Favorite() {
   const fav = useSelector((state) => state.fav);
+  const dispatch = useDispatch();
+  const handleRemove = (id) => {
+    dispatch({ type: REMOVE_FROM_FAV, _id: id });
+  };
 
   return (
     <div className="favorite">
       {fav.length !== 0 ? (
         fav.map((product) => (
           <div className="recent__product">
+            <div
+              className="remove__fav"
+              onClick={() => handleRemove(product.details._id)}
+            >
+              <DeleteOutlineIcon />
+            </div>
             <img src={product?.details.photos[0]} />
 
-            <div>
+            <Link to={`/product/${product.details._id}`}>
               <div className="title">
                 <p>
                   {" "}
@@ -30,7 +42,7 @@ function Favorite() {
                 {currencyFormatter.format(product.details.price, { code: "" })}
                 <span>(PKR)</span>
               </p>
-            </div>
+            </Link>
             <div className="product__from">
               <p>
                 {product.details.location.length > 20

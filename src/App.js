@@ -31,6 +31,7 @@ import AwardDetails from "./pages/Awards/AwardDetails/AwardDetails";
 import Eligibility from "./pages/Awards/AwardDetails/Eligibility";
 import ProfileView from "./pages/Views/ProfileView/ProfileView";
 import TotalProductView from "./pages/Views/TotalProductView/TotalProductView";
+import PaymentCard from "./components/PaymentCard/PaymentCard";
 
 function App() {
   return (

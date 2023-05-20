@@ -39,7 +39,9 @@ export const userReducer = (state = initialState, action) => {
         fav: [...state.fav, action.payload],
       };
     case REMOVE_FROM_FAV:
-      const index = state.fav.findIndex((item) => item._id === action.id);
+      const index = state.fav.findIndex(
+        (item) => item.details._id === action._id
+      );
       let newFav = [...state.fav];
       if (index >= 0) {
         newFav.splice(index, 1);

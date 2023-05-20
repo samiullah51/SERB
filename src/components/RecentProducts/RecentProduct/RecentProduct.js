@@ -9,10 +9,6 @@ function RecentProduct({ product }) {
   const [productViews, setProductViews] = useState([]);
   const user = useSelector((state) => state.user);
 
-  const check = () => {
-    console.log("checking");
-  };
-
   // fetch product views
   useEffect(() => {
     const fetchVeiws = async () => {
@@ -35,9 +31,7 @@ function RecentProduct({ product }) {
       console.log(err.message);
     }
   };
-  useEffect(() => {
-    check();
-  }, []);
+
   return (
     <Link
       to={`/product/${product._id}`}
