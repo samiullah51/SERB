@@ -20,6 +20,7 @@ function ProductDetails({ mode, chatBtn, id }) {
   const [isFav, setIsFav] = useState(false);
   const fav = useSelector((state) => state.fav);
   const [btnMsg, setBtnMsg] = useState("Add To Favorite");
+  const [show, setShow] = useState(false);
   // fetch product Details
   useEffect(() => {
     setLoading(true);
@@ -82,9 +83,11 @@ function ProductDetails({ mode, chatBtn, id }) {
 
   return !loading ? (
     <div className="product__details">
-      <div className="payment__wrapper">
-        <PaymentCard />
-      </div>
+      {show && (
+        <div className="payment__wrapper">
+          <PaymentCard setShow={setShow} />
+        </div>
+      )}
       {/* Header */}
       <div className="details__header">
         <Link
@@ -140,7 +143,9 @@ function ProductDetails({ mode, chatBtn, id }) {
           chatBtn && <button className="chat__btn">Chat Now</button>
         ) : (
           <div className="actions">
-            <button className="buy__btn">Buy Now</button>
+            <button className="buy__btn" onClick={() => setShow(true)}>
+              Buy Now
+            </button>
 
             <button className="favorite__btn" onClick={handleFav}>
               {btnMsg}
