@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./PaymentCard.css"; // Import your CSS file
-
+import { Link } from "react-router-dom";
+// import paid from "../../../public/images/paid.png";
 const PaymentCard = ({ setShow, product }) => {
   const [inputValue, setInputValue] = useState("");
+  const [isPaid, setIsPaid] = useState(false);
   const [cvv, setCvv] = useState("");
   const handleInputChange = (e) => {
     const enteredValue = e.target.value;
@@ -30,7 +32,7 @@ const PaymentCard = ({ setShow, product }) => {
     // Update the input value state
     setCvv(limitedValue);
   };
-  return (
+  return !isPaid ? (
     <div className="payment_card">
       <p className="paymentcard">Payment Card</p>
       <div className="amount">
@@ -74,8 +76,21 @@ const PaymentCard = ({ setShow, product }) => {
         <button className="cancel" onClick={() => setShow(false)}>
           Cancel
         </button>
-        <button className="pay">Pay Now</button>
+        <button className="pay" onClick={() => setIsPaid(true)}>
+          Pay Now
+        </button>
       </div>
+    </div>
+  ) : (
+    <div className="paid">
+      <h1>You have paid Successfully</h1>
+      <img src="../../images/paid.png" alt="" />
+      <Link>Check Transactions</Link>
+      <p>
+        Your payment is safe with SERB right now. You will recieve your product
+        soon.
+      </p>
+      <Link onClick={() => setShow(false)}>OK</Link>
     </div>
   );
 };
