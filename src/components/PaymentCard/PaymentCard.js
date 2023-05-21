@@ -5,6 +5,8 @@ const PaymentCard = ({ setShow }) => {
   return (
     <div className="payment_card">
       <div className="amount">
+        <p>Pay for</p>
+        <h1>Smart Watch</h1>
         <p>Amount</p>
         <h1>12,000</h1>
       </div>
