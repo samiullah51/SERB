@@ -23,6 +23,7 @@ function ProductDetails({ mode, chatBtn, id }) {
   const [show, setShow] = useState(false);
   // fetch product Details
   useEffect(() => {
+    setShow(false);
     setLoading(true);
     const fetchData = async () => {
       const fetched = await publicRequest.get(`/product/sell/details/` + id);
@@ -85,7 +86,7 @@ function ProductDetails({ mode, chatBtn, id }) {
     <div className="product__details">
       {show && (
         <div className="payment__wrapper">
-          <PaymentCard setShow={setShow} />
+          <PaymentCard setShow={setShow} product={details.details} />
         </div>
       )}
       {/* Header */}
