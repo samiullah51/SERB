@@ -32,6 +32,7 @@ import Eligibility from "./pages/Awards/AwardDetails/Eligibility";
 import ProfileView from "./pages/Views/ProfileView/ProfileView";
 import TotalProductView from "./pages/Views/TotalProductView/TotalProductView";
 import PaymentCard from "./components/PaymentCard/PaymentCard";
+import Transactions from "./pages/Transactions/Transactions";
 
 function App() {
   return (
@@ -84,6 +85,7 @@ function App() {
             element={<TotalProductView />}
           />
           <Route path="/revenue" element={<Revenue />} />
+          <Route path="/transactions" element={<Transactions />} />
         </Route>
 
         <Route path="/register" element={<Register />} />
