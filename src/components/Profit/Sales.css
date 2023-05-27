@@ -18,7 +18,7 @@
 .saleStats .chart{
     width: 400px;
 }
-.saleStats h1{
+.sales h1{
     color: var(--primary-color);
     margin: 10px 0;
     font-weight: 500;

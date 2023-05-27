@@ -1,22 +1,20 @@
 import React from "react";
-import "./Transactions.css";
+import "./Orders.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Sales from "../../components/Sales/Sales";
 import Profit from "../../components/Profit/Profit";
 import SingleTransaction from "./SingleTransaction/SingleTransaction";
 
-function Transactions() {
+function Orders() {
   return (
     <>
       <Navbar />
-      <div className="transactions">
-        {/* Sidebar */}
-        <Sidebar />
+      <div className="orders">
         {/* Sales */}
         <div className="transaction__container">
           <div className="transaction__header">
-            <h1>Transactions</h1>
+            <h1>Orders</h1>
           </div>
           {/* single Transaction */}
 
@@ -29,4 +27,4 @@ function Transactions() {
   );
 }
 
-export default Transactions;
+export default Orders;

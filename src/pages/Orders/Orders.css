@@ -1,5 +1,5 @@
-.transactions{
-    margin-top: 70px;
+.orders{
+    margin-top: -50px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -7,16 +7,22 @@
     min-height: 90vh;
 }
 .transaction__container{
-    flex-basis: 80%;
+    width: 100%;
 }
 .transaction__container .transaction__header{
     display: flex;
     align-items: center;
 }
 
-.transactions h1{
+.orders h1{
     color: var(--primary-color);
     margin: 10px 0;
     font-weight: 500;
 }
 
+
+.single__transaction__header p{
+    color: #fff;
+    font-weight: 400;
+
+}
