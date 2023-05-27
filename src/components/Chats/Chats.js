@@ -17,7 +17,7 @@ function Chats() {
       setChats(gotChats.data);
     };
     getChats();
-  }, []);
+  }, [chats]);
 
   return (
     <>

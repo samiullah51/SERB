@@ -85,12 +85,16 @@ const PaymentCard = ({ setShow, product }) => {
     <div className="paid">
       <h1>You have paid Successfully</h1>
       <img src="../../images/paid.png" alt="" />
-      <Link>Check Transactions</Link>
+      <Link style={{ color: "#fff", textDecoration: "underline" }}>
+        Check Transactions
+      </Link>
       <p>
         Your payment is safe with SERB right now. You will recieve your product
         soon.
       </p>
-      <Link onClick={() => setShow(false)}>OK</Link>
+      <Link className="okBtn" onClick={() => setShow(false)}>
+        OK
+      </Link>
     </div>
   );
 };
