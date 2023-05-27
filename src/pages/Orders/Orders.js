@@ -9,7 +9,6 @@ import SingleTransaction from "./SingleTransaction/SingleTransaction";
 function Orders() {
   return (
     <>
-      <Navbar />
       <div className="orders">
         {/* Sales */}
         <div className="transaction__container">

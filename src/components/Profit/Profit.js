@@ -7,6 +7,7 @@ function Profit() {
     <div className="sales">
       <ProfitStats />
       {/* orders */}
+      {/* <h1>Orders</h1> */}
       <Orders />
     </div>
   );
