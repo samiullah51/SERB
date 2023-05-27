@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 
 function BuyerModal({ setModal }) {
-  const status = "Confirmed";
   return (
     <div className="transaction__modal">
       <div className="close__modal" onClick={() => setModal(false)}>
@@ -10,9 +9,9 @@ function BuyerModal({ setModal }) {
       </div>
       {/* product Details */}
       <div className="transaction__details">
-        <img src="https://th.bing.com/th/id/OIP.SbFcUmrpAZixqahRxnvrrQHaHa?pid=ImgDet&rs=1" />
+        <img src="https://myportfolio-as-mern-stack.netlify.app/images/mypic3.jpg" />
         <div className="details__others">
-          <h1>Bicycle</h1>
+          <h1>Sami Samiullah</h1>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora
             quibusdam obcaecati autem odit, ratione quasi distinctio aliquid
@@ -20,19 +19,12 @@ function BuyerModal({ setModal }) {
             optio cum placeat esse. Delectus?
           </p>
           <h1>
-            12,000 <span> (PKR)</span>{" "}
+            Level <span> 1</span>{" "}
           </h1>
-          <div
-            className="status"
-            style={{
-              backgroundColor: status === "Pending" ? "#EE63AE" : "#4FDA86",
-            }}
-          >
-            {status}
-          </div>
+
           <div className="location">
-            <h1>Address: </h1>
-            <p>Pabbi Station, NSR</p>
+            <h1>Rating: </h1>
+            <p>5.4 Stars</p>
           </div>
         </div>
         <p className="closeBtn" onClick={() => setModal(false)}>

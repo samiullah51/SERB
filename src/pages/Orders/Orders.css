@@ -14,7 +14,7 @@
     align-items: center;
 }
 
-.orders h1{
+.orders .transaction__header h1{
     color: var(--primary-color);
     margin: 10px 0;
     font-weight: 500;

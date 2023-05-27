@@ -10,7 +10,7 @@ function SingleTransaction() {
   return (
     <div className="single__transaction">
       {modal && <TransactionModal setModal={setModal} />}
-      {buyerModal && <BuyerModal setModal={setModal} />}
+      {buyerModal && <BuyerModal setModal={setBuyerModal} />}
       <p>0x23dffs232443355</p>
       <p>33-Jan-2023</p>
       <p>12,000</p>
