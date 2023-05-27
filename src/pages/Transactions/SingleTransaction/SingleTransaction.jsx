@@ -1,17 +1,20 @@
 import React from "react";
 import "./SingleTransaction.css";
 import { useState } from "react";
+import TransactionModal from "../../../components/TransactionModal/TransactionModal";
 function SingleTransaction() {
   const [modal, setModal] = useState(false);
 
-  const status = "Confirmed";
+  const status = "Pending";
   return (
     <div className="single__transaction">
-      <div className="transaction">ff</div>
+      {modal && <TransactionModal setModal={setModal} />}
       <p>0x23dffs232443355</p>
       <p>33-Jan-2023</p>
       <p>12,000</p>
-      <p className="details__btn">Product Details</p>
+      <p className="details__btn" onClick={() => setModal(true)}>
+        Product Details
+      </p>
       <p
         className="transaction__status"
         style={{
