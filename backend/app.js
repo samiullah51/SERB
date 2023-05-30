@@ -12,6 +12,7 @@ const conversationRouter = require("./routes/ChatRoute/Conversation");
 const messageRouter = require("./routes/ChatRoute/Message");
 const profileRouter = require("./routes/ProfileViewsRoute/ProfileViews");
 const productViewsRouter = require("./routes/ProductViewsRoute/ProductViews");
+const transactionRouter = require("./routes/TransactionRoute/Transaction");
 
 // dotEnv Configuration
 dotenv.config();
@@ -33,6 +34,7 @@ app.use("/serb/api/conversation", conversationRouter);
 app.use("/serb/api/message", messageRouter);
 app.use("/serb/api/profileviews", profileRouter);
 app.use("/serb/api/productviews", productViewsRouter);
+app.use("/serb/api/transaction", transactionRouter);
 
 // Listening to a server
 app.listen(process.env.PORT || 8000, () => {
