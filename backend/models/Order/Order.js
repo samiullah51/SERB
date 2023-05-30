@@ -39,7 +39,7 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    buyerToName: {
+    buyerName: {
       type: String,
       required: true,
     },
@@ -47,11 +47,11 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    buyerToLevel: {
+    buyerLevel: {
       type: String,
       required: true,
     },
-    buyerToRating: {
+    buyerRating: {
       type: Number,
       required: true,
     },

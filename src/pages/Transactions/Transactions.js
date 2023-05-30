@@ -5,8 +5,25 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Sales from "../../components/Sales/Sales";
 import Profit from "../../components/Profit/Profit";
 import SingleTransaction from "./SingleTransaction/SingleTransaction";
+import { useState } from "react";
+import { useEffect } from "react";
+import { publicRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
 
 function Transactions() {
+  const [transactions, setTransactions] = useState([]);
+  const user = useSelector((state) => state.user);
+  // fetch all transactions
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      const allTransactions = await publicRequest.get(
+        `/transaction/all/${user._id}`
+      );
+      setTransactions(allTransactions.data);
+    };
+    fetchTransactions();
+  }, [transactions]);
+
   return (
     <>
       <Navbar />
@@ -21,8 +38,12 @@ function Transactions() {
           {/* single Transaction */}
 
           {/* single Transaction */}
-          <SingleTransaction />
-          <SingleTransaction />
+          {transactions.map((transaction) => (
+            <SingleTransaction
+              key={transaction._id}
+              transaction={transaction}
+            />
+          ))}
         </div>
       </div>
     </>

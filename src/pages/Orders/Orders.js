@@ -5,8 +5,22 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Sales from "../../components/Sales/Sales";
 import Profit from "../../components/Profit/Profit";
 import SingleTransaction from "./SingleTransaction/SingleTransaction";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { publicRequest } from "../../requestMethods";
 
 function Orders() {
+  const [orders, setOrders] = useState([]);
+  const user = useSelector((state) => state.user);
+  // fetch all transactions
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const allOrders = await publicRequest.get(`/order/all/${user._id}`);
+      setOrders(allOrders.data);
+    };
+    fetchOrders();
+  }, [orders]);
   return (
     <>
       <div className="orders">
@@ -18,8 +32,9 @@ function Orders() {
           {/* single Transaction */}
 
           {/* single Transaction */}
-          <SingleTransaction />
-          <SingleTransaction />
+          {orders.map((order) => (
+            <SingleTransaction key={order._id} order={order} />
+          ))}
         </div>
       </div>
     </>

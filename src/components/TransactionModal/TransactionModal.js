@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function TransactionModal({ setModal }) {
+function TransactionModal({ setModal, product }) {
   const status = "Confirmed";
   return (
     <div className="transaction__modal">
@@ -10,29 +10,27 @@ function TransactionModal({ setModal }) {
       </div>
       {/* product Details */}
       <div className="transaction__details">
-        <img src="https://th.bing.com/th/id/OIP.SbFcUmrpAZixqahRxnvrrQHaHa?pid=ImgDet&rs=1" />
+        <img src={product.photo} />
         <div className="details__others">
-          <h1>Bicycle</h1>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora
-            quibusdam obcaecati autem odit, ratione quasi distinctio aliquid
-            repellat ipsa dolorem numquam cupiditate nostrum soluta assumenda
-            optio cum placeat esse. Delectus?
-          </p>
+          <h1>{product.title}</h1>
+          <p>{product.description}</p>
           <h1>
-            12,000 <span> (PKR)</span>{" "}
+            {product.price} <span> (PKR)</span>{" "}
           </h1>
           <div
             className="status"
             style={{
-              backgroundColor: status === "Pending" ? "#EE63AE" : "#4FDA86",
+              backgroundColor:
+                product.status === "Pending" || "pending"
+                  ? "#EE63AE"
+                  : "#4FDA86",
             }}
           >
-            {status}
+            {product.status}
           </div>
           <div className="location">
             <h1>Address: </h1>
-            <p>Pabbi Station, NSR</p>
+            <p>{product.location}</p>
           </div>
         </div>
         <p className="closeBtn" onClick={() => setModal(false)}>

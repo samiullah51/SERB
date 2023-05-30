@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import "./SingleTransaction.css";
 import TransactionModal from "../../../components/TransactionModal/TransactionModal";
 import BuyerModal from "../../../components/BuyerModal/BuyerModal";
-function SingleTransaction() {
+function SingleTransaction({ order }) {
   const [modal, setModal] = useState(false);
   const [buyerModal, setBuyerModal] = useState(false);
-
-  const status = "Pending";
+  let orderCreatedAt = new Date(order?.createdAt).toLocaleString("en-US", {
+    day: "numeric",
+    year: "numeric",
+    month: "long",
+  });
   return (
     <div className="single__transaction">
-      {modal && <TransactionModal setModal={setModal} />}
-      {buyerModal && <BuyerModal setModal={setBuyerModal} />}
-      <p>0x23dffs232443355</p>
-      <p>33-Jan-2023</p>
-      <p>12,000</p>
+      {modal && <TransactionModal product={order} setModal={setModal} />}
+      {buyerModal && <BuyerModal order={order} setModal={setBuyerModal} />}
+      <p>{order._id}</p>
+      <p>{orderCreatedAt}</p>
+      <p>{order.price}</p>
       <p className="details__btn product" onClick={() => setModal(true)}>
         Product Details
       </p>
@@ -23,10 +26,11 @@ function SingleTransaction() {
       <p
         className="transaction__status"
         style={{
-          backgroundColor: status === "Pending" ? "#EE63AE" : "#4FDA86",
+          backgroundColor:
+            order.status === "Pending" || "pending" ? "#EE63AE" : "#4FDA86",
         }}
       >
-        {status}
+        {order.status}
       </p>
     </div>
   );
