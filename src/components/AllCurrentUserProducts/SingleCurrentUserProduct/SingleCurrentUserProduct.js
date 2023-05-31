@@ -88,7 +88,9 @@ function SingleCurrentUserProduct({ product, mode }) {
         }
         className="status"
         style={
-          product.status === "sold" || product.status === "exchanged"
+          product.status === "Sold" ||
+          product.status === "exchanged" ||
+          product.status === "sold"
             ? { backgroundColor: "#4D4D4D" }
             : { backgroundColor: "#138D95" }
         }

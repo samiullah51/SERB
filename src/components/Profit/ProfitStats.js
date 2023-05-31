@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Sales.css";
 
 import {
@@ -9,6 +9,9 @@ import {
   Line,
   CartesianGrid,
 } from "recharts";
+import { useState } from "react";
+import { publicRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
 const data = [
   { name: "Jan", uv: 1200 },
   { name: "Feb", uv: 800 },
@@ -18,6 +21,16 @@ const data = [
   { name: "June", uv: 2000 },
 ];
 function ProfitStats() {
+  const [profit, setProfit] = useState();
+  const user = useSelector((state) => state.user);
+  // fetch current profit/revenu
+  useEffect(() => {
+    const fetchProfit = async () => {
+      const gotProfit = await publicRequest.get(`/order/total/${user._id}`);
+      setProfit(gotProfit.data);
+    };
+    fetchProfit();
+  }, [profit]);
   return (
     <div className="saleStats">
       <h1>Revenue</h1>
@@ -32,7 +45,8 @@ function ProfitStats() {
       <div className="total__revenue">
         <h1>Currently, You Have Total Amount Of</h1>
         <h1 style={{ fontSize: "60px" }}>
-          150,000<span style={{ fontSize: "20px" }}>(PKR)</span>
+          {profit?.length > 0 && profit[0].total}
+          <span style={{ fontSize: "20px" }}>(PKR)</span>
         </h1>
       </div>
     </div>

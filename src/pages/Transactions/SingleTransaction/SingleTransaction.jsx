@@ -46,9 +46,7 @@ function SingleTransaction({ transaction }) {
         className="transaction__status"
         style={{
           backgroundColor:
-            transaction.status === "Pending" || transaction.status === "pending"
-              ? "#EE63AE"
-              : "#4FDA86",
+            transaction.status === "Pending" ? "#EE63AE" : "#4FDA86",
         }}
       >
         {transaction.status === "Sold" ? "Confirmed" : transaction.status}

@@ -39,7 +39,7 @@ const ProductSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "available",
+      default: "Available",
     },
   },
   { timestamps: true }

@@ -46,7 +46,7 @@ router.get("/sell/available/:userId", async (req, res) => {
   try {
     const allProducts = await Product.find({
       userId: req.params.userId,
-      status: "available",
+      status: "Available",
     }).sort({ createdAt: -1 });
     res.status(200).json(allProducts);
   } catch (err) {
@@ -60,7 +60,7 @@ router.get("/sell/sold/:userId", async (req, res) => {
   try {
     const allProducts = await Product.find({
       userId: req.params.userId,
-      status: "sold",
+      status: "Sold",
     }).sort({ createdAt: -1 });
     res.status(200).json(allProducts);
   } catch (err) {
@@ -74,7 +74,7 @@ router.get("/sell/pending/:userId", async (req, res) => {
   try {
     const allProducts = await Product.find({
       userId: req.params.userId,
-      status: "pending",
+      status: "Pending",
     }).sort({ createdAt: -1 });
     res.status(200).json(allProducts);
   } catch (err) {
@@ -84,7 +84,7 @@ router.get("/sell/pending/:userId", async (req, res) => {
 // Get Recent Products
 router.get("/recentproducts", async (req, res) => {
   try {
-    const recentProducts = await Product.find({ status: "available" })
+    const recentProducts = await Product.find({ status: "Available" })
       .limit(8)
       .sort({ createdAt: -1 });
     res.status(200).json(recentProducts);
@@ -103,17 +103,17 @@ router.get("/sell/all/:userId", async (req, res) => {
     // fetch sold products
     const soldProducts = await Product.find({
       userId: req.params.userId,
-      status: "sold",
+      status: "Sold",
     }).sort({ createdAt: -1 });
     // fetch available products
     const availableProducts = await Product.find({
       userId: req.params.userId,
-      status: "available",
+      status: "Available",
     }).sort({ createdAt: -1 });
     // fetch available products
     const pendingProducts = await Product.find({
       userId: req.params.userId,
-      status: "pending" && "Pending",
+      status: "Pending",
     }).sort({ createdAt: -1 });
     res.status(200).json({
       allProducts: allProducts,
