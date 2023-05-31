@@ -2,13 +2,29 @@ import React, { useState } from "react";
 import "./PaymentCard.css"; // Import your CSS file
 import { Link } from "react-router-dom";
 // import paid from "../../../public/images/paid.png";
+import { publicRequest } from "../../requestMethods";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 const PaymentCard = ({ setShow, product }) => {
   const [inputValue, setInputValue] = useState("");
   const [isPaid, setIsPaid] = useState(false);
   const [cvv, setCvv] = useState("");
+  const [sellerInfo, setSellerInfo] = useState("");
+  const user = useSelector((state) => state.user);
+  // get seller info
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const gotUser = await publicRequest.get(
+        `/product/sell/details/${product._id}`
+      );
+      setSellerInfo(gotUser.data);
+    };
+    getUserInfo();
+  }, [product]);
+
   const handleInputChange = (e) => {
     const enteredValue = e.target.value;
-
+    console.log(product);
     // Remove any non-digit characters
     const digitsOnly = enteredValue.replace(/\D/g, "");
 
@@ -32,6 +48,35 @@ const PaymentCard = ({ setShow, product }) => {
     // Update the input value state
     setCvv(limitedValue);
   };
+
+  // hanlde payment
+  const handlePayment = async () => {
+    // setIsPaid(true);
+    const postTransaction = await publicRequest.post(`/transaction/add`, {
+      userId: user._id,
+      title: sellerInfo.details.title,
+      description: sellerInfo.details.description,
+      location: sellerInfo.details.location,
+      condition: sellerInfo.details.condition,
+      price: sellerInfo.details.price,
+      photo: sellerInfo.details.photos[0],
+      status: "Pending",
+      belongsToPicture: sellerInfo.By.profileImage,
+      belongsToName: sellerInfo.By.fullName,
+      belongsToDescription: sellerInfo.By.description,
+      belongsToLevel: sellerInfo.By.level,
+      belongsToRating: 3.5,
+    });
+    const update = await publicRequest.put(
+      `/product/sell/edit/${product._id}`,
+      {
+        status: "Pending",
+      }
+    );
+    console.log(postTransaction);
+    console.log(update);
+  };
+
   return !isPaid ? (
     <div className="payment_card">
       <p className="paymentcard">Payment Card</p>
@@ -76,7 +121,7 @@ const PaymentCard = ({ setShow, product }) => {
         <button className="cancel" onClick={() => setShow(false)}>
           Cancel
         </button>
-        <button className="pay" onClick={() => setIsPaid(true)}>
+        <button className="pay" onClick={handlePayment}>
           Pay Now
         </button>
       </div>

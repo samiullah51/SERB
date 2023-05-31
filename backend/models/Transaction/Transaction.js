@@ -48,7 +48,7 @@ const TransactionSchema = new mongoose.Schema(
       required: true,
     },
     belongsToLevel: {
-      type: String,
+      type: Number,
       required: true,
     },
     belongsToRating: {

@@ -158,7 +158,7 @@ router.get("/sell/relatedproducts", async (req, res) => {
 });
 
 // Update a product
-router.put("/sell/edit/:productId", verifyToken, async (req, res) => {
+router.put("/sell/edit/:productId", async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.productId,
