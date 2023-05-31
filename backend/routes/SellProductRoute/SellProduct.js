@@ -84,8 +84,8 @@ router.get("/sell/pending/:userId", async (req, res) => {
 // Get Recent Products
 router.get("/recentproducts", async (req, res) => {
   try {
-    const recentProducts = await Product.find()
-      .limit(12)
+    const recentProducts = await Product.find({ status: "available" })
+      .limit(8)
       .sort({ createdAt: -1 });
     res.status(200).json(recentProducts);
   } catch (err) {
