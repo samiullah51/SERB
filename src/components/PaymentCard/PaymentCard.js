@@ -11,6 +11,7 @@ const PaymentCard = ({ setShow, product }) => {
   const [cvv, setCvv] = useState("");
   const [sellerInfo, setSellerInfo] = useState("");
   const user = useSelector((state) => state.user);
+  console.log(sellerInfo);
   // get seller info
   useEffect(() => {
     const getUserInfo = async () => {
@@ -73,8 +74,23 @@ const PaymentCard = ({ setShow, product }) => {
         status: "Pending",
       }
     );
+    const postOrder = await publicRequest.post(`/order/add`, {
+      userId: sellerInfo.By._id,
+      title: sellerInfo.details.title,
+      description: sellerInfo.details.description,
+      location: sellerInfo.details.location,
+      condition: sellerInfo.details.condition,
+      price: sellerInfo.details.price,
+      photo: sellerInfo.details.photos[0],
+      status: "Pending",
+      buyerPicture: user.profileImage,
+      buyerName: user.fullName,
+      buyerDescription: user.description,
+      buyerLevel: user.level,
+      buyerRating: 4,
+    });
     console.log(postTransaction);
-    console.log(update);
+    console.log(postOrder);
   };
 
   return !isPaid ? (

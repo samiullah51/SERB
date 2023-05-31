@@ -113,7 +113,7 @@ router.get("/sell/all/:userId", async (req, res) => {
     // fetch available products
     const pendingProducts = await Product.find({
       userId: req.params.userId,
-      status: "pending",
+      status: "pending" && "Pending",
     }).sort({ createdAt: -1 });
     res.status(200).json({
       allProducts: allProducts,

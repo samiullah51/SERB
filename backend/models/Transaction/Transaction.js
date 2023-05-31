@@ -12,7 +12,6 @@ const TransactionSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
     },
     location: {
       type: String,
@@ -45,7 +44,6 @@ const TransactionSchema = new mongoose.Schema(
     },
     belongsToDescription: {
       type: String,
-      required: true,
     },
     belongsToLevel: {
       type: Number,
