@@ -2,6 +2,7 @@ import React from "react";
 import "./SingleTransaction.css";
 import { useState } from "react";
 import TransactionModal from "../../../components/TransactionModal/TransactionModal";
+import { publicRequest } from "../../../requestMethods";
 function SingleTransaction({ transaction }) {
   const [modal, setModal] = useState(false);
   let transactionCreatedAt = new Date(transaction?.createdAt).toLocaleString(
@@ -12,6 +13,26 @@ function SingleTransaction({ transaction }) {
       month: "long",
     }
   );
+
+  const handleConfirm = async (id) => {
+    const update = await publicRequest.put(`/product/sell/edit/${id}`, {
+      status: "Sold",
+    });
+    const updateOrder = await publicRequest.put(`/order/edit/status/${id}`, {
+      status: "Sold",
+    });
+    const updateTransactions = await publicRequest.put(
+      `/transaction/edit/status/${id}`,
+      {
+        status: "Sold",
+      }
+    );
+    // console.log(update);
+    // console.log(id);
+    // console.log(transaction);
+    console.log(update);
+  };
+
   return (
     <div className="single__transaction">
       {modal && <TransactionModal product={transaction} setModal={setModal} />}
@@ -25,15 +46,20 @@ function SingleTransaction({ transaction }) {
         className="transaction__status"
         style={{
           backgroundColor:
-            transaction.status === "Pending" || "pending"
+            transaction.status === "Pending" || transaction.status === "pending"
               ? "#EE63AE"
               : "#4FDA86",
         }}
       >
-        {transaction.status}
+        {transaction.status === "Sold" ? "Confirmed" : transaction.status}
       </p>
       <div className="actions">
-        <button className="confirm__btn">Confirm</button>
+        <button
+          className="confirm__btn"
+          onClick={() => handleConfirm(transaction.productId)}
+        >
+          Confirm
+        </button>
         <button className="cancel__btn">Cancel</button>
       </div>
     </div>

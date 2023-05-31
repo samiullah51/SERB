@@ -39,7 +39,25 @@ router.get("/all/:userId", async (req, res) => {
     res.status(500).json(err.message);
   }
 });
-
+// Change  product Status
+router.put("/edit/status/:productId", async (req, res) => {
+  try {
+    const updatedStatus = await Transaction.findOneAndUpdate(
+      {
+        productId: req.params.productId,
+      },
+      {
+        $set: {
+          status: req.body.status,
+        },
+      },
+      { new: true }
+    );
+    res.status(201).json(updatedStatus);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
 // // Get profile Stats
 // router.get("/stats/:userId", async (req, res) => {
 //   const startOfDay = new Date();

@@ -55,6 +55,7 @@ const PaymentCard = ({ setShow, product }) => {
     // setIsPaid(true);
     const postTransaction = await publicRequest.post(`/transaction/add`, {
       userId: user._id,
+      productId: sellerInfo.details._id,
       title: sellerInfo.details.title,
       description: sellerInfo.details.description,
       location: sellerInfo.details.location,
@@ -76,6 +77,7 @@ const PaymentCard = ({ setShow, product }) => {
     );
     const postOrder = await publicRequest.post(`/order/add`, {
       userId: sellerInfo.By._id,
+      productId: sellerInfo.details._id,
       title: sellerInfo.details.title,
       description: sellerInfo.details.description,
       location: sellerInfo.details.location,
