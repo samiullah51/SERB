@@ -43,12 +43,29 @@ function Transactions() {
 
           {/* single Transaction */}
           {!loading ? (
-            transactions.map((transaction) => (
-              <SingleTransaction
-                key={transaction._id}
-                transaction={transaction}
-              />
-            ))
+            transactions.length > 0 ? (
+              transactions.map((transaction) => (
+                <SingleTransaction
+                  key={transaction._id}
+                  transaction={transaction}
+                />
+              ))
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "10px",
+                }}
+              >
+                <img
+                  src="https://th.bing.com/th/id/OIP.RY8og1hAuWLb-jV1qqibxQAAAA?pid=ImgDet&rs=1"
+                  width={200}
+                />
+              </div>
+            )
           ) : (
             <div
               style={{

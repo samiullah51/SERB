@@ -27,10 +27,7 @@ function SingleTransaction({ transaction }) {
         status: "Sold",
       }
     );
-    // console.log(update);
-    // console.log(id);
-    // console.log(transaction);
-    console.log(update);
+    window.location.reload();
   };
 
   return (

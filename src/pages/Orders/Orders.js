@@ -37,9 +37,26 @@ function Orders() {
 
           {/* single Transaction */}
           {!loading ? (
-            orders.map((order) => (
-              <SingleTransaction key={order._id} order={order} />
-            ))
+            orders.length > 0 ? (
+              orders.map((order) => (
+                <SingleTransaction key={order._id} order={order} />
+              ))
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "10px",
+                }}
+              >
+                <img
+                  src="https://th.bing.com/th/id/OIP.RY8og1hAuWLb-jV1qqibxQAAAA?pid=ImgDet&rs=1"
+                  width={200}
+                />
+              </div>
+            )
           ) : (
             <div
               style={{
