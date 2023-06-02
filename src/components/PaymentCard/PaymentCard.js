@@ -52,9 +52,16 @@ const PaymentCard = ({ setShow, product }) => {
 
   // hanlde payment
   const handlePayment = async () => {
-    setLoading(true);
     // setIsPaid(true);
-    if (inputValue && cvv) {
+    if (!inputValue || !cvv) {
+      alert("Please provide Credential");
+      return false;
+    } else if (inputValue.length !== 16 || cvv.length !== 3) {
+      alert("Card number should be 16 digits and CVV should be 3 digits");
+      return false;
+    } else {
+      setLoading(true);
+
       const postTransaction = await publicRequest.post(`/transaction/add`, {
         userId: user._id,
         productId: sellerInfo.details._id,
@@ -97,10 +104,6 @@ const PaymentCard = ({ setShow, product }) => {
         setLoading(false);
         setIsPaid(true);
       }
-    } else if (inputValue.length !== 16 || cvv.length !== 3) {
-      alert("Card number should be 16 digits and CVV should be 3 digits");
-    } else {
-      alert("Please provide Credential");
     }
   };
 

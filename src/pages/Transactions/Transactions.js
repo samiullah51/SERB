@@ -14,16 +14,19 @@ import { loader } from "../../loader";
 function Transactions() {
   const [transactions, setTransactions] = useState([]);
   const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
   // fetch all transactions
   useEffect(() => {
+    setLoading(true);
     const fetchTransactions = async () => {
       const allTransactions = await publicRequest.get(
         `/transaction/all/${user._id}`
       );
       setTransactions(allTransactions.data);
+      setLoading(false);
     };
     fetchTransactions();
-  }, [transactions]);
+  }, []);
 
   return (
     <>
@@ -39,7 +42,7 @@ function Transactions() {
           {/* single Transaction */}
 
           {/* single Transaction */}
-          {transactions.length > 0 ? (
+          {!loading ? (
             transactions.map((transaction) => (
               <SingleTransaction
                 key={transaction._id}
