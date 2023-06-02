@@ -13,10 +13,10 @@ function RecentProducts({ title, items }) {
     const fetchProducts = async () => {
       const fetched = await publicRequest.get("/product/recentproducts");
       setProducts(fetched.data);
+      setLoading(false);
     };
     fetchProducts();
-    setLoading(false);
-  }, [products]);
+  }, []);
 
   return !loading ? (
     <div className="recent__products">

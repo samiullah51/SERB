@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { publicRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
+import { loader } from "../../loader";
 
 function Transactions() {
   const [transactions, setTransactions] = useState([]);
@@ -38,12 +39,26 @@ function Transactions() {
           {/* single Transaction */}
 
           {/* single Transaction */}
-          {transactions.map((transaction) => (
-            <SingleTransaction
-              key={transaction._id}
-              transaction={transaction}
-            />
-          ))}
+          {transactions.length > 0 ? (
+            transactions.map((transaction) => (
+              <SingleTransaction
+                key={transaction._id}
+                transaction={transaction}
+              />
+            ))
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "100px",
+              }}
+            >
+              <img src={loader} width={30} />
+            </div>
+          )}
         </div>
       </div>
     </>

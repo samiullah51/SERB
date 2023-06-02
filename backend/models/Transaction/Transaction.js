@@ -6,56 +6,46 @@ const TransactionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    productId:{
+    productId: {
       type: String,
       required: true,
     },
     title: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
     },
     location: {
       type: String,
-      required: true,
     },
     condition: {
       type: String,
-      required: true,
     },
     price: {
       type: Number,
-      required: true,
     },
     photo: {
       type: String,
-      required: true,
     },
     status: {
       type: String,
-      required: true,
     },
 
     belongsToPicture: {
       type: String,
-      required: true,
     },
     belongsToName: {
       type: String,
-      required: true,
     },
     belongsToDescription: {
       type: String,
     },
     belongsToLevel: {
       type: Number,
-      required: true,
     },
     belongsToRating: {
       type: Number,
-      required: true,
     },
   },
   { timestamps: true }

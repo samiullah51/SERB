@@ -148,6 +148,7 @@ router.get("/sell/relatedproducts", async (req, res) => {
       category: {
         $in: [qCategory],
       },
+      status: "Available",
     })
       .limit(5)
       .sort({ createdAt: -1 });
@@ -205,6 +206,7 @@ router.delete("/sell/delete/:productId", verifyToken, async (req, res) => {
 router.get("/sell/find", async (req, res) => {
   try {
     const searchProducts = await Product.find({
+      status: "Available",
       $or: [
         {
           category: { $regex: new RegExp(".*" + req.query.search + ".*", "i") },

@@ -9,18 +9,22 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { publicRequest } from "../../requestMethods";
+import { loader } from "../../loader";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
   const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
   // fetch all transactions
   useEffect(() => {
+    setLoading(true);
     const fetchOrders = async () => {
       const allOrders = await publicRequest.get(`/order/all/${user._id}`);
       setOrders(allOrders.data);
+      setLoading(false);
     };
     fetchOrders();
-  }, [orders]);
+  }, []);
   return (
     <>
       <div className="orders">
@@ -32,9 +36,23 @@ function Orders() {
           {/* single Transaction */}
 
           {/* single Transaction */}
-          {orders.map((order) => (
-            <SingleTransaction key={order._id} order={order} />
-          ))}
+          {!loading ? (
+            orders.map((order) => (
+              <SingleTransaction key={order._id} order={order} />
+            ))
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              <img src={loader} width={30} />
+            </div>
+          )}
         </div>
       </div>
     </>

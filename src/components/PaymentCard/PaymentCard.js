@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import { publicRequest } from "../../requestMethods";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { loader } from "../../loader";
 const PaymentCard = ({ setShow, product }) => {
   const [inputValue, setInputValue] = useState("");
   const [isPaid, setIsPaid] = useState(false);
   const [cvv, setCvv] = useState("");
   const [sellerInfo, setSellerInfo] = useState("");
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
-  console.log(sellerInfo);
   // get seller info
   useEffect(() => {
     const getUserInfo = async () => {
@@ -25,7 +26,6 @@ const PaymentCard = ({ setShow, product }) => {
 
   const handleInputChange = (e) => {
     const enteredValue = e.target.value;
-    console.log(product);
     // Remove any non-digit characters
     const digitsOnly = enteredValue.replace(/\D/g, "");
 
@@ -52,47 +52,56 @@ const PaymentCard = ({ setShow, product }) => {
 
   // hanlde payment
   const handlePayment = async () => {
+    setLoading(true);
     // setIsPaid(true);
-    const postTransaction = await publicRequest.post(`/transaction/add`, {
-      userId: user._id,
-      productId: sellerInfo.details._id,
-      title: sellerInfo.details.title,
-      description: sellerInfo.details.description,
-      location: sellerInfo.details.location,
-      condition: sellerInfo.details.condition,
-      price: sellerInfo.details.price,
-      photo: sellerInfo.details.photos[0],
-      status: "Pending",
-      belongsToPicture: sellerInfo.By.profileImage,
-      belongsToName: sellerInfo.By.fullName,
-      belongsToDescription: sellerInfo.By.description,
-      belongsToLevel: sellerInfo.By.level,
-      belongsToRating: 3.5,
-    });
-    const update = await publicRequest.put(
-      `/product/sell/edit/${product._id}`,
-      {
+    if (inputValue && cvv) {
+      const postTransaction = await publicRequest.post(`/transaction/add`, {
+        userId: user._id,
+        productId: sellerInfo.details._id,
+        title: sellerInfo.details.title,
+        description: sellerInfo.details.description,
+        location: sellerInfo.details.location,
+        condition: sellerInfo.details.condition,
+        price: sellerInfo.details.price,
+        photo: sellerInfo.details.photos[0],
         status: "Pending",
+        belongsToPicture: sellerInfo.By.profileImage,
+        belongsToName: sellerInfo.By.fullName,
+        belongsToDescription: sellerInfo.By.description,
+        belongsToLevel: sellerInfo.By.level,
+        belongsToRating: 3.5,
+      });
+      const update = await publicRequest.put(
+        `/product/sell/edit/${product._id}`,
+        {
+          status: "Pending",
+        }
+      );
+      const postOrder = await publicRequest.post(`/order/add`, {
+        userId: sellerInfo.By._id,
+        productId: sellerInfo.details._id,
+        title: sellerInfo.details.title,
+        description: sellerInfo.details.description,
+        location: sellerInfo.details.location,
+        condition: sellerInfo.details.condition,
+        price: sellerInfo.details.price,
+        photo: sellerInfo.details.photos[0],
+        status: "Pending",
+        buyerPicture: user.profileImage,
+        buyerName: user.fullName,
+        buyerDescription: user.description,
+        buyerLevel: user.level,
+        buyerRating: 4,
+      });
+      if (postTransaction && update && postOrder) {
+        setLoading(false);
+        setIsPaid(true);
       }
-    );
-    const postOrder = await publicRequest.post(`/order/add`, {
-      userId: sellerInfo.By._id,
-      productId: sellerInfo.details._id,
-      title: sellerInfo.details.title,
-      description: sellerInfo.details.description,
-      location: sellerInfo.details.location,
-      condition: sellerInfo.details.condition,
-      price: sellerInfo.details.price,
-      photo: sellerInfo.details.photos[0],
-      status: "Pending",
-      buyerPicture: user.profileImage,
-      buyerName: user.fullName,
-      buyerDescription: user.description,
-      buyerLevel: user.level,
-      buyerRating: 4,
-    });
-    console.log(postTransaction);
-    console.log(postOrder);
+    } else if (inputValue.length !== 16 || cvv.length !== 3) {
+      alert("Card number should be 16 digits and CVV should be 3 digits");
+    } else {
+      alert("Please provide Credential");
+    }
   };
 
   return !isPaid ? (
@@ -140,7 +149,7 @@ const PaymentCard = ({ setShow, product }) => {
           Cancel
         </button>
         <button className="pay" onClick={handlePayment}>
-          Pay Now
+          {!loading ? "Pay Now" : <img src={loader} width={10} />}
         </button>
       </div>
     </div>
@@ -148,16 +157,16 @@ const PaymentCard = ({ setShow, product }) => {
     <div className="paid">
       <h1>You have paid Successfully</h1>
       <img src="../../images/paid.png" alt="" />
-      <Link style={{ color: "#fff", textDecoration: "underline" }}>
+      <Link
+        to="/transactions"
+        style={{ color: "#fff", textDecoration: "underline" }}
+      >
         Check Transactions
       </Link>
       <p>
         Your payment is safe with SERB right now. You will recieve your product
         soon.
       </p>
-      <Link className="okBtn" onClick={() => setShow(false)}>
-        OK
-      </Link>
     </div>
   );
 };
