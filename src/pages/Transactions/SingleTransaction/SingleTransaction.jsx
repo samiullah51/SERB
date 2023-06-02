@@ -48,15 +48,21 @@ function SingleTransaction({ transaction }) {
       >
         {transaction.status === "Sold" ? "Confirmed" : transaction.status}
       </p>
-      <div className="actions">
-        <button
-          className="confirm__btn"
-          onClick={() => handleConfirm(transaction.productId)}
-        >
-          Confirm
-        </button>
-        <button className="cancel__btn">Cancel</button>
-      </div>
+      {transaction.status === "Pending" ? (
+        <div className="actions">
+          <button
+            className="confirm__btn"
+            onClick={() => handleConfirm(transaction.productId)}
+          >
+            Confirm
+          </button>
+          <button className="cancel__btn">Cancel</button>
+        </div>
+      ) : (
+        <div className="actions">
+          <p className="finilaze__btn">It's Finalized</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import "./AllCurrentUserProducts.css";
 import SingleCurrentUserProduct from "./SingleCurrentUserProduct/SingleCurrentUserProduct";
 import { publicRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
+import { loader } from "../../loader";
 
 function AllCurrentUserProducts({ mode }) {
   const user = useSelector((state) => state.user);
@@ -25,7 +26,7 @@ function AllCurrentUserProducts({ mode }) {
       }
     };
     getProducts();
-  }, [products]);
+  }, []);
 
   // fetch all Exchange product of current user
   useEffect(() => {
@@ -42,19 +43,33 @@ function AllCurrentUserProducts({ mode }) {
       }
     };
     getProducts();
-  }, [exchangeProducts]);
+  }, []);
 
-  return products?.length === 0 ? (
-    <h2 style={{ textAlign: "center", color: "#d4d4d4" }}>No Product Yet</h2>
-  ) : (
+  return (
     <div className="all__current__user__products">
-      {mode === "sell"
-        ? products.map((product) => (
+      {!loading ? (
+        mode === "sell" ? (
+          products.map((product) => (
             <SingleCurrentUserProduct product={product} mode={mode} />
           ))
-        : exchangeProducts.map((product) => (
+        ) : (
+          exchangeProducts.map((product) => (
             <SingleCurrentUserProduct product={product} mode={mode} />
-          ))}
+          ))
+        )
+      ) : (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "100px",
+          }}
+        >
+          <img src={loader} width={30} />
+        </div>
+      )}
     </div>
   );
 }

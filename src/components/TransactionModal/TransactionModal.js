@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-
+import StarIcon from "@mui/icons-material/Star";
+import StarHalfIcon from "@mui/icons-material/StarHalf";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
 function TransactionModal({ setModal, product }) {
-  const status = "Confirmed";
   return (
     <div className="transaction__modal">
       <div className="close__modal" onClick={() => setModal(false)}>
@@ -21,9 +22,7 @@ function TransactionModal({ setModal, product }) {
             className="status"
             style={{
               backgroundColor:
-                product.status === "Pending" || "pending"
-                  ? "#EE63AE"
-                  : "#4FDA86",
+                product.status !== "Sold" ? "#EE63AE" : "#4FDA86",
             }}
           >
             {product.status}
@@ -33,8 +32,35 @@ function TransactionModal({ setModal, product }) {
             <p>{product.location}</p>
           </div>
         </div>
+        {/* belongs to */}
+        <h1>Owner</h1>
+        <div className="belongsto">
+          <div className="belongsto__info">
+            <img src={product.belongsToPicture} />
+            <p>{product.belongsToName}</p>
+          </div>
+          <div className="stars">
+            <p>({product.belongsToRating}) </p>
+
+            {Array.from({ length: 5 }, (_, index) => {
+              let number = index + 0.5;
+              return (
+                <p>
+                  {product.belongsToRating >= index + 1 ? (
+                    <StarIcon />
+                  ) : product.belongsToRating >= number ? (
+                    <StarHalfIcon />
+                  ) : (
+                    <StarOutlineIcon />
+                  )}
+                </p>
+              );
+            })}
+          </div>
+        </div>
+
         <p className="closeBtn" onClick={() => setModal(false)}>
-          Close
+          X
         </p>
       </div>
     </div>
