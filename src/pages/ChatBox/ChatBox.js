@@ -58,7 +58,7 @@ function ChatBox() {
       setMessages(getMsgs.data);
     };
     msgs();
-  }, [messages.length, currentChat]);
+  }, [messages, currentChat]);
 
   //   scrolling
   useEffect(() => {

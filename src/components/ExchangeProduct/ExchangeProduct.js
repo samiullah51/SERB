@@ -44,8 +44,8 @@ function ExchangeProduct({ product }) {
           {/* Footer Left */}
 
           <div className="footer__left">
-            <img src={userDetails.profileImage} />
-            <p>{userDetails.fullName}</p>
+            <img src={userDetails?.profileImage} />
+            <p>{userDetails?.fullName}</p>
           </div>
         </div>
       </Link>

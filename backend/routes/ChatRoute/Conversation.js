@@ -26,7 +26,7 @@ router.get("/", verifyToken, async (req, res) => {
 });
 
 // Get a conversation of a specific user with the help of id
-router.get("/find/:userId", verifyToken, async (req, res) => {
+router.get("/find/:userId", async (req, res) => {
   try {
     const conversation = await Conversation.find({
       members: { $in: [req.params.userId] },
@@ -37,7 +37,7 @@ router.get("/find/:userId", verifyToken, async (req, res) => {
   }
 });
 // Get a conversation of a user
-router.get("/:userId", verifyToken, async (req, res) => {
+router.get("/:userId", async (req, res) => {
   try {
     const conversation = await Conversation.find({
       members: { $in: [req.params.userId] },

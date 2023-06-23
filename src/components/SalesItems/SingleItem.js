@@ -57,7 +57,7 @@ function SingleItem({ product }) {
       </p>
       <div className="actions">
         <DeleteOutlineIcon onClick={() => handleDelete(product._id)} />
-        {product.status === "available" && (
+        {product.status === "Available" && (
           <Link to={`/editproduct/${product._id}`}>
             <EditIcon />
           </Link>
