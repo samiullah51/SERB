@@ -33,6 +33,7 @@ import ProfileView from "./pages/Views/ProfileView/ProfileView";
 import TotalProductView from "./pages/Views/TotalProductView/TotalProductView";
 import PaymentCard from "./components/PaymentCard/PaymentCard";
 import Transactions from "./pages/Transactions/Transactions";
+import Notifications from "./pages/Notifications/Notifications";
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
             path="/exchangewithproductdetails/:productId"
             element={<ExchangeWithProductDetails />}
           />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="/chatbox" element={<ChatBox />} />
           {/* analytics for working product */}
           <Route path="/analytics" element={<Analytics />} />
