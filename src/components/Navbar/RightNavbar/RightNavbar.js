@@ -38,9 +38,10 @@ function RightNavbar() {
         <EqualizerIcon />
         <p>Analytics</p>
       </NavLink>
-      <NavLink to="/notifications">
+      <NavLink to="/notifications" className="notifi__icon">
         <NotificationsNoneIcon />
         <p>Notifications</p>
+        <div></div>
       </NavLink>
 
       <NavLink to="/chatbox">

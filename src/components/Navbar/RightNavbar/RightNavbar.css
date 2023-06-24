@@ -54,3 +54,20 @@ cursor: pointer;
     color: rgb(92, 92, 92);
     cursor: pointer;
 }
+.notifi__icon{
+    position: relative;
+}
+.notifi__icon div{
+    position: absolute;
+    top: 2px;
+    right: 23px;
+    height: 11px;
+    width: 11px;
+    background-color: rgb(8, 124, 170);
+    border-radius: 50%;
+    border: 1px solid #fff;
+
+
+
+
+}
