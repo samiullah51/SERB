@@ -64,7 +64,9 @@ function Notifications() {
         {/* right notification */}
 
         <div className="notifi__right">
-          <div className="notifi__content">sdfsdfasfa</div>
+          <div className="notifi__content">
+            <img src="https://th.bing.com/th/id/R.7aabd381c7f4d88a13abeac20ca25e56?rik=YG4UHj9%2fgH0ZqA&pid=ImgRaw&r=0" />
+          </div>
         </div>
       </div>
     </>
