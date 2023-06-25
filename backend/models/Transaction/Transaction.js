@@ -31,7 +31,9 @@ const TransactionSchema = new mongoose.Schema(
     status: {
       type: String,
     },
-
+    belongsToId: {
+      type: String,
+    },
     belongsToPicture: {
       type: String,
     },

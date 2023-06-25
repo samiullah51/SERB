@@ -1,29 +1,52 @@
 import React, { useState } from "react";
 import "./Notifications.css";
 import Navbar from "../../components/Navbar/Navbar";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { publicRequest } from "../../requestMethods";
+import { loader } from "../../loader";
+import { Link } from "react-router-dom";
 function Notifications() {
-  const [selected, setSelected] = useState(null);
-  const [current, setCurrent] = useState(false);
-  let [all, setAll] = useState([
-    {
-      id: 1,
-      text: "hello 1 from",
-      status: "unread",
-    },
-    {
-      id: 2,
-      text: "hello 2 from",
-      status: "read",
-    },
-    {
-      id: 3,
-      text: "hello 3 from",
-      status: "unread",
-    },
-  ]);
+  const [notifications, setNotifications] = useState([]);
+  const user = useSelector((state) => state.user);
+  const [isActive, setIsActive] = useState(true);
+  const [singleNotification, setSingleNotification] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [unread, setUnread] = useState([]);
+  // fetch notifications
+  useEffect(() => {
+    const getNotifications = async () => {
+      const gotNotifications = await publicRequest.get(
+        `/notifications/${user._id}`
+      );
 
-  const handleClick = (index) => {
-    setAll([...all], (all[index].status = "read"));
+      setNotifications(gotNotifications.data);
+    };
+    getNotifications();
+  }, [notifications]);
+
+  // fetch unread notifications
+  useEffect(() => {
+    const unreadNot = async () => {
+      const unreadNotifications = await publicRequest.get(
+        `/notifications/unread/${user._id}`
+      );
+      setUnread(unreadNotifications.data);
+    };
+    unreadNot();
+  }, [unread]);
+
+  const handleClick = async (id) => {
+    setLoading(true);
+    const gotNotification = await publicRequest.get(
+      `/notifications/notification/${id}`
+    );
+    setSingleNotification(gotNotification.data);
+    setIsActive(false);
+    setLoading(false);
+    // update
+    gotNotification &&
+      (await publicRequest.put(`/notifications/notification/${id}`));
   };
   return (
     <>
@@ -32,7 +55,7 @@ function Notifications() {
         <div className="notifi__left">
           <div className="notifi__left__header">
             <h2>
-              Notifications <span>6</span>
+              Notifications <span>{unread?.length}</span>
             </h2>
           </div>
           <div
@@ -41,18 +64,20 @@ function Notifications() {
           ></div>
           {/* notifications */}
           <div className="notifications__list">
-            {all.map((single, index) => (
+            {notifications.map((single) => (
               <div
                 className="single__notification"
-                onClick={() => handleClick(index)}
+                onClick={() => handleClick(single._id)}
               >
                 <p
-                  key={single.id}
+                  key={single._id}
                   style={{
-                    fontWeight: single.status == "unread" ? "bold" : "normal",
+                    fontWeight: single.status === "unread" ? "bold" : "normal",
                   }}
                 >
-                  {single.text}
+                  {single?.text.length > 25
+                    ? single?.text.slice(0, 25) + "..."
+                    : single?.text}
                 </p>
                 {single.status === "unread" && (
                   <p className="notifi__status">New</p>
@@ -64,9 +89,38 @@ function Notifications() {
         {/* right notification */}
 
         <div className="notifi__right">
-          <div className="notifi__content">
-            <img src="https://th.bing.com/th/id/R.7aabd381c7f4d88a13abeac20ca25e56?rik=YG4UHj9%2fgH0ZqA&pid=ImgRaw&r=0" />
-          </div>
+          {isActive ? (
+            <div className="notifi__content">
+              <img src="https://th.bing.com/th/id/R.7aabd381c7f4d88a13abeac20ca25e56?rik=YG4UHj9%2fgH0ZqA&pid=ImgRaw&r=0" />
+              <h1>Notifications</h1>
+            </div>
+          ) : !loading ? (
+            <div
+              style={{
+                fontSize: "20px",
+                padding: "10px",
+                alignSelf: "flex-start",
+                marginRight: "auto",
+              }}
+            >
+              <h1 style={{ fontWeight: "400", marginBottom: "20px" }}>
+                SERB Notifications
+              </h1>
+              <p>{singleNotification.text}</p>
+              <Link
+                to="/transactions"
+                style={{
+                  color: "dodgerblue",
+                  fontSize: "16px",
+                  textDecoration: "underline",
+                }}
+              >
+                Check Transaction
+              </Link>
+            </div>
+          ) : (
+            <img src={loader} width={40} />
+          )}
         </div>
       </div>
     </>

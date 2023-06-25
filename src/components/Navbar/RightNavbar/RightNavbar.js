@@ -11,15 +11,32 @@ import TurnSlightLeftIcon from "@mui/icons-material/TurnSlightLeft";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { Link, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LOG_OUT } from "../../../redux/User/userTypes";
+import { publicRequest } from "../../../requestMethods";
+import { useEffect } from "react";
 function RightNavbar() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const [notifications, setNotifications] = useState([]);
+
   // handle logout
   const handleLogout = () => {
     localStorage.clear();
     dispatch({ type: LOG_OUT });
   };
+
+  // fetch unread notifications
+  useEffect(() => {
+    const getNotifications = async () => {
+      const gotNotifications = await publicRequest.get(
+        `/notifications/unread/${user._id}`
+      );
+      setNotifications(gotNotifications.data);
+    };
+    getNotifications();
+  }, [notifications]);
+
   return (
     <div className="right__navbar">
       <NavLink to="/">
@@ -41,7 +58,7 @@ function RightNavbar() {
       <NavLink to="/notifications" className="notifi__icon">
         <NotificationsNoneIcon />
         <p>Notifications</p>
-        <div></div>
+        {notifications.length > 0 && <div></div>}
       </NavLink>
 
       <NavLink to="/chatbox">

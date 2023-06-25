@@ -3,8 +3,11 @@ import "./SingleTransaction.css";
 import { useState } from "react";
 import TransactionModal from "../../../components/TransactionModal/TransactionModal";
 import { publicRequest } from "../../../requestMethods";
+import { useSelector } from "react-redux";
 function SingleTransaction({ transaction }) {
+  console.log(transaction);
   const [modal, setModal] = useState(false);
+  const user = useSelector((state) => state.user);
   let transactionCreatedAt = new Date(transaction?.createdAt).toLocaleString(
     "en-US",
     {
@@ -27,6 +30,16 @@ function SingleTransaction({ transaction }) {
         status: "Sold",
       }
     );
+    const notification = await publicRequest.post(`/notifications`, {
+      userId: user._id,
+      notifyBy: user.fullName,
+      text: `Congratulation ${user.fullName}, you have successfully purchased ${transaction.title} of (${transaction.price} (PKR). `,
+    });
+    const sellerNotification = await publicRequest.post(`/notifications`, {
+      userId: transaction.belongsToId,
+      notifyBy: user.fullName,
+      text: `Congratulation ${transaction.belongsTo.Name}, you have recieved ${transaction.belongsTo.price} (PKR) by ${user.fullName} for product (${transaction.title})`,
+    });
     window.location.reload();
   };
 

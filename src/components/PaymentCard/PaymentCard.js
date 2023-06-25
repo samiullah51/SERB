@@ -72,6 +72,7 @@ const PaymentCard = ({ setShow, product }) => {
         price: sellerInfo.details.price,
         photo: sellerInfo.details.photos[0],
         status: "Pending",
+        belongsToId: sellerInfo.By._id,
         belongsToPicture: sellerInfo.By.profileImage,
         belongsToName: sellerInfo.By.fullName,
         belongsToDescription: sellerInfo.By.description,
@@ -100,7 +101,24 @@ const PaymentCard = ({ setShow, product }) => {
         buyerLevel: user.level,
         buyerRating: 4,
       });
-      if (postTransaction && update && postOrder) {
+      const notification = await publicRequest.post(`/notifications`, {
+        userId: user._id,
+        notifyBy: user.fullName,
+        text: `Dear ${user.fullName}, you have paid ${sellerInfo.details.price} (PKR) for your product(${sellerInfo.details.title}). This payment is safe with SERB, once you confirm your transaction, you will be charge ${sellerInfo.details.price} (PKR). Currently, this transaction is in pending state. Thanks `,
+      });
+
+      const sellerNotification = await publicRequest.post(`/notifications`, {
+        userId: sellerInfo.By._id,
+        notifyBy: sellerInfo.By.fullName,
+        text: `Dear ${sellerInfo.By.fullName}, your product (${sellerInfo.details.title}) have been purchased by ${user.fullName} of (${sellerInfo.details.price}) but currently, it is in pending mode. If ${user.fullName} makes this transaction confirmed, you will recieve ${sellerInfo.details.price}. Thanks`,
+      });
+      if (
+        postTransaction &&
+        update &&
+        postOrder &&
+        notification &&
+        sellerNotification
+      ) {
         setLoading(false);
         setIsPaid(true);
       }
