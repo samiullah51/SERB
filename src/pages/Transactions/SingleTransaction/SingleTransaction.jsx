@@ -38,7 +38,7 @@ function SingleTransaction({ transaction }) {
     const sellerNotification = await publicRequest.post(`/notifications`, {
       userId: transaction.belongsToId,
       notifyBy: user.fullName,
-      text: `Congratulation ${transaction.belongsTo.Name}, you have recieved ${transaction.belongsTo.price} (PKR) by ${user.fullName} for product (${transaction.title})`,
+      text: `Congratulation ${transaction.belongsToName}, you have recieved ${transaction.price} (PKR) by ${user.fullName} for product (${transaction.title})`,
     });
     window.location.reload();
   };
