@@ -34,18 +34,18 @@ function ProfitStats() {
   return (
     <div className="saleStats">
       <h1>Revenue</h1>
-      <LineChart width={600} height={300} data={data}>
+      {/* <LineChart width={600} height={300} data={data}>
         <Line type="monotone" dataKey="uv" stroke="#8884d8" />
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-      </LineChart>
+      </LineChart> */}
       {/* Total */}
       <div className="total__revenue">
         <h1>Currently, You Have Total Amount Of</h1>
         <h1 style={{ fontSize: "60px" }}>
-          {profit?.length > 0 && profit[0].total}
+          {profit?.length > 0 ? profit[0].total : "0"}
           <span style={{ fontSize: "20px" }}>(PKR)</span>
         </h1>
       </div>

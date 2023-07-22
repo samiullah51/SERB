@@ -5,9 +5,9 @@ import TransactionModal from "../../../components/TransactionModal/TransactionMo
 import { publicRequest } from "../../../requestMethods";
 import { useSelector } from "react-redux";
 function SingleTransaction({ transaction }) {
-  console.log(transaction);
   const [modal, setModal] = useState(false);
   const user = useSelector((state) => state.user);
+  const [reviewModal, setReviewModal] = useState(false);
   let transactionCreatedAt = new Date(transaction?.createdAt).toLocaleString(
     "en-US",
     {
@@ -46,6 +46,22 @@ function SingleTransaction({ transaction }) {
   return (
     <div className="single__transaction">
       {modal && <TransactionModal product={transaction} setModal={setModal} />}
+
+      {/* review modal */}
+      {reviewModal && (
+        <div className="review__modal">
+            <div className="review__form">
+              <img src="" alt="" />
+            </div>
+
+          <div className="review__close" onClick={() => setReviewModal(false)}>
+            X
+          </div>
+        </div>
+      )}
+
+      {/* end review modal */}
+
       <p>{transaction._id}</p>
       <p>{transactionCreatedAt}</p>
       <p>{transaction.price}</p>
@@ -73,6 +89,13 @@ function SingleTransaction({ transaction }) {
         </div>
       ) : (
         <div className="actions">
+          <p
+            className="finilaze__btn review"
+            style={{ backgroundColor: "dodgerblue", color: "#fff" }}
+            onClick={() => setReviewModal(true)}
+          >
+            Review
+          </p>
           <p className="finilaze__btn">It's Finalized</p>
         </div>
       )}
