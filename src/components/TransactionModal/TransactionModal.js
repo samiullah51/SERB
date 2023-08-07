@@ -3,6 +3,8 @@ import { useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import Feedback from "../Feedback/Feedback";
+import { Typography } from "@mui/material";
 function TransactionModal({ setModal, product }) {
   return (
     <div className="transaction__modal">
@@ -33,7 +35,24 @@ function TransactionModal({ setModal, product }) {
           </div>
         </div>
         {/* belongs to */}
-        <h1>Owner</h1>
+        <div style={{ display: "flex", alignItems: "baseline" }}>
+          <h1>Owner</h1>
+
+          <div
+            style={{
+              marginLeft: "50px",
+              color: "#fff",
+              fontSize: "14px",
+              padding: "5px 10px",
+              fontWeight: "400",
+              cursor: "pointer",
+              backgroundColor: "dodgerblue",
+              borderRadius: "5px",
+            }}
+          >
+            Give Me Your Feedback Please
+          </div>
+        </div>
         <div className="belongsto">
           <div className="belongsto__info">
             <img src={product.belongsToPicture} />
@@ -59,6 +78,11 @@ function TransactionModal({ setModal, product }) {
           </div>
         </div>
 
+        {/* feed back form */}
+        <div className="feedback" style={{ width: "100%", margin: "10px 0" }}>
+          <Typography component="legend">Rating and Reviews</Typography>
+          <Feedback />
+        </div>
         <p className="closeBtn" onClick={() => setModal(false)}>
           X
         </p>
