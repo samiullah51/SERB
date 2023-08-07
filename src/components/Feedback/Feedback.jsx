@@ -2,7 +2,10 @@ import * as React from "react";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
-import { TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
+import { publicRequest, userRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
+import { loader } from "../../loader";
 
 const labels = {
   0.5: "Useless",
@@ -21,9 +24,31 @@ function getLabelText(value) {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 }
 
-export default function HoverRating() {
-  const [value, setValue] = React.useState(2);
+export default function HoverRating({ userToId }) {
+  const [value, setValue] = React.useState(0.5);
   const [hover, setHover] = React.useState(-1);
+  const user = useSelector((state) => state.user);
+  const [desc, setDesc] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
+  // add new rating
+  const addRating = async () => {
+    try {
+      setLoading(true);
+      const all = publicRequest.post(`/feedback/add`, {
+        userId: userToId,
+        feedbackById: user._id,
+        feedbackByUsername: user.fullName,
+        feedbackByPic: user.profileImage,
+        rating: value,
+        description: desc,
+      });
+      setLoading(false);
+      console.log(all);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <Box
@@ -57,8 +82,14 @@ export default function HoverRating() {
           rows={4}
           style={{
             width: "100%",
+            margin: "10px 0",
           }}
+          onChange={(e) => setDesc(e.target.value)}
         />
+
+        <Button variant="contained" onClick={addRating}>
+          {!loading ? "Submit Review" : "loading..."}
+        </Button>
       </div>
     </>
   );

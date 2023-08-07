@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AllCurrentUserProducts from "../../components/AllCurrentUserProducts/AllCurrentUserProducts";
@@ -10,10 +10,10 @@ import Reviews from "../../components/Reviews/Reviews";
 import SoldProducts from "../../components/SoldProducts/SoldProducts";
 import "./CurrentUserProfile.css";
 import Favorite from "../../components/Favorite/Favorite";
+import { userRequest } from "../../requestMethods";
 function CurrentUserProfile() {
   const user = useSelector((state) => state.user);
   const [active, setActive] = useState(true);
-  // hanlde active
 
   return (
     <>

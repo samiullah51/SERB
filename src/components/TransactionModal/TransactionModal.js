@@ -6,6 +6,7 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import Feedback from "../Feedback/Feedback";
 import { Typography } from "@mui/material";
 function TransactionModal({ setModal, product }) {
+  const [showReview, setShowReview] = useState(false);
   return (
     <div className="transaction__modal">
       <div className="close__modal" onClick={() => setModal(false)}>
@@ -49,6 +50,7 @@ function TransactionModal({ setModal, product }) {
               backgroundColor: "dodgerblue",
               borderRadius: "5px",
             }}
+            onClick={() => setShowReview(!showReview)}
           >
             Give Me Your Feedback Please
           </div>
@@ -79,10 +81,12 @@ function TransactionModal({ setModal, product }) {
         </div>
 
         {/* feed back form */}
-        <div className="feedback" style={{ width: "100%", margin: "10px 0" }}>
-          <Typography component="legend">Rating and Reviews</Typography>
-          <Feedback />
-        </div>
+        {showReview && (
+          <div className="feedback" style={{ width: "100%", margin: "10px 0" }}>
+            <Typography component="legend">Rating and Reviews</Typography>
+            <Feedback userToId={product.belongsToId} />
+          </div>
+        )}
         <p className="closeBtn" onClick={() => setModal(false)}>
           X
         </p>
