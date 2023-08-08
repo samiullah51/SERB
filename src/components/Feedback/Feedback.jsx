@@ -6,6 +6,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { publicRequest, userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { loader } from "../../loader";
+import { useNavigate } from "react-router";
 
 const labels = {
   0.5: "Useless",
@@ -30,6 +31,7 @@ export default function HoverRating({ userToId }) {
   const user = useSelector((state) => state.user);
   const [desc, setDesc] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate("/");
 
   // add new rating
   const addRating = async () => {
@@ -45,6 +47,7 @@ export default function HoverRating({ userToId }) {
       });
       setLoading(false);
       console.log(all);
+      navigate("/currentuserprofile");
     } catch (err) {
       console.log(err);
     }

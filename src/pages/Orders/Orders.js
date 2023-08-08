@@ -27,7 +27,7 @@ function Orders() {
   }, []);
   return (
     <>
-      <div className="orders">
+      <div className="orders" style={{ marginTop: "100px" }}>
         {/* Sales */}
         <div className="transaction__container">
           <div className="transaction__header">
