@@ -1,4 +1,4 @@
-# Final Year Project SERB(SELL, EXCHANGE or BUY)
+# Final Year Project SERB(SELL, EXCHANGE OR BUY)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
